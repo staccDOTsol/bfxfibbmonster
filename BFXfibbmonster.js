@@ -31,7 +31,7 @@ var keys = []
 var keys2 = []
 ws.on('open', () => {
   ws.auth()
-    ////console.log('open')
+    console.log('open')
 	rest.calcAvailableBalance('tBTCUSD', 1, 0.090072, 'MARGIN').then(balances => {
 	////console.log(balances[0]);
 	})
@@ -221,7 +221,7 @@ ws.onTicker({ symbol: k }, (ticker) => {
 										winnas.push(k);
 															
 									
-								//insert(winners[k], collection);
+							//	insert(winners[k], collection);
 									}
 									updateStoplimits(winners[k], collection);
 								}
@@ -516,9 +516,6 @@ var collection = dbo.collection(k);
 	}catch(err){}
 	}, Math.random() * 5000);
 }
-rest.calcAvailableBalance('tEOSUSD', 1, 8, 'MARGIN').then(balances => {
-//console.log(balances);
-});
 function sell(k, rate, rate2){ //rate2 for sell is lower
 //console.log(k);
 //console.log(rate);
@@ -1302,7 +1299,7 @@ app.get('/', function(req, res) {
 							doc3[d].trades.buy2 = wp.buy2;
 							doc3[d].trades.sell1 = wp.sell1;
 							doc3[d].trades.sell2 = wp.sell2;
-							
+	console.log(doc3[d].trades);						
 	 collection.update({
 	},{
                             $set: {
@@ -1312,7 +1309,8 @@ app.get('/', function(req, res) {
 		
 	},
 	function(err, result) {
-		////////console.log(result.result);
+	
+		console.log(result.result);
 	});
 	}
 					}
