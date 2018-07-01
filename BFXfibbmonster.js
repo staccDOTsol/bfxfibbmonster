@@ -221,7 +221,7 @@ ws.onTicker({ symbol: k }, (ticker) => {
 										winnas.push(k);
 															
 									
-							//	insert(winners[k], collection);
+							//insert(winners[k], collection);
 									}
 									updateStoplimits(winners[k], collection);
 								}
@@ -1575,7 +1575,7 @@ var collections = []
 setTimeout(function(){
 MongoClient.connect(process.env.mongodb || mongodb, function(err, db) {
 	
-    var dbo = db.db('polomonster138-jare5211332')
+    var dbo = db.db('polomonster138-jare65211332')
 	var count = 0;
     dbo.listCollections().toArray(function(err, collInfos) {
         // collInfos is an array of collection info objects that look like:
@@ -1889,7 +1889,7 @@ godosell = false;
 var dbo;
 				MongoClient.connect(process.env.mongodb || mongodb, function(err, db) {
 					
-				dbo = db.db('polomonster138-jare5211332')
+				dbo = db.db('polomonster138-jare65211332')
 				////////console.log('dbo');
 				
 				});
