@@ -959,14 +959,14 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 							}
 					
 	},(seventeen * 4  * ks.length + 1000));
-					}, 4000);
+					}, 1000);
 					
 	});
 	}catch(err){
 		res.send('err: ' + err);
 	}
 }
-var seventeen = 195;
+var seventeen = 135;
 var godoks = true;
 function doks(ks){
 	if (godoks == true){
