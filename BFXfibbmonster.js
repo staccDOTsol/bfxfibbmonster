@@ -847,7 +847,9 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 						var cccu = 0;
 						var cccb = 0;
 						var ccce = 0;
+						var pairs = []
 							for (var d in trades){
+								if (!pairs.includes(trades[d].symbol)){
 								if (trades[d].symbol.slice(-4) == "USDT"){
 									
 							totals['USDT'].push({'pair': trades[d].symbol, 'total': 0});
@@ -859,6 +861,7 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 								if (trades[d].symbol.slice(-3) == "ETH"){
 									
 							totals['ETH'].push({'pair': trades[d].symbol, 'total': 0});
+								}
 								}
 							}
 							for (var d in trades){
