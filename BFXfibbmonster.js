@@ -1340,7 +1340,6 @@ async function collectionDo(collection){
 									if (d3d.trades.sold1 == true){
 									////console.log('sold1 and sold2 true');
 								}
-								}
 								activeOrders.splice( d3d.trades.k, 1 );
 									d3d.trades.sold1 = false;
 									d3d.trades.sold2 = false;
@@ -1357,6 +1356,7 @@ async function collectionDo(collection){
 															
 
 									});
+								}
 								}
 								}
 							
