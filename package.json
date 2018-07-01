@@ -15,6 +15,7 @@
     "poloniex-api-node": "^1.9.0",
     "request": "^2.87.0",
     "serve-favicon": "*",
+	"dotenv": "*",
     "trendyways": "^0.4.2"
   },
   "scripts": {
