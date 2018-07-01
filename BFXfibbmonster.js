@@ -555,6 +555,7 @@ function buy(k, rate, rate2){ //rate2 for buy is higher
 			amt = amt * 1.1;
 			}
 		}
+		console.log('lala ' + lala);
 	
 		////console.log(amt);
 		    console.log('buyl price: ' + ((rate2)) + ' amount ' + amt);
@@ -786,6 +787,7 @@ rest.calcAvailableBalance(k, 1, rate, 'MARGIN').then(balances => {
 			amt = amt * 1.1;
 			}
 		}
+		console.log('lala ' + lala);
 	//console.log(k);
   console.log('sell price: ' + (rate) + ' amount ' + (-1 * amt * (1 / rate)));
   const o = new Order({
