@@ -30,13 +30,13 @@ var keys = []
 var keys2 = []
 ws.on('open', () => {
   ws.auth()
-    //console.log('open')
+    ////console.log('open')
 	rest.calcAvailableBalance('tBTCUSD', 1, 0.090072, 'MARGIN').then(balances => {
-	//console.log(balances[0]);
+	////console.log(balances[0]);
 	})
     rest.symbols().then(symbols => {
         for (var s in symbols) {
-            // //console.log('t' + symbols[s].toUpperCase());
+            // ////console.log('t' + symbols[s].toUpperCase());
 			if ( symbols[s].toUpperCase().slice(-3) == "ETH" ||  symbols[s].toUpperCase().slice(-3) == "BTC" ||  symbols[s].toUpperCase().slice(-3) == "USD"){
             keys.push('trade:1m:t' + symbols[s].toUpperCase());
 			keys2.push('t' + symbols[s].toUpperCase());
@@ -50,14 +50,14 @@ ws.on('open', () => {
 		tickerticker("tBTCUSD");
 		tickerticker("tETHUSD");
 		for (var k in keys) {
-			console.log(keys2[k]);	
+			//console.log(keys2[k]);	
 		ws.subscribeTicker(keys2[k]);
 			tickerticker(keys2[k]);
 			
 		}*/
         for (var k in keys) {
 			
-            ////console.log(keys[k]);
+            //////console.log(keys[k]);
 			lpa[keys[k]] = null 
 			lpb[keys[k]] = null 
 			prevTS[keys[k]] = null
@@ -73,7 +73,7 @@ ws.on('open', () => {
             dbs.push(collInfos[col].name);
             collections.push(dbo.collection(collInfos[col].name));
         }
-        ////////console.log(dbs);
+        //////////console.log(dbs);
 		for (var c in collections){
 			var collection = collections[c];
                 collection.find({
@@ -84,14 +84,14 @@ ws.on('open', () => {
                     _id: -1
 
                 }).toArray(function(err, doc3) {
-        ////////console.log(dbs);
+        //////////console.log(dbs);
 		ws.subscribeTicker("tBTCUSD");
 		ws.subscribeTicker("tETHUSD");
 		tickerticker("tBTCUSD");
 		tickerticker("tETHUSD");
 		for (var d in doc3){
 						if (doc3[d].trades.k == 'tZCNETH'){
-							console.log('tZCNETH');
+							//console.log('tZCNETH');
 						}
 					subs(doc3[d].trades.k, 0);
 					}
@@ -101,7 +101,7 @@ ws.on('open', () => {
 	
 	}, 2000);
     }).catch(err => {
-        console.log(err);
+        //console.log(err);
     })
 })
 function subs(ss, count){
@@ -121,7 +121,7 @@ function tickerticker(k){
 	
 ws.onTicker({ symbol: k }, (ticker) => {
 	if (k == 'tZCNETH'){
-		console.log(k);
+		//console.log(k);
 	}
 	if (btcusd != 0&& ethusd != 0){
 		
@@ -152,7 +152,7 @@ ws.onTicker({ symbol: k }, (ticker) => {
 					if ((ticker.volume * ticker.ask) / amt > (avg / 20)){
 						
 						if (!tickers.includes('trade:1m:' + k)){
-							console.log(k);
+							//console.log(k);
 						tickers.push('trade:1m:' + k)
 						bestAsk[k] = ticker.ask;
 						bestBid[k] = ticker.bid;
@@ -245,12 +245,12 @@ async function oo(){
 			}
 			
 		}
-		console.log('activeorders');
-		console.log(activeOrders);
+		//console.log('activeorders');
+		//console.log(activeOrders);
 }
 ws.once('auth', () => {
 	oo();
-//console.log('auth');
+////console.log('auth');
 });
 function buy(k, rate, rate2){ //rate2 for buy is higher
 	setTimeout(function(){
@@ -258,19 +258,19 @@ function buy(k, rate, rate2){ //rate2 for buy is higher
 	if (!activeOrders.includes(k)){
 		  console.log('buy buy !! ' + k + ' ' + (rate));
 	activeOrders.push(k);
-	//console.log(activeOrders);
+	////console.log(activeOrders);
 	
 	rest.calcAvailableBalance(k, 1, rate, 'MARGIN').then(balances => {
-	//console.log(balances[0]);
+	////console.log(balances[0]);
 		var amt = balances[0] / 8;
-		//console.log(amt);
+		////console.log(amt);
 		for (var v in activeOrders){
 			if (v >= 22){
 			amt = amt * 1.1;
 			}
 		}
 	
-		//console.log(amt);
+		////console.log(amt);
 		    console.log('buyl price: ' + ((rate)) + ' amount ' + amt);
 
   const o = new Order({
@@ -298,8 +298,8 @@ o.on('error', () => {
 		os = parseFloat(o.serialize()[6]);
 	}
 	if (o.serialize().toString().indexOf('EXECUTED') != -1){
-		console.log(k);
-    console.log('sell price: ' + ((rate * 1.007)) + ' amount ' + (-1 * os));
+		//console.log(k);
+   console.log('sell price: ' + ((rate * 1.007)) + ' amount ' + (-1 * os));
 
    const o2 = new Order({
     cid: Date.now(),
@@ -325,7 +325,7 @@ o2.on('error', () => {
 	  
     console.log('order closed: %s', o2.status)
 	activeOrders.splice( k, 1 );
-	//console.log(activeOrders);
+	////console.log(activeOrders);
 var collection = dbo.collection(k);
 		collection.find({
 
@@ -348,7 +348,7 @@ var collection = dbo.collection(k);
 		
 	},
 	function(err, result) {
-		//////console.log(result.result);
+		////////console.log(result.result);
 	});
 	}
 					}
@@ -382,7 +382,7 @@ var collection = dbo.collection(k);
 		
 	},
 	function(err, result) {
-		//////console.log(result.result);
+		////////console.log(result.result);
 	});
 	}
 					}
@@ -414,7 +414,7 @@ var collection = dbo.collection(k);
 		
 	},
 	function(err, result) {
-		//////console.log(result.result);
+		////////console.log(result.result);
 	});
 	}
 					}
@@ -449,7 +449,7 @@ var collection = dbo.collection(k);
 		
 	},
 	function(err, result) {
-		//////console.log(result.result);
+		////////console.log(result.result);
 	});
 	}
 					}
@@ -457,33 +457,33 @@ var collection = dbo.collection(k);
   });	
     });
 	}
-	}catch(err){console.log(err);}
+	}catch(err){//console.log(err);}
 	}, Math.random() * 5000);
 }
 rest.calcAvailableBalance('tEOSUSD', 1, 8, 'MARGIN').then(balances => {
-console.log(balances);
+//console.log(balances);
 });
 function sell(k, rate, rate2){ //rate2 for sell is lower
-console.log(k);
-console.log(rate);
-console.log(rate2);
+//console.log(k);
+//console.log(rate);
+//console.log(rate2);
 setTimeout(function(){
 		try {
 	if (!activeOrders.includes(k)){
-		  //console.log('sell sell !! ' + k + ' ' + (rate));
+		  ////console.log('sell sell !! ' + k + ' ' + (rate));
 	activeOrders.push(k);
-	//console.log(activeOrders);
+	////console.log(activeOrders);
 	
 rest.calcAvailableBalance(k, 1, rate, 'MARGIN').then(balances => {
-	//console.log(balances[0]);
+	////console.log(balances[0]);
 		var amt = balances[0] / 8;
-		//console.log(amt);
+		////console.log(amt);
 		for (var v in activeOrders){
 			if (v >= 22){
 			amt = amt * 1.1;
 			}
 		}
-	console.log(k);
+	//console.log(k);
   console.log('sell price: ' + (rate) + ' amount ' + (-1 * amt * (1 / rate)));
   const o = new Order({
     cid: Date.now(),
@@ -554,13 +554,13 @@ o2.on('error', () => {
 		
 	},
 	function(err, result) {
-		//////console.log(result.result);
+		////////console.log(result.result);
 	});
 	}
 					}
 					});
 	activeOrders.splice( k, 1 );
-	//console.log(activeOrders);
+	////console.log(activeOrders);
     closed2 = true
   })
 
@@ -590,7 +590,7 @@ o2.on('error', () => {
 		
 	},
 	function(err, result) {
-		//////console.log(result.result);
+		////////console.log(result.result);
 	});
 	}
 					}
@@ -624,7 +624,7 @@ o2.on('error', () => {
 		
 	},
 	function(err, result) {
-		//////console.log(result.result);
+		////////console.log(result.result);
 	});
 	}
 					}
@@ -657,7 +657,7 @@ o2.on('error', () => {
 		
 	},
 	function(err, result) {
-		//////console.log(result.result);
+		////////console.log(result.result);
 	});
 	}
 					}
@@ -665,7 +665,7 @@ o2.on('error', () => {
   });
 });
 	}
-		}catch(err){console.log(err);}
+		}catch(err){//console.log(err);}
 	}, Math.random() * 5000);
 }
 var usds = []
@@ -685,7 +685,7 @@ var lpb = []
 
 ws.on('error', (err) => {
 	if (err.toString().indexOf('recv update') == -1){
-  console.log(err)
+  //console.log(err)
 	}
   if (err.toString().indexOf('EAI_AGAIN') != -1){
   setTimeout(function(){
@@ -756,8 +756,8 @@ async function doget(req, res){
 			
 			orders2.push(orders[o]);
 		}
-			console.log('activeOrders');
-			console.log(activeOrders);
+			//console.log('activeOrders');
+			//console.log(activeOrders);
 	dbo.listCollections().toArray(function(err, collInfos) {
         // collInfos is an array of collection info objects that look like:
         // { name: 'test', options: {} }
@@ -766,8 +766,8 @@ async function doget(req, res){
             dbs.push(collInfos[col].name);
             collections.push(dbo.collection(collInfos[col].name));
         }
-        ////////console.log(dbs);				
-		//console.log(tickers);
+        //////////console.log(dbs);				
+		////console.log(tickers);
 
 		for (var c in collections){
 			var collection = collections[c];
@@ -783,9 +783,9 @@ async function doget(req, res){
 						if (!ks.includes(doc3[d].trades.k)){
 							ks.push(doc3[d].trades.k);
 						}
-					//	//////console.log(doc3[d])
+					//	////////console.log(doc3[d])
 						
-						////////console.log(doc3[d].trades);
+						//////////console.log(doc3[d].trades);
 						if (doc3[d].trades){
 							
 						if (doc3[d].trades.bought1 == false){
@@ -830,11 +830,11 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 		}
 					setTimeout(function(){
 						
-		console.log((seventeen * ks.length + 5000));
-		console.log('seventeen seventeen');
+		//console.log((seventeen * ks.length + 5000));
+		//console.log('seventeen seventeen');
 						
 						doks(ks);
-						console.log(ks);
+						//console.log(ks);
 					
 	setTimeout(async function(){
 					
@@ -862,12 +862,12 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 								}
 							}
 							for (var d in trades){
-								console.log(trades[d].symbol);
+								//console.log(trades[d].symbol);
 								if (trades[d].symbol.slice(-4) == "USDT"){
 									
 							if (trades[d].side == 'sell'){
 											totals['USDT'][cccu].total += ( parseFloat(trades[d].price) * parseFloat(trades[d].amount ));
-											console.log(parseFloat(trades[d].price) * parseFloat(trades[d].amount ));
+											//console.log(parseFloat(trades[d].price) * parseFloat(trades[d].amount ));
 										}else {
 											totals['USDT'][cccu].total = totals['USDT'][cccu].total - (parseFloat(trades[d].price) * parseFloat(trades[d].amount));
 										}
@@ -876,7 +876,7 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 								if (trades[d].symbol.slice(-3) == "BTC"){
 									if (trades[d].side == 'sell'){
 											totals['BTC'][cccb].total += ( parseFloat(trades[d].price) * parseFloat(trades[d].amount ));
-											console.log(parseFloat(trades[d].price) * parseFloat(trades[d].amount ));
+											//console.log(parseFloat(trades[d].price) * parseFloat(trades[d].amount ));
 										}else {
 											totals['BTC'][cccb].total = totals['BTC'][cccb].total - (parseFloat(trades[d].price) * parseFloat(trades[d].amount));
 										}
@@ -885,7 +885,7 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 								if (trades[d].symbol.slice(-3) == "ETH"){
 									if (trades[d].side == 'sell'){
 											totals['ETH'][ccce].total += ( parseFloat(trades[d].price) * parseFloat(trades[d].amount ));
-											console.log(parseFloat(trades[d].price) * parseFloat(trades[d].amount ));
+											//console.log(parseFloat(trades[d].price) * parseFloat(trades[d].amount ));
 										}else {
 											totals['ETH'][ccce].total = totals['ETH'][ccce].total - (parseFloat(trades[d].price) * parseFloat(trades[d].amount));
 										}
@@ -896,31 +896,31 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 										
 									
 							}
-							console.log(totals);
-						//console.log('1');
-							//console.log(balances[0]);
+							//console.log(totals);
+						////console.log('1');
+							////console.log(balances[0]);
 	
 							var btcbal = 0;
-							//console.log(orders);
+							////console.log(orders);
 							//for (var o in orders){
-							//	console.log(o);
-							//	console.log(orders[o]);
+							//	//console.log(o);
+							//	//console.log(orders[o]);
 							//}
 								
 							var ts = Math.round(new Date().getTime() / 1000) - 1000;
 							var tsYesterday = ts - (24 * 3600) - 1000;
-								console.log(err);
+								//console.log(err);
 								var ccc = 0;
 							var percent =  (100 * (-1 * (1 - (btcbal / startBtc)))).toFixed(4);
 					var diff2 = Math.abs(new Date() - startDate);
 					var minutes = Math.floor((diff2/1000)/60);
 					var hours = ((diff2/1000)/60 / 60).toFixed(8);
 					var percentHr = (percent / hours).toFixed(4);
-							////////console.log(balances.BTC);
+							//////////console.log(balances.BTC);
 							trades.sort(sortFunction3);
 							stoplimits.sort(sortFunction);
-		////////console.log(stoplimits);
-		//console.log((totals).toString());
+		//////////console.log(stoplimits);
+		////console.log((totals).toString());
 		var thetotalusdt = 0;
 		for (var t in totals['USDT']){
 			thetotalusdt+= totals['USDT'][t].total;
@@ -973,16 +973,16 @@ function doks(ks){
 	godoks = false;
 	setTimeout(function(){
 	dodoget(ks, 0, ks.length);
-	console.log(ks.length);
+	//console.log(ks.length);
 	}, seventeen);
 }
 }
 async function dodoget(ks, i, length){
-	console.log('length ' + length);
-	console.log(ks[i]);
+	////console.log('length ' + length);
+	////console.log(ks[i]);
 	var string = ks[i].replace(/(?=.{3}$)/,'/');
 	string = string.substr(1, string.length);
-	console.log(string);
+	//console.log(string);
 	try {
 		if (string.slice(-3) == "USD"){
 		string += "T";	
@@ -996,19 +996,19 @@ string = "DASH" + string;
 		string = string.substr(3, string.length);
 string = "IOTA" + string;		
 		}
-		console.log(string);
+		//console.log(string);
 	let trades2 = await bitfinexapi.fetchMyTrades(string);
 	for (var o in trades2){
-		//console.log(trades2[o])
+		////console.log(trades2[o])
 		trades.push(trades2[o]);
 	}
 		if ((i + 1) < ks.length - 1){
-			console.log('dodoagain');
+			//console.log('dodoagain');
 	setTimeout(async function(){
 		dodoget(ks, i + 1, ks.length);
 	}, seventeen * 4);
 		}
-	}catch(err){console.log(err);
+	}catch(err){//console.log(err);
 	if (err.toString().indexOf('Rate') != -1){
 	setTimeout(async function(){
 		dodoget(ks, i, ks.length);
@@ -1026,7 +1026,7 @@ app.get('/', function(req, res) {
 	try {
 		doget(req, res);
 	} catch (err){
-		console.log(err);
+		//console.log(err);
 		setTimeout(function(){
 		doget(req, res);
 		}, 20000);
@@ -1034,7 +1034,7 @@ app.get('/', function(req, res) {
 });
 
             app.listen(process.env.PORT || 8080, function() {});
-						//console.log('2');
+						////console.log('2');
 //poloniex.subscribe('BTC_ETC');
  var vols = [];
 	var winnas = []
@@ -1069,7 +1069,7 @@ app.get('/', function(req, res) {
 		
 	},
 	function(err, result) {
-		//////console.log(result.result);
+		////////console.log(result.result);
 	});
 	}
 					}
@@ -1077,19 +1077,19 @@ app.get('/', function(req, res) {
 				}
  
  function insert(wp, collection){
-	console.log(wp);
-	 console.log('insert');
+	//console.log(wp);
+	 //console.log('insert');
 	
 			
 			collection.insertOne({
 				'trades': wp
 			}, function(err, res) {
-				if (err) console.log(err);
+				if (err) //console.log(err);
 				
 			if (wp.currencyPair == "BTC_BCH"){
-				//////console.log(wp);
+				////////console.log(wp);
 			}
-			  ////console.log(res.result);
+			  //////console.log(res.result);
 			}); 
  }
  
@@ -1101,7 +1101,7 @@ var dbs = []
 var collections = []
 setTimeout(function(){
 MongoClient.connect(process.env.mongodb || mongodb, function(err, db) {
-	console.log(err);
+	//console.log(err);
     var dbo = db.db('polomonster138-jare11332')
 	var count = 0;
     dbo.listCollections().toArray(function(err, collInfos) {
@@ -1112,8 +1112,8 @@ MongoClient.connect(process.env.mongodb || mongodb, function(err, db) {
             dbs.push(collInfos[col].name);
             collections.push(dbo.collection(collInfos[col].name));
         }
-        ////////console.log(dbs);
-						//////////console.log('settimeout');
+        //////////console.log(dbs);
+						////////////console.log('settimeout');
 						doCollections(collections);
                 setInterval(function() {
                     doCollections(collections);
@@ -1125,11 +1125,11 @@ MongoClient.connect(process.env.mongodb || mongodb, function(err, db) {
 function doCollections(collections, balances){
 							
 							
-						////console.log('8'); 
+						//////console.log('8'); 
 			
     
 			
-            ////////console.log(balances.BTC);
+            //////////console.log(balances.BTC);
 			
 			var count = 0;
 							
@@ -1162,7 +1162,7 @@ async function collectionDo(collection){
 							 var d3d = doc3[d];
 					var ts = Math.round(new Date().getTime() / 1000) - 1000;
 					var tsHour = ts - (30 * 60) - 1000;
-					////console.log(tsHour);
+					//////console.log(tsHour);
 					
 					/*
 					const o = new CancelOrder({
@@ -1174,41 +1174,41 @@ async function collectionDo(collection){
 					  // Enable automatic updates
 					  o.registerListeners()
 					o.on('error', () => {
-						console.log('error');
+						//console.log('error');
 					});
 					  o.on('update', () => {
-						console.log('order updated: %j', o.serialize())
+						//console.log('order updated: %j', o.serialize())
 						
 					  })
 
 					  o.on('close', () => {
-						console.log('order closed: %s', o.status)
+						//console.log('order closed: %s', o.status)
 						closed = true
 					  })
 
-					  console.log('submitting order %d', o.cid)
+					  //console.log('submitting order %d', o.cid)
 
 					  o.submit().then(() => {
-						console.log('got submit confirmation for order %d [%d]', o.cid, o.id)
+						//console.log('got submit confirmation for order %d [%d]', o.cid, o.id)
 					  });
 					/*
 						for (var d in data){
 								if (data[d].length > 0){
 									for (var a in data[d]){
 										data[d][a].pair = d;
-										////console.log(data[d][a].type);
+										//////console.log(data[d][a].type);
 										if (data[d][a].type == "buy"){
 										data[d][a].currentBid = bestBid[data[d][a].pair];
 										var date = new Date(data[d][a].date).getTime() / 1000;
-											////console.log(date); 
+											//////console.log(date); 
 										var date2 = startDate.getTime() / 1000;
 										if (date <= tsHour && date >= date2){
-											//console.log(parseFloat(data[d][a].orderNumber));
-											//console.log('cancel cancel!');
+											////console.log(parseFloat(data[d][a].orderNumber));
+											////console.log('cancel cancel!');
 											
 											
 											poloniex.cancelOrder(parseFloat(data[d][a].orderNumber), function(data){
-												//console.log('cancelled');
+												////console.log('cancelled');
 											});
 											
 											
@@ -1228,21 +1228,21 @@ async function collectionDo(collection){
 							if (balances[d3d.trades.currencyPair.substr(d3d.trades.currencyPair.indexOf('_') +1, d3d.trades.currencyPair.length)] != 0){
 								if (balances[d3d.trades.currencyPair.substr(d3d.trades.currencyPair.indexOf('_') +1, d3d.trades.currencyPair.length)]  * bestAsk[d3d.trades.currencyPair] > 0.0001){
 								poloniex.sell(d3d.trades.currencyPair, parseFloat(d3d.trades.sell1).toFixed(8), (balances[d3d.trades.currencyPair.substr(d3d.trades.currencyPair.indexOf('_') +1, d3d.trades.currencyPair.length)] * .998).toFixed(8), 0, 0, 0 , function (err, data3){
-									//console.log(data3);
-									console.log(err);
+									////console.log(data3);
+									//console.log(err);
 
 								});
 								}
 							}
 							*/
-							//console.log(d3d.trades.currencyPair);
-							////console.log('ds: ');
-							////console.log(ds);
+							////console.log(d3d.trades.currencyPair);
+							//////console.log('ds: ');
+							//////console.log(ds);
 							if (d3d.trades.currencyPair){
 								if (d3d.trades.buy2){
 								if (d3d.trades.bought1 == true && d3d.trades.bought2 == true && ((d3d.trades.buyorder1 == 0) &&((d3d.trades.buyorder2 == 0)))){
 									if (d3d.trades.bought1 == true){
-									//console.log('bought1 and bought2 true');
+									////console.log('bought1 and bought2 true');
 								}
 									d3d.trades.bought1 = false;
 									d3d.trades.bought2 = false;
@@ -1255,8 +1255,8 @@ async function collectionDo(collection){
 										}
 									}, { multi: true },
 									function(err, result) {
-									   console.log(err);
-										////console.log(result.result);
+									   //console.log(err);
+										//////console.log(result.result);
 									godobuy = true;
 															
 
@@ -1266,7 +1266,7 @@ async function collectionDo(collection){
 								
 								if (d3d.trades.sold1 == true && d3d.trades.sold2 == true && ((d3d.trades.buyorder1 == 0 ) &&((d3d.trades.buyorder2 == 0 )))){
 									if (d3d.trades.sold1 == true){
-									//console.log('sold1 and sold2 true');
+									////console.log('sold1 and sold2 true');
 								}
 								}
 									d3d.trades.sold1 = false;
@@ -1278,8 +1278,8 @@ async function collectionDo(collection){
 										}
 									}, { multi: true },
 									function(err, result) {
-									   console.log(err);
-										////console.log(result.result);
+									   //console.log(err);
+										//////console.log(result.result);
 									godobuy = true;
 															
 
@@ -1290,14 +1290,14 @@ async function collectionDo(collection){
 						if (d3d.trades.bought1 == false){
 							
                         if (parseFloat(bestAsk[d3d.trades.k]) <= d3d.trades.buy1 && parseFloat(bestAsk[d3d.trades.k]) > 0.00000200)	 {
-                            ////////console.log(d3d.trades.last);
-							////////console.log(d3d.trades);
+                            //////////console.log(d3d.trades.last);
+							//////////console.log(d3d.trades);
 							d3d.trades.bought1 = true;
 							if (godobuy == true){
 								godobuy = false;
 
-							//console.log('dobuy:');
-							//console.log(d3d);
+							////console.log('dobuy:');
+							////console.log(d3d);
 							collection.update({
 								}, {
 									$set: {
@@ -1305,8 +1305,8 @@ async function collectionDo(collection){
 									}
 								}, { multi: true },
 								function(err, result) {
-								   console.log(err);
-									////console.log(result.result);
+								   //console.log(err);
+									//////console.log(result.result);
 								godobuy = true;
 														
 
@@ -1317,8 +1317,8 @@ async function collectionDo(collection){
 						}
                         if (d3d.trades.buy2) {
                             if (parseFloat(bestAsk[d3d.trades.k])<= d3d.trades.buy2 && d3d.trades.bought2 == false && parseFloat(bestAsk[d3d.trades.k]) > 0.00000200) {
-							////////console.log(d3d.trades.last);
-							////////console.log(d3d.trades);
+							//////////console.log(d3d.trades.last);
+							//////////console.log(d3d.trades);
 							d3d.trades.bought2 = true;
 														if (godobuy == true){
 godobuy = false;
@@ -1329,33 +1329,33 @@ godobuy = false;
 									}
 								}, { multi: true },
 								function(err, result) {
-								   console.log(err);
-									////console.log(result.result);
+								   //console.log(err);
+									//////console.log(result.result);
 								godobuy = true;
 														
 
 								});
-							//console.log('dobuy2:');
+							////console.log('dobuy2:');
 							buy(d3d.trades.k, d3d.trades.buy2, d3d.trades.buy1);
                             }
 							}
                         }
 						if (d3d.trades.k == 'tSNTUSD'){
-						console.log(d3d.trades.k);
-						console.log(d3d.trades.sold1);
-						console.log(parseFloat(bestBid[d3d.trades.k]))
-						console.log(d3d.trades.sell1);
+						//console.log(d3d.trades.k);
+						//console.log(d3d.trades.sold1);
+						//console.log(parseFloat(bestBid[d3d.trades.k]))
+						//console.log(d3d.trades.sell1);
 						}
 						if (d3d.trades.sold1 == false){
                         if (parseFloat(bestBid[d3d.trades.k]) >= d3d.trades.sell1 && parseFloat(bestAsk[d3d.trades.k]) > 0.00000200) {
-                            ////////console.log(d3d.trades.last);
-							////////console.log(d3d.trades);
+                            //////////console.log(d3d.trades.last);
+							//////////console.log(d3d.trades);
 							d3d.trades.sold1 = true;
 							if (godosell == true){
 								godosell = false;
 
-							console.log('dosell');
-							console.log(d3d);
+							//console.log('dosell');
+							//console.log(d3d);
 							collection.update({
 								}, {
 									$set: {
@@ -1363,8 +1363,8 @@ godobuy = false;
 									}
 								}, { multi: true },
 								function(err, result) {
-								   console.log(err);
-									////console.log(result.result);
+								   //console.log(err);
+									//////console.log(result.result);
 								godosell = true;
 														
 
@@ -1375,8 +1375,8 @@ godobuy = false;
 						}
                         if (d3d.trades.sell2) {
                             if (parseFloat(bestBid[d3d.trades.k]) >= d3d.trades.sell2 && d3d.trades.sold2 == false && parseFloat(bestAsk[d3d.trades.k]) > 0.00000200 ){
-							////////console.log(d3d.trades.last);
-							////////console.log(d3d.trades);
+							//////////console.log(d3d.trades.last);
+							//////////console.log(d3d.trades);
 							d3d.trades.sold2 = true;
 														if (godosell == true){
 godosell = false;
@@ -1387,13 +1387,13 @@ godosell = false;
 									}
 								}, { multi: true },
 								function(err, result) {
-								   console.log(err);
-									////console.log(result.result);
+								   //console.log(err);
+									//////console.log(result.result);
 								godosell = true;
 														
 
 								});
-							//console.log('dosell:');
+							////console.log('dosell:');
 							sell(d3d.trades.k, d3d.trades.sell2, d3d.trades.sell1);
                             }
 							}
@@ -1406,8 +1406,8 @@ godosell = false;
    
 var dbo;
 				MongoClient.connect(process.env.mongodb || mongodb, function(err, db) {
-					console.log(err);
+					//console.log(err);
 				dbo = db.db('polomonster138-jare11332')
-				//////console.log('dbo');
+				////////console.log('dbo');
 				
 				});
