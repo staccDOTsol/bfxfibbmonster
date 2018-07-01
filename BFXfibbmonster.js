@@ -1314,7 +1314,8 @@ async function collectionDo(collection){
 								if (d3d.trades.bought1 == true && d3d.trades.bought2 == true && ((d3d.trades.buyorder1 == 0) &&((d3d.trades.buyorder2 == 0)))){
 									if (d3d.trades.bought1 == true){
 									////console.log('bought1 and bought2 true');
-								}
+								} 
+								activeOrders.splice( k, 1 );
 									d3d.trades.bought1 = false;
 									d3d.trades.bought2 = false;
 									d3d.trades.buyorder1 = 0;
@@ -1340,6 +1341,7 @@ async function collectionDo(collection){
 									////console.log('sold1 and sold2 true');
 								}
 								}
+								activeOrders.splice( k, 1 );
 									d3d.trades.sold1 = false;
 									d3d.trades.sold2 = false;
 									collection.update({
