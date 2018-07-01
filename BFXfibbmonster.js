@@ -130,9 +130,24 @@ ws.onTicker({ symbol: k }, (ticker) => {
 		//console.log(k);
 	}
 	if (btcusd != 0&& ethusd != 0){
-		
+			var  collection = dbo.collection(k);
+								collection.find({
+
+										}, {
+											$exists: true
+										}).sort({
+											_id: -1
+
+										}).toArray(function(err, doc3) {
+											for (var d in doc3) {
+												if (doc3[d].trades){
+													winnas.push(doc3[d].trades.k);
+												}
+											}
 	if (k.slice(-3)== "USD"){
 						var amt = btcusd;
+										
+								
 					if (!volKs.includes(k) && ((ticker.volume * ticker.ask) / amt)){						
 					volKs.push(k);
 						volTot += (ticker.volume * ticker.ask) / amt;
@@ -218,8 +233,8 @@ ws.onTicker({ symbol: k }, (ticker) => {
 								winners[k].cancelled = false;
 									if (!winnas.includes(k)){
 										winnas.push(k);
-															
-									
+											
+										
 								insert(winners[k], collection);
 									}
 									updateStoplimits(winners[k], collection);
@@ -227,6 +242,7 @@ ws.onTicker({ symbol: k }, (ticker) => {
 									
 						}
 					}
+										});
 	} else {
 		if (k == "tBTCUSD"){
 			btcusd = ticker.ask;
