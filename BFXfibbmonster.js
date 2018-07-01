@@ -278,12 +278,12 @@ async function oo(){
 		}
 	string = 't' + string;
 		console.log(string);
-		if (activeOders[string] == undefined){
-					activeOders[string] = 0;
+		if (activeOrders[string] == undefined){
+					activeOrders[string] = 0;
 				}
 			if (activeOrders[string] <= 1){
-				if (activeOders[string] == undefined){
-					activeOders[string] = 0;
+				if (activeOrders[string] == undefined){
+					activeOrders[string] = 0;
 				}
 			activeOrders[string] += 1;
 }
@@ -302,12 +302,12 @@ ws.once('auth', () => {
 function buy(k, rate, rate2){ //rate2 for buy is higher
 	setTimeout(function(){
 		try{
-			if (activeOders[k] == undefined){
-					activeOders[k] = 0;
+			if (activeOrders[k] == undefined){
+					activeOrders[k] = 0;
 				}
 			if (activeOrders[k] <= 1){
-				if (activeOders[k] == undefined){
-					activeOders[k] = 0;
+				if (activeOrders[k] == undefined){
+					activeOrders[k] = 0;
 				}
 		  console.log('buy buy !! ' + k + ' ' + (rate));
 			activeOrders[k] += 1;
@@ -523,12 +523,12 @@ function sell(k, rate, rate2){ //rate2 for sell is lower
 //console.log(rate);
 //console.log(rate2);
 setTimeout(function(){
-		try {if (activeOders[k] == undefined){
-					activeOders[k] = 0;
+		try {if (activeOrders[k] == undefined){
+					activeOrders[k] = 0;
 				}
 			if (activeOrders[k] <= 1){
-				if (activeOders[k] == undefined){
-					activeOders[k] = 0;
+				if (activeOrders[k] == undefined){
+					activeOrders[k] = 0;
 				}
 		  ////console.log('sell sell !! ' + k + ' ' + (rate));
 			activeOrders[k] += 1;
@@ -836,12 +836,12 @@ async function doget(req, res){
 	string = 't' + string;
 	if (string.slice(-4) == "USDT"){
 		string = string.substr(0, string.length -1 );
-	}if (activeOders[string] == undefined){
-					activeOders[string] = 0;
+	}if (activeOrders[string] == undefined){
+					activeOrders[string] = 0;
 				}
 			if (activeOrders[string] <= 1){
-				if (activeOders[string] == undefined){
-					activeOders[string] = 0;
+				if (activeOrders[string] == undefined){
+					activeOrders[string] = 0;
 				}
 			activeOrders[string] += 1;
 			}
