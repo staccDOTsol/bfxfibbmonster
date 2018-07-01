@@ -672,7 +672,6 @@ ws.on('error', (err) => {
   }
 })
 ws.open()
-poloniex = new Poloniex('70I6ABA8-69HS4C5S-Q7OT8P2T-6WXK4ZT1', process.env.apikey2 , { socketTimeout: 130000, nonce: () => new Date().getTime() * 1000 + 5000});
 var mongodb = "";
 const express = require('express');
 var startDate = new Date('2018/06/29 22:08')
