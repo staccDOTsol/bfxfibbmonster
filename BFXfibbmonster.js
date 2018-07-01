@@ -920,6 +920,15 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 							for (var d in orders2){
 								
 						var string = orders2[d].symbol.replace('/','');
+						if (string.startsWith('DSH')){
+							string = string.subst(3. string.length);
+							string = "DASH" + string;
+						}if (string.startsWith('IOT')){
+							string = string.subst(3. string.length);
+							string = "IOTA" + string;
+						}if (string.slice(-4) == "USDT"){
+							string = string.substr(0, string.length - 1);
+						}
 						string = 't'+string;
 								if (orders2[d].symbol.slice(-4) == "USDT"){
 									for (var s in totals['USDT']){
