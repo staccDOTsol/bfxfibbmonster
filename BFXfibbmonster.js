@@ -1458,9 +1458,6 @@ function doks(){
 async function dodoget(ks, i, length){
 
 	if (ks[i]){
-	console.log('length ' + length);
-	console.log(ks[i]);
-	console.log(i);
 	var string = ks[i].replace(/(?=.{3}$)/,'/');
 	string = string.substr(1, string.length);
 	//console.log(string);
