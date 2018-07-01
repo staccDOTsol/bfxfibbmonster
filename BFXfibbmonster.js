@@ -764,7 +764,6 @@ async function doget(req, res){
 		dbs = []
 		collections = []
 		var orders2 = []
-							 trades = []
 		let orders = await bitfinexapi.fetchOpenOrders();
 		
 		for (var o in orders){
@@ -1081,6 +1080,7 @@ setInterval(function(){
 	doks();
 }, 300000);
 function doks(){
+	trades = []
 	if (godoks == true){
 	godoks = false;
 	setTimeout(function(){
