@@ -913,6 +913,49 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 										
 									
 							}
+							for (var o in orders2){
+								if (orders2[d].symbol.slice(-4) == "USDT"){
+									for (var s in totals['USDT']){
+										if (totals['USDT'][s].pair == orders2[d].symbol){
+									
+							if (orders2[d].side == 'sell'){
+											totals['USDT'][s].total += ( parseFloat(bestBid[doc3[d].trades.k]) * parseFloat(orders2[d].amount ));
+											//console.log(parseFloat(orders2[d].price) * parseFloat(orders2[d].amount ));
+										}else {
+											totals['USDT'][s].total = totals['USDT'][s].total - (parseFloat(bestAsk[doc3[d].trades.k]) * parseFloat(orders2[d].amount));
+										}
+								cccu++;
+										}
+									}
+								} else 
+								if (orders2[d].symbol.slice(-3) == "BTC"){
+									for (var s in totals['BTC']){
+										if (totals['BTC'][s].pair == orders2[d].symbol){
+									if (orders2[d].side == 'sell'){
+											totals['BTC'][s].total += ( parseFloat(bestBid[doc3[d].trades.k])* parseFloat(orders2[d].amount ));
+											//console.log(parseFloat(orders2[d].price) * parseFloat(orders2[d].amount ));
+										}else {
+											totals['BTC'][s].total = totals['BTC'][s].total - (parseFloat(bestAsk[doc3[d].trades.k]) * parseFloat(orders2[d].amount));
+										}
+								cccb++;
+										}
+									}
+								} else 
+								if (orders2[d].symbol.slice(-3) == "ETH"){
+									
+									for (var s in totals['ETH']){
+										if (totals['ETH'][s].pair == orders2[d].symbol){
+									if (orders2[d].side == 'sell'){
+											totals['ETH'][s].total += ( parseFloat(bestBid[doc3[d].trades.k]) * parseFloat(orders2[d].amount ));
+											//console.log(parseFloat(orders2[d].price) * parseFloat(orders2[d].amount ));
+										}else {
+											totals['ETH'][s].total = totals['ETH'][s].total - (parseFloat(bestAsk[doc3[d].trades.k]) * parseFloat(orders2[d].amount));
+										}
+								ccce++;
+										}
+									}
+								}
+							}
 							//console.log(totals);
 						////console.log('1');
 							////console.log(balances[0]);
