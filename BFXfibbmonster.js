@@ -908,6 +908,7 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 									}
 								string = 't' + string;
 									console.log(string);
+									console.log(bestAsk);
 								if (orders2[d].symbol.slice(-4) == "USDT"){
 									for (var s in totals['USDT']){
 										if (totals['USDT'][s].pair == orders2[d].symbol){
@@ -916,7 +917,7 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 											totals['USDT'][s].total += ( parseFloat(bestAsk[string]) * parseFloat(orders2[d].amount ));
 											//console.log(parseFloat(orders2[d].price) * parseFloat(orders2[d].amount ));
 										}else {
-											totals['USDT'][s].total = totals['USDT'][s].total - (parseFloat(bestBid[string]) * parseFloat(orders2[d].amount));
+											totals['USDT'][s].total = totals['USDT'][s].total - ( parseFloat(bestAsk[string]) * parseFloat(orders2[d].amount ));
 										}
 								cccu++;
 										}
@@ -929,7 +930,7 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 											totals['BTC'][s].total += ( parseFloat(bestAsk[string])* parseFloat(orders2[d].amount ));
 											//console.log(parseFloat(orders2[d].price) * parseFloat(orders2[d].amount ));
 										}else {
-											totals['BTC'][s].total = totals['BTC'][s].total - (parseFloat(bestBid[string]) * parseFloat(orders2[d].amount));
+											totals['BTC'][s].total = totals['BTC'][s].total - ( parseFloat(bestAsk[string]) * parseFloat(orders2[d].amount ));
 										}
 								cccb++;
 										}
@@ -943,7 +944,7 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 											totals['ETH'][s].total += ( parseFloat(bestAsk[string]) * parseFloat(orders2[d].amount ));
 											//console.log(parseFloat(orders2[d].price) * parseFloat(orders2[d].amount ));
 										}else {
-											totals['ETH'][s].total = totals['ETH'][s].total - (parseFloat(bestBid[string]) * parseFloat(orders2[d].amount));
+											totals['ETH'][s].total = totals['ETH'][s].total - ( parseFloat(bestAsk[string]) * parseFloat(orders2[d].amount ));
 										}
 								ccce++;
 										}
