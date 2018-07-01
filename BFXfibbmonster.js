@@ -588,7 +588,7 @@ o.on('error', () => {
    const o2 = new Order({
     cid: Date.now(),
     symbol: k,
-    price: (rate2),
+    price: (rate2 * 0.99925),
     amount: (-1 * os),
     type: Order.type.LIMIT
   }, ws)
@@ -801,7 +801,7 @@ o.on('error', () => {
    const o2 = new Order({
     cid: Date.now(),
     symbol: k,
-    price: rate,
+    price: rate * 1.00075,
     amount: -1 * os,
     type: Order.type.LIMIT
   }, ws)
