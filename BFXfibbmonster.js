@@ -1069,7 +1069,7 @@ string = "IOTA" + string;
 		}
 		//console.log(string);
 		
-							var ts = Math.round(new Date().getTime() / 1000) - 1000;
+							var ts = Math.round(new Date().getTime()) - 1000;
 							var tsYesterday = ts - (24 * 3600) - 1000;
 	let trades2 = await bitfinexapi.fetchMyTrades(string, tsYesterday);
 	for (var o in trades2){
