@@ -738,6 +738,7 @@ async function doget(req, res){
 			
 			orders2.push(orders[o]);
 		}
+			console.log('activeOrders');
 			console.log(activeOrders);
 	dbo.listCollections().toArray(function(err, collInfos) {
         // collInfos is an array of collection info objects that look like:
