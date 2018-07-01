@@ -963,7 +963,7 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 							
 							}
 					
-	},(seventeen * 4 / 1.3 * ks.length + 1000));
+	},(seventeen * 5.33 * ks.length + 1000));
 					}, 1000);
 					
 	});
