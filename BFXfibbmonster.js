@@ -490,7 +490,7 @@ rest.calcAvailableBalance(k, 1, rate, 'MARGIN').then(balances => {
   const o = new Order({
     cid: Date.now(),
     symbol: k,
-    price: rate2,
+    price: rate,
     amount: -1 * amt *.9995,
     type: Order.type.LIMIT
   }, ws)
@@ -515,7 +515,7 @@ o.on('error', () => {
    const o2 = new Order({
     cid: Date.now(),
     symbol: k,
-    price: rate,
+    price: rate2,
     amount: -1 * os,
     type: Order.type.LIMIT
   }, ws)
