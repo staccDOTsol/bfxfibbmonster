@@ -1,0 +1,30 @@
+{
+  "author": {
+    "name": "Jarett Dunn",
+    "email": "jarettrsdunn@gmail.com"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "bitfinex-api-node": "^2.0.0-beta.1",
+    "body-parser": "^1.18.3",
+    "ccxt": "^1.14.301",
+    "co": "4.6.0",
+    "express": "^4.16.3",
+    "mongodb": "*",
+    "path": "*",
+    "poloniex-api-node": "^1.9.0",
+    "request": "^2.87.0",
+    "serve-favicon": "*",
+    "trendyways": "^0.4.2"
+  },
+  "scripts": {
+    "start": "node BFXfibbmonster.js"
+  },
+  "deprecated": false,
+  "description": "Engine for Polo automation",
+  "engines": {
+    "node": ">=0.6"
+  },
+  "name": "polofibbmonster",
+  "version": "1.0.4"
+}
