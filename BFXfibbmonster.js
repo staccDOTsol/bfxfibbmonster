@@ -868,33 +868,45 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 							for (var d in trades){
 								//console.log(trades[d].symbol);
 								if (trades[d].symbol.slice(-4) == "USDT"){
+									for (var s in totals['USDT']){
+										if (totals['USDT'][s].pair = trades[d].symbol){
 									
 							if (trades[d].side == 'sell'){
-											totals['USDT'][cccu].total += ( parseFloat(trades[d].price) * parseFloat(trades[d].amount ));
+											totals['USDT'][s].total += ( parseFloat(trades[d].price) * parseFloat(trades[d].amount ));
 											//console.log(parseFloat(trades[d].price) * parseFloat(trades[d].amount ));
 										}else {
-											totals['USDT'][cccu].total = totals['USDT'][cccu].total - (parseFloat(trades[d].price) * parseFloat(trades[d].amount));
+											totals['USDT'][s].total = totals['USDT'][s].total - (parseFloat(trades[d].price) * parseFloat(trades[d].amount));
 										}
 								cccu++;
+										}
+									}
 								} else 
 								if (trades[d].symbol.slice(-3) == "BTC"){
+									for (var s in totals['BTC']){
+										if (totals['BTC'][s].pair = trades[d].symbol){
 									if (trades[d].side == 'sell'){
-											totals['BTC'][cccb].total += ( parseFloat(trades[d].price) * parseFloat(trades[d].amount ));
+											totals['BTC'][s].total += ( parseFloat(trades[d].price) * parseFloat(trades[d].amount ));
 											//console.log(parseFloat(trades[d].price) * parseFloat(trades[d].amount ));
 										}else {
-											totals['BTC'][cccb].total = totals['BTC'][cccb].total - (parseFloat(trades[d].price) * parseFloat(trades[d].amount));
+											totals['BTC'][s].total = totals['BTC'][s].total - (parseFloat(trades[d].price) * parseFloat(trades[d].amount));
 										}
 								cccb++;
+										}
+									}
 								} else 
 								if (trades[d].symbol.slice(-3) == "ETH"){
 									
+									for (var s in totals['ETH']){
+										if (totals['ETH'][s].pair = trades[d].symbol){
 									if (trades[d].side == 'sell'){
-											totals['ETH'][ccce].total += ( parseFloat(trades[d].price) * parseFloat(trades[d].amount ));
+											totals['ETH'][s].total += ( parseFloat(trades[d].price) * parseFloat(trades[d].amount ));
 											//console.log(parseFloat(trades[d].price) * parseFloat(trades[d].amount ));
 										}else {
-											totals['ETH'][ccce].total = totals['ETH'][ccce].total - (parseFloat(trades[d].price) * parseFloat(trades[d].amount));
+											totals['ETH'][s].total = totals['ETH'][s].total - (parseFloat(trades[d].price) * parseFloat(trades[d].amount));
 										}
 								ccce++;
+										}
+									}
 								}
 									
 									
