@@ -913,7 +913,7 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 										
 									
 							}
-							for (var o in orders2){
+							for (var d in orders2){
 								if (orders2[d].symbol.slice(-4) == "USDT"){
 									for (var s in totals['USDT']){
 										if (totals['USDT'][s].pair == orders2[d].symbol){
