@@ -963,7 +963,7 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 							
 							}
 					
-	},(seventeen * 4  * ks.length + 1000));
+	},(seventeen * 4 / 1.3 * ks.length + 1000));
 					}, 1000);
 					
 	});
@@ -971,7 +971,7 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 		res.send('err: ' + err);
 	}
 }
-var seventeen = 135;
+var seventeen = 105;
 var godoks = true;
 function doks(ks){
 	if (godoks == true){
