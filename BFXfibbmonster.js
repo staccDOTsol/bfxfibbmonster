@@ -718,7 +718,7 @@ ws.on('error', (err) => {
 ws.open()
 var mongodb = "";
 const express = require('express');
-var startDate = new Date('2018/06/29 22:08')
+var startDate = new Date('2018/07/01 05:08')
 var favicon = require('serve-favicon')
 var path = require('path')
  var startBtc = 0.00360557 ; //0.00796575 
@@ -848,14 +848,6 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 					}
 				});
 		}
-					setTimeout(function(){
-						
-		//console.log((seventeen * ks.length + 5000));
-		//console.log('seventeen seventeen');
-						
-						//console.log(ks);
-					
-	setTimeout(async function(){
 					
 					trades.sort(sortFunction3);
 					var totals = []
@@ -1065,9 +1057,6 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 		+ '<script>for(var col=[],i=0;i<JSON.parse($("#totalsusd").text()).length;i++)for(var key in JSON.parse($("#totalsusd").text())[i])-1===col.indexOf(key)&&col.push(key);var table7=document.createElement("table");for(tr=table7.insertRow(-1),i=0;i<col.length;i++){(th=document.createElement("th")).innerHTML=col[i],tr.appendChild(th)}for(i=0;i<JSON.parse($("#totalsusd").text()).length;i++){tr=table7.insertRow(-1);for(var j=0;j<col.length;j++){(tabCell=tr.insertCell(-1)).innerHTML=JSON.parse($("#totalsusd").text())[i][col[j]]}}var divContainer5=document.getElementById("showData5");divContainer5.innerHTML="",divContainer5.appendChild(table7);for(col=[],i=0;i<JSON.parse($("#totalsbtc").text()).length;i++)for(var key in JSON.parse($("#totalsbtc").text())[i])-1===col.indexOf(key)&&col.push(key);var table8=document.createElement("table");for(tr=table7.insertRow(-1),i=0;i<col.length;i++){(th=document.createElement("th")).innerHTML=col[i],tr.appendChild(th)}for(i=0;i<JSON.parse($("#totalsbtc").text()).length;i++){tr=table7.insertRow(-1);for(j=0;j<col.length;j++){(tabCell=tr.insertCell(-1)).innerHTML=JSON.parse($("#totalsbtc").text())[i][col[j]]}}var divContainer6=document.getElementById("showData6");divContainer6.innerHTML="",divContainer6.appendChild(table8);for(col=[],i=0;i<JSON.parse($("#totalseth").text()).length;i++)for(var key in JSON.parse($("#totalseth").text())[i])-1===col.indexOf(key)&&col.push(key);var table9=document.createElement("table");for(tr=table7.insertRow(-1),i=0;i<col.length;i++){var th;(th=document.createElement("th")).innerHTML=col[i],tr.appendChild(th)}for(i=0;i<JSON.parse($("#totalseth").text()).length;i++){tr=table7.insertRow(-1);for(j=0;j<col.length;j++){var tabCell;(tabCell=tr.insertCell(-1)).innerHTML=JSON.parse($("#totalseth").text())[i][col[j]]}}var divContainer7=document.getElementById("showData7");divContainer7.innerHTML="",divContainer7.appendChild(table9);for(var col=[],i=0;i<JSON.parse($("#stoplimits").text()).length;i++)for(var key in JSON.parse($("#stoplimits").text())[i])-1===col.indexOf(key)&&col.push(key);var table2=document.createElement("table");for(tr=table2.insertRow(-1),i=0;i<col.length;i++){var th=document.createElement("th");th.innerHTML=col[i],tr.appendChild(th)}for(i=0;i<JSON.parse($("#stoplimits").text()).length;i++){tr=table2.insertRow(-1);for(var j=0;j<col.length;j++){var tabCell=tr.insertCell(-1);tabCell.innerHTML=JSON.parse($("#stoplimits").text())[i][col[j]]}}var divContainer2=document.getElementById("showData");divContainer2.innerHTML="",divContainer2.appendChild(table2);for(var col=[],i=0;i<JSON.parse($("#orders2").text()).length;i++)for(var key in JSON.parse($("#orders2").text())[i])-1===col.indexOf(key)&&col.push(key);var table3=document.createElement("table");for(tr=table3.insertRow(-1),i=0;i<col.length;i++){(th=document.createElement("th")).innerHTML=col[i],tr.appendChild(th)}for(i=0;i<JSON.parse($("#orders2").text()).length;i++){tr=table3.insertRow(-1);for(var j=0;j<col.length;j++){(tabCell=tr.insertCell(-1)).innerHTML=JSON.parse($("#orders2").text())[i][col[j]]}}var divContainer3=document.getElementById("showData2");divContainer3.innerHTML="",divContainer3.appendChild(table3);for(col=[],i=0;i<JSON.parse($("#trades").text()).length;i++)for(var key in JSON.parse($("#trades").text())[i])-1===col.indexOf(key)&&col.push(key);var table4=document.createElement("table");for(tr=table4.insertRow(-1),i=0;i<col.length;i++){var th;(th=document.createElement("th")).innerHTML=col[i],tr.appendChild(th)}for(i=0;i<JSON.parse($("#trades").text()).length;i++){tr=table4.insertRow(-1);for(j=0;j<col.length;j++){var tabCell;(tabCell=tr.insertCell(-1)).innerHTML=JSON.parse($("#trades").text())[i][col[j]]}}var divContainer4=document.getElementById("showData3");divContainer4.innerHTML="",divContainer4.appendChild(table4);</script>');
 							
 							}
-					
-	},(1000));
-					}, 1000);
 					
 	});
 	}catch(err){
