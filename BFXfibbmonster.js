@@ -258,7 +258,7 @@ function buy(k, rate, rate2){ //rate2 for buy is higher
   const o = new Order({
     cid: Date.now(),
     symbol: k,
-    price: rate *1.0005,
+    price: rate,
     amount: amt ,
     type: Order.type.LIMIT
   }, ws)
