@@ -16,6 +16,8 @@
     "request": "^2.87.0",
     "serve-favicon": "*",
 	"dotenv": "*",
+	"sendgrid": "*",
+	"@sendgrid/mail": "*",
     "trendyways": "^0.4.2"
   },
   "scripts": {
