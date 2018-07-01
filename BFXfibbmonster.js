@@ -197,13 +197,13 @@ ws.onTicker({ symbol: k }, (ticker) => {
 									winners[k].sell2 = greater[1]
 									
 								}
-								if (lesser[1] != undefined){
-									winners[k].buy1 = lesser[1]
+								if (lesser[0] != undefined){
+									winners[k].buy1 = lesser[0]
 									winners[k].sl = lesser[0] * 0.01; //0.93
 									
 								}
-								if (lesser[0] != undefined){
-									winners[k].buy2 = lesser[0]
+								if (lesser[1] != undefined){
+									winners[k].buy2 = lesser[1]
 									winners[k].sl = lesser[1] * 0.01; //.93
 									
 								}
@@ -1119,7 +1119,7 @@ async function doget(req, res){
 						}
 						if (doc3[d].trades.bought2 == false){
 							if (doc3[d].trades.buy2 != undefined){
-							//console.log(bestAsk);
+							console.log(bestAsk);
 							var sl = {'activeOrders': activeOrders[doc3[d].trades.k], 'direction': 'buy2', 'pair' : doc3[d].trades.k, 'stoplimit': doc3[d].trades.buy2, 'currentAsk': bestAsk[doc3[d].trades.k], 'percent': (parseFloat(bestAsk[doc3[d].trades.k]) / parseFloat(doc3[d].trades.buy2))}
 							
 if ((activeOrders[doc3[d].trades.k] <= 1)&&  tickers.includes('trade:1m:' + doc3[d].trades.k)){
@@ -1202,7 +1202,7 @@ if ((activeOrders[doc3[d].trades.k] <= 1)&&  tickers.includes('trade:1m:' + doc3
 									string = "IOT" + string;
 									}
 								string = 't' + string;
-									//console.log(string);
+									console.log(string);
 								//	console.log(bestAsk);
 								if (orders2[d].symbol.slice(-4) == "USDT"){
 									for (var s in totals['USDT']){
@@ -1258,7 +1258,7 @@ if ((activeOrders[doc3[d].trades.k] <= 1)&&  tickers.includes('trade:1m:' + doc3
 									string = "IOT" + string;
 									}
 								string = 't' + string;
-								//console.log('string ' + string);
+								console.log('string ' + string);
 								orders2[d].activeOrders = activeOrders[string]; 
 							}
 					trades.sort(sortFunction3);
@@ -1575,7 +1575,7 @@ var collections = []
 setTimeout(function(){
 MongoClient.connect(process.env.mongodb || mongodb, function(err, db) {
 	
-    var dbo = db.db('polomonster138-jare66211332')
+    var dbo = db.db('polomonster138-jare5211332')
 	var count = 0;
     dbo.listCollections().toArray(function(err, collInfos) {
         // collInfos is an array of collection info objects that look like:
@@ -1889,7 +1889,7 @@ godosell = false;
 var dbo;
 				MongoClient.connect(process.env.mongodb || mongodb, function(err, db) {
 					
-				dbo = db.db('polomonster138-jare66211332')
+				dbo = db.db('polomonster138-jare5211332')
 				////////console.log('dbo');
 				
 				});
