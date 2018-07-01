@@ -231,7 +231,7 @@ ws.onTicker({ symbol: k }, (ticker) => {
 	}
 });
 }
-ws.once('auth', () => {
+async function oo(){
 	let orders = await bitfinexapi.fetchOpenOrders();
 		
 		for (var o in orders){
@@ -247,6 +247,9 @@ ws.once('auth', () => {
 		}
 		console.log('activeorders');
 		console.log(activeOrders);
+}
+ws.once('auth', () => {
+	oo();
 //console.log('auth');
 });
 function buy(k, rate, rate2){ //rate2 for buy is higher
