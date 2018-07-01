@@ -262,7 +262,7 @@ function buy(k, rate, rate2){ //rate2 for buy is higher
 	
 	rest.calcAvailableBalance(k, 1, rate, 'MARGIN').then(balances => {
 	//console.log(balances[0]);
-		var amt = balances[0] / 10;
+		var amt = balances[0] / 8;
 		//console.log(amt);
 		for (var v in activeOrders){
 			if (v >= 22){
@@ -476,7 +476,7 @@ setTimeout(function(){
 	
 rest.calcAvailableBalance(k, 1, rate, 'MARGIN').then(balances => {
 	//console.log(balances[0]);
-		var amt = balances[0] / 10;
+		var amt = balances[0] / 8;
 		//console.log(amt);
 		for (var v in activeOrders){
 			if (v >= 22){
