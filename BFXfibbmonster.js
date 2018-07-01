@@ -869,6 +869,7 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 								}
 								}
 							}
+							var substrbch = true;
 							for (var d in trades){
 								//console.log(trades[d].symbol);
 								if (trades[d].symbol.slice(-4) == "USDT"){
@@ -895,6 +896,14 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 											totals['BTC'][s].total = totals['BTC'][s].total - (parseFloat(trades[d].price) * parseFloat(trades[d].amount));
 										}
 								cccb++;
+								
+									
+									if (trades[d].symbol == "BCH/BTC"){
+										if (substrbch == true){
+											substrbch = false;
+											totals['BTC'][s].total = totals['BTC'][s].total - 0.004797753407399999;
+										}
+									}
 										}
 									}
 								} else 
@@ -920,15 +929,16 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 							for (var d in orders2){
 								
 						var string = orders2[d].symbol.replace('/','');
-						if (string.startsWith('DSH')){
-							string = string.substr(3, string.length);
-							string = "DASH" + string;
-						}if (string.startsWith('IOT')){
-							string = string.substr(3, string.length);
-							string = "IOTA" + string;
-						}if (string.slice(-4) == "USDT"){
-							string = string.substr(0, string.length - 1);
+						if (string.startsWith('DASH')){
+							string = string.substr(4, string.length);
+							string = "DSH" + string;
+						}if (string.startsWith('IOTA')){
+							string = string.substr(4, string.length);
+							string = "IOT" + string;
+						}if (string.slice(-3) == "USD"){
+							string+="T";
 						}
+						console.log(string);
 						string = 't'+string;
 								if (orders2[d].symbol.slice(-4) == "USDT"){
 									for (var s in totals['USDT']){
@@ -945,6 +955,8 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 									}
 								} else 
 								if (orders2[d].symbol.slice(-3) == "BTC"){
+									console.log(string);
+									console.log(bestBid[string]);
 									for (var s in totals['BTC']){
 										if (totals['BTC'][s].pair == orders2[d].symbol){
 									if (orders2[d].side == 'sell'){
@@ -1060,6 +1072,7 @@ function doks(ks){
 async function dodoget(ks, i, length){
 	////console.log('length ' + length);
 	////console.log(ks[i]);
+	if (ks[i]){
 	var string = ks[i].replace(/(?=.{3}$)/,'/');
 	string = string.substr(1, string.length);
 	//console.log(string);
@@ -1101,6 +1114,7 @@ string = "IOTA" + string;
 		setTimeout(async function(){
 		dodoget(ks, i + 1, ks.length);
 	}, seventeen * 4);
+	}
 	}
 	}
 	}
