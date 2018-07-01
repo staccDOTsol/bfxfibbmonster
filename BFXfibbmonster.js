@@ -555,12 +555,12 @@ function buy(k, rate, rate2){ //rate2 for buy is higher
 		}
 	
 		////console.log(amt);
-		    console.log('buyl price: ' + ((rate)) + ' amount ' + amt);
+		    console.log('buyl price: ' + ((rate2)) + ' amount ' + amt);
 
   const o = new Order({
     cid: Date.now(),
     symbol: k,
-    price: rate,
+    price: rate2,
     amount: amt ,
     type: Order.type.LIMIT
   }, ws)
@@ -583,12 +583,12 @@ o.on('error', () => {
 	}
 	if (o.serialize().toString().indexOf('EXECUTED') != -1){
 		//console.log(k);
-   console.log('sell price: ' + ((rate2)) + ' amount ' + (-1 * os));
+   console.log('sell price: ' + ((rate)) + ' amount ' + (-1 * os));
 
    const o2 = new Order({
     cid: Date.now(),
     symbol: k,
-    price: (rate2),
+    price: (rate),
     amount: (-1 * os),
     type: Order.type.LIMIT
   }, ws)
