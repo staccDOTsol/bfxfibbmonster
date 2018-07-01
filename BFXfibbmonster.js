@@ -236,7 +236,6 @@ async function oo(){
 		
 		for (var o in orders){
 	var string = orders[o].symbol.replace('/', "");
-	string = 't' + string;
 	if (string.slice(-4) == "USDT"){
 		string = string.substr(0, string.length -1 );
 	}if (string.substr(0, 3) == "DASH"){
@@ -246,6 +245,7 @@ async function oo(){
 		string = string.substr(3, string.length );
 		string = "IOT" + string;
 		}
+	string = 't' + string;
 		console.log(string);
 			if (!activeOrders.includes(string)){
 			activeOrders.push(string);
