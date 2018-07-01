@@ -232,6 +232,21 @@ ws.onTicker({ symbol: k }, (ticker) => {
 });
 }
 ws.once('auth', () => {
+	let orders = await bitfinexapi.fetchOpenOrders();
+		
+		for (var o in orders){
+	var string = orders[o].symbol.replace('/', "");
+	string = 't' + string;
+	if (string.slice(-4) == "USDT"){
+		string = string.substr(0, string.length -1 );
+	}
+			if (!activeOrders.includes(string)){
+			activeOrders.push(string);
+			}
+			
+		}
+		console.log('activeorders');
+		console.log(activeOrders);
 //console.log('auth');
 });
 function buy(k, rate, rate2){ //rate2 for buy is higher
