@@ -772,11 +772,11 @@ rest.calcAvailableBalance(k, 1, rate, 'MARGIN').then(balances => {
 			}
 		}
 	//console.log(k);
-  console.log('sell price: ' + (rate2) + ' amount ' + (-1 * amt * (1 / rate)));
+  console.log('sell price: ' + (rate) + ' amount ' + (-1 * amt * (1 / rate)));
   const o = new Order({
     cid: Date.now(),
     symbol: k,
-    price: rate2,
+    price: rate,
     amount: -1 * amt,
     type: Order.type.LIMIT
   }, ws)
@@ -797,11 +797,11 @@ o.on('error', () => {
 	}else {
 		os = parseFloat(o.serialize()[6]);
 	}
-  console.log('buyl price: ' + (rate) + ' amount ' + (-1 * os));
+  console.log('buyl price: ' + (rate2) + ' amount ' + (-1 * os));
    const o2 = new Order({
     cid: Date.now(),
     symbol: k,
-    price: rate,
+    price: rate2,
     amount: -1 * os,
     type: Order.type.LIMIT
   }, ws)
@@ -1876,7 +1876,7 @@ godosell = false;
 
 								});
 							console.log('dosell2:');
-						sell(d3d.trades.k, d3d.trades.sell2, d3d.trades.sell1);
+						sell(d3d.trades.k, d3d.trades.sell1, d3d.trades.sell2);
                             }
 							}
                         }
