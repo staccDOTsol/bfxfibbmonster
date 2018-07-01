@@ -130,7 +130,7 @@ ws.onTicker({ symbol: k }, (ticker) => {
 		//console.log(k);
 	}
 	if (btcusd != 0&& ethusd != 0){
-		if (dbo){
+		if (dbo != undefined){
 			var  collection = dbo.collection(k);
 								collection.find({
 
@@ -780,6 +780,11 @@ async function doget(req, res){
 	try{
 		var gosend = true;
 		godoks = true;
+						totals = []
+					totals['USDT'] = []
+					totals['BTC'] = []
+					totals['ETH'] = []
+					
 	stoplimits = []
 		count = 0;
 		dbs = []
@@ -824,7 +829,7 @@ async function doget(req, res){
                 }).toArray(async function(err, doc3) {
 					for (var d in doc3){
 						
-					//	////////console.log(doc3[d])
+					console.log(doc3[d])
 						
 						//////////console.log(doc3[d].trades);
 						if (doc3[d].trades){
@@ -866,11 +871,6 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 							}
 						} 
 						}
-						totals = []
-					totals['USDT'] = []
-					totals['BTC'] = []
-					totals['ETH'] = []
-					
 						var cccu = 0;
 						var cccb = 0;
 						var ccce = 0;
@@ -1267,6 +1267,10 @@ app.get('/', function(req, res) {
 			}
 			  //////console.log(res.result);
 			}); 
+			MongoClient.connect(process.env.mongodb || mongodb, function(err, db) {
+	console.log(monster)
+    dbo = db.db(monster)
+			});
  }
  
  var btceth = 0;
@@ -1277,7 +1281,7 @@ var dbs = []
 var collections = []
 setTimeout(function(){
 MongoClient.connect(process.env.mongodb || mongodb, function(err, db) {
-	
+	console.log(monster)
     var dbo = db.db(monster)
 	var count = 0;
     dbo.listCollections().toArray(function(err, collInfos) {
@@ -1586,13 +1590,28 @@ godosell = false;
 						}
 						})
 					}
-					
-			var monster = 'polomonster138-jare' + Math.random().toString(36).substring(7);		
-   
+
+function randLetter(letter, callback) {
+    var letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+    letter += letters[Math.floor(Math.random() * letters.length)];
+	console.log(letter);
+	console.log(letter.length);
+	if (letter.length <= 32){
+    randLetter(letter, callback);
+	}
+	else {
+		callback(letter);
+	}
+}
 var dbo;
+var monster;
+   randLetter('jare', function(data){
+	  monster = data;
 				MongoClient.connect(process.env.mongodb || mongodb, function(err, db) {
-					
+					console.log(monster)
 				dbo = db.db(monster)
 				////////console.log('dbo');
 				
 				});
+
+   });
