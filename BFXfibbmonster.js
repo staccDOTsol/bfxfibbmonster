@@ -5,6 +5,7 @@ let poloniex
 				var bestAsk = []
 
 				const ccxt = require ('ccxt');
+				
 
 				var bestBid = []
 				const bfx = require('./bfx.js')
@@ -720,7 +721,8 @@ const express = require('express');
 var startDate = new Date('2018/06/29 22:08')
 var favicon = require('serve-favicon')
 var path = require('path')
- var startBtc = 0.00776254 ; //0.00796575 
+ var startBtc = 0.00360557 ; //0.00796575 
+ var startBch = 0.06579248;
 var app = express()
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 	function sortFunction3(a,b){  
@@ -989,6 +991,18 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 							////console.log(balances[0]);
 	
 							var btcbal = 0;
+							const balances = await rest.balances() 
+							var bchbal = 0;
+							console.log(balances);
+							for (var b in balances){
+								if (balances[b].currency == "bch"){
+							bchbal +=parseFloat(balances[b].amount);		
+								}
+								if (balances[b].currency == "btc"){
+							btcbal +=parseFloat(balances[b].amount);		
+								}
+							}
+							
 							////console.log(orders);
 							//for (var o in orders){
 							//	//console.log(o);
@@ -999,11 +1013,13 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 							var tsYesterday = ts - (24 * 3600) - 1000;
 								
 								var ccc = 0;
-							var percent =  (100 * (-1 * (1 - (btcbal / startBtc)))).toFixed(4);
+							var percent3 =  (100 * (-1 * (1 - (btcbal / startBtc)))).toFixed(4);
+							var percent2 =  (100 * (-1 * (1 - (bchbal / startBch)))).toFixed(4);
+							var percent =  (percent3 + percent) / 2;
 					var diff2 = Math.abs(new Date() - startDate);
 					var minutes = Math.floor((diff2/1000)/60);
 					var hours = ((diff2/1000)/60 / 60).toFixed(8);
-					var percentHr = (percent / hours).toFixed(4);
+					var percentHr = (percent3 / hours).toFixed(4);
 							//////////console.log(balances.BTC);
 							trades.sort(sortFunction3);
 							stoplimits.sort(sortFunction);
@@ -1028,6 +1044,7 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 		res.send('<head><link rel="icon" href="https://polofibbmonster.herokuapp.com/favicon.ico?v=2" /><meta http-equiv="refresh" content="120"><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script></head><h1>Don\'t Panic! If the data seems off, wait a minute or so.</h1>'
 		+ 'current time: ' + new Date()
 		+ '<br>BTC Balance: ' + btcbal + '<br>'
+		+ '<br>BCH Balance: ' + bchbal + '<br>'
 		+ 'minutes: ' + minutes + '<br>'
 		+ 'hours: ' + hours + '<br>'
 		+ 'percent: ' + percent + '%<br>'
