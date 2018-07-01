@@ -986,7 +986,7 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 							var btcbal = 0;
 							const balances = await rest.balances() 
 							var bchbal = 0;
-							console.log(balances);
+							//console.log(balances);
 							for (var b in balances){
 								if (balances[b].currency == "bch"){
 							bchbal +=parseFloat(balances[b].amount);		
@@ -1042,8 +1042,8 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 		+ 'hours: ' + hours + '<br>'
 		+ 'percent: ' + percent3 + '%<br>'
 		+ '<h1>percent/hr: ' + percentHr + '%</h1>'
-		+ 'trades now: ' + trades.length;
-		+ '<br>max. trades recorded: ' + maxclosed;
+		+ 'trades now: ' + trades.length
+		+ '<br>max. trades recorded: ' + maxclosed
 		+ '<h1>total gains (usdt): ' + thetotalusdt + '</h1>'
 		+ '<h1>total gains (sats): ' + thetotalbtc + '</h1>'
 		+ '<h1>total gains (wei): ' + thetotaleth + '</h1>'
