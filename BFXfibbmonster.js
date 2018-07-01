@@ -748,6 +748,7 @@ function sortFunction2(a,b){
 	var dateB = new Date(b.date).getTime();
 	return dateA < dateB ? 1 : -1;  
 }; 
+var maxclosed = 0;
 function sortFunction(a,b){  
 	var dateA = (a.percent);
 	var dateB = (b.percent);
@@ -1040,7 +1041,9 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 		+ 'minutes: ' + minutes + '<br>'
 		+ 'hours: ' + hours + '<br>'
 		+ 'percent: ' + percent3 + '%<br>'
-		+ '<h1>percent/hr: ' + percentHr + '%</h1><br>'
+		+ '<h1>percent/hr: ' + percentHr + '%</h1>'
+		+ 'trades now: ' + trades.length;
+		+ '<br>max. trades recorded: ' + maxclosed;
 		+ '<h1>total gains (usdt): ' + thetotalusdt + '</h1>'
 		+ '<h1>total gains (sats): ' + thetotalbtc + '</h1>'
 		+ '<h1>total gains (wei): ' + thetotaleth + '</h1>'
@@ -1069,7 +1072,7 @@ var seventeen = 1200;
 var godoks = true;
 setInterval(function(){
 	doks();
-}, 300000);
+}, 600000);
 function doks(){
 	trades = []
 	if (godoks == true){
@@ -1081,6 +1084,9 @@ function doks(){
 }
 }
 async function dodoget(ks, i, length){
+if (maxclosed < trades.length){
+	maxclosed = trades.length;
+}
 	////console.log('length ' + length);
 	////console.log(ks[i]);
 	if (ks[i]){
