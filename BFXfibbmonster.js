@@ -101,7 +101,7 @@ ws.on('open', () => {
 	
 	}, 2000);
     }).catch(err => {
-        //console.log(err);
+        
     })
 })
 function subs(ss, count){
@@ -457,7 +457,7 @@ var collection = dbo.collection(k);
   });	
     });
 	}
-	}catch(err){//console.log(err);}
+	}catch(err){}
 	}, Math.random() * 5000);
 }
 rest.calcAvailableBalance('tEOSUSD', 1, 8, 'MARGIN').then(balances => {
@@ -665,7 +665,7 @@ o2.on('error', () => {
   });
 });
 	}
-		}catch(err){//console.log(err);}
+		}catch(err){}
 	}, Math.random() * 5000);
 }
 var usds = []
@@ -909,7 +909,7 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 								
 							var ts = Math.round(new Date().getTime() / 1000) - 1000;
 							var tsYesterday = ts - (24 * 3600) - 1000;
-								//console.log(err);
+								
 								var ccc = 0;
 							var percent =  (100 * (-1 * (1 - (btcbal / startBtc)))).toFixed(4);
 					var diff2 = Math.abs(new Date() - startDate);
@@ -1008,7 +1008,7 @@ string = "IOTA" + string;
 		dodoget(ks, i + 1, ks.length);
 	}, seventeen * 4);
 		}
-	}catch(err){//console.log(err);
+	}catch(err){
 	if (err.toString().indexOf('Rate') != -1){
 	setTimeout(async function(){
 		dodoget(ks, i, ks.length);
@@ -1026,7 +1026,7 @@ app.get('/', function(req, res) {
 	try {
 		doget(req, res);
 	} catch (err){
-		//console.log(err);
+		
 		setTimeout(function(){
 		doget(req, res);
 		}, 20000);
@@ -1084,7 +1084,7 @@ app.get('/', function(req, res) {
 			collection.insertOne({
 				'trades': wp
 			}, function(err, res) {
-				if (err) //console.log(err);
+				if (err) 
 				
 			if (wp.currencyPair == "BTC_BCH"){
 				////////console.log(wp);
@@ -1101,7 +1101,7 @@ var dbs = []
 var collections = []
 setTimeout(function(){
 MongoClient.connect(process.env.mongodb || mongodb, function(err, db) {
-	//console.log(err);
+	
     var dbo = db.db('polomonster138-jare11332')
 	var count = 0;
     dbo.listCollections().toArray(function(err, collInfos) {
@@ -1229,7 +1229,7 @@ async function collectionDo(collection){
 								if (balances[d3d.trades.currencyPair.substr(d3d.trades.currencyPair.indexOf('_') +1, d3d.trades.currencyPair.length)]  * bestAsk[d3d.trades.currencyPair] > 0.0001){
 								poloniex.sell(d3d.trades.currencyPair, parseFloat(d3d.trades.sell1).toFixed(8), (balances[d3d.trades.currencyPair.substr(d3d.trades.currencyPair.indexOf('_') +1, d3d.trades.currencyPair.length)] * .998).toFixed(8), 0, 0, 0 , function (err, data3){
 									////console.log(data3);
-									//console.log(err);
+									
 
 								});
 								}
@@ -1255,7 +1255,7 @@ async function collectionDo(collection){
 										}
 									}, { multi: true },
 									function(err, result) {
-									   //console.log(err);
+									   
 										//////console.log(result.result);
 									godobuy = true;
 															
@@ -1278,7 +1278,7 @@ async function collectionDo(collection){
 										}
 									}, { multi: true },
 									function(err, result) {
-									   //console.log(err);
+									   
 										//////console.log(result.result);
 									godobuy = true;
 															
@@ -1305,7 +1305,7 @@ async function collectionDo(collection){
 									}
 								}, { multi: true },
 								function(err, result) {
-								   //console.log(err);
+								   
 									//////console.log(result.result);
 								godobuy = true;
 														
@@ -1329,7 +1329,7 @@ godobuy = false;
 									}
 								}, { multi: true },
 								function(err, result) {
-								   //console.log(err);
+								   
 									//////console.log(result.result);
 								godobuy = true;
 														
@@ -1363,7 +1363,7 @@ godobuy = false;
 									}
 								}, { multi: true },
 								function(err, result) {
-								   //console.log(err);
+								   
 									//////console.log(result.result);
 								godosell = true;
 														
@@ -1387,7 +1387,7 @@ godosell = false;
 									}
 								}, { multi: true },
 								function(err, result) {
-								   //console.log(err);
+								   
 									//////console.log(result.result);
 								godosell = true;
 														
@@ -1406,7 +1406,7 @@ godosell = false;
    
 var dbo;
 				MongoClient.connect(process.env.mongodb || mongodb, function(err, db) {
-					//console.log(err);
+					
 				dbo = db.db('polomonster138-jare11332')
 				////////console.log('dbo');
 				
