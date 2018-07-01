@@ -45,7 +45,7 @@ ws.on('open', () => {
 			
 	
 			}
-        }/*
+        }
 			ws.subscribeTicker("tBTCUSD");
 		ws.subscribeTicker("tETHUSD");
 		tickerticker("tBTCUSD");
@@ -55,7 +55,7 @@ ws.on('open', () => {
 		ws.subscribeTicker(keys2[k]);
 			tickerticker(keys2[k]);
 			
-		}*/
+		}
         for (var k in keys) {
 			
             //////console.log(keys[k]);
@@ -220,7 +220,7 @@ ws.onTicker({ symbol: k }, (ticker) => {
 										winnas.push(k);
 															
 									
-								//insert(winners[k], collection);
+								insert(winners[k], collection);
 									}
 									updateStoplimits(winners[k], collection);
 								}
@@ -755,6 +755,7 @@ function sortFunction(a,b){
 	return dateA > dateB ? 1 : -1;  
 }; 
 var trades = []
+						var totals = []
 					var ks = []
 async function doget(req, res){
 	try{
@@ -818,7 +819,7 @@ async function doget(req, res){
 						}
 						if (doc3[d].trades.bought2 == false){
 							if (doc3[d].trades.buy2 != undefined){
-
+							console.log(bestAsk);
 							var sl = {'direction': 'buy2', 'pair' : doc3[d].trades.k, 'stoplimit': doc3[d].trades.buy2, 'currentAsk': bestAsk[doc3[d].trades.k], 'percent': (parseFloat(bestAsk[doc3[d].trades.k]) / parseFloat(doc3[d].trades.buy2))}
 							
 if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + doc3[d].trades.k)){
@@ -846,13 +847,7 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 							}
 						} 
 						}
-					}
-				});
-		}
-	setTimeout(async function(){
-					
-					trades.sort(sortFunction3);
-					var totals = []
+						totals = []
 					totals['USDT'] = []
 					totals['BTC'] = []
 					totals['ETH'] = []
@@ -908,7 +903,7 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 									}
 								string = 't' + string;
 									console.log(string);
-									console.log(bestAsk);
+								//	console.log(bestAsk);
 								if (orders2[d].symbol.slice(-4) == "USDT"){
 									for (var s in totals['USDT']){
 										if (totals['USDT'][s].pair == orders2[d].symbol){
@@ -951,6 +946,9 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 									}
 								}
 							}
+							
+					trades.sort(sortFunction3);
+					
 							for (var d in trades){
 								//console.log(trades[d].symbol);
 								if (trades[d].symbol.slice(-4) == "USDT"){
@@ -1006,7 +1004,12 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 									
 										
 									
-							}
+							
+					}
+					}
+				});
+		}
+	setTimeout(async function(){
 							
 							//console.log(totals);
 						////console.log('1');
@@ -1223,7 +1226,7 @@ app.get('/', function(req, res) {
  
  function insert(wp, collection){
 	//console.log(wp);
-	 //console.log('insert');
+	 console.log('insert');
 	
 			
 			collection.insertOne({
@@ -1247,7 +1250,7 @@ var collections = []
 setTimeout(function(){
 MongoClient.connect(process.env.mongodb || mongodb, function(err, db) {
 	
-    var dbo = db.db('polomonster138-jare11332')
+    var dbo = db.db('polomonster138-jare2211332')
 	var count = 0;
     dbo.listCollections().toArray(function(err, collInfos) {
         // collInfos is an array of collection info objects that look like:
@@ -1561,7 +1564,7 @@ godosell = false;
 var dbo;
 				MongoClient.connect(process.env.mongodb || mongodb, function(err, db) {
 					
-				dbo = db.db('polomonster138-jare11332')
+				dbo = db.db('polomonster138-jare2211332')
 				////////console.log('dbo');
 				
 				});
