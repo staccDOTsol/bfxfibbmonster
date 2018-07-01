@@ -958,7 +958,7 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 		+ '<div style="display:none;" id="totalseth">' + JSON.stringify(totals['ETH']) + '</div>'
 		+ '<div style="display:none;" id="totalsbtc">' + JSON.stringify(totals['BTC']) + '</div>'
 		+ 'Actual closed totals 24hrs:'
-		+ '<div id="showData4"></div><div id="showData5"></div><div id="showData6"></div><br>stoplimits:'
+		+ '<div id="showData5"></div><div id="showData6"></div><div id="showData7"></div><br>stoplimits:'
 		+ '<div id="showData"></div><br>open orders: (' + orders2.length + ')'
 		+ '<div id="showData2"></div><br>closed orders 24hrs: (max 200) (' + trades.length + ')'
 		+ '<div id="showData3"></div>'
