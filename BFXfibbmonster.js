@@ -1119,7 +1119,7 @@ async function doget(req, res){
 						}
 						if (doc3[d].trades.bought2 == false){
 							if (doc3[d].trades.buy2 != undefined){
-							console.log(bestAsk);
+							//console.log(bestAsk);
 							var sl = {'activeOrders': activeOrders[doc3[d].trades.k], 'direction': 'buy2', 'pair' : doc3[d].trades.k, 'stoplimit': doc3[d].trades.buy2, 'currentAsk': bestAsk[doc3[d].trades.k], 'percent': (parseFloat(bestAsk[doc3[d].trades.k]) / parseFloat(doc3[d].trades.buy2))}
 							
 if ((activeOrders[doc3[d].trades.k] <= 1)&&  tickers.includes('trade:1m:' + doc3[d].trades.k)){
@@ -1202,7 +1202,7 @@ if ((activeOrders[doc3[d].trades.k] <= 1)&&  tickers.includes('trade:1m:' + doc3
 									string = "IOT" + string;
 									}
 								string = 't' + string;
-									console.log(string);
+									//console.log(string);
 								//	console.log(bestAsk);
 								if (orders2[d].symbol.slice(-4) == "USDT"){
 									for (var s in totals['USDT']){
@@ -1258,7 +1258,7 @@ if ((activeOrders[doc3[d].trades.k] <= 1)&&  tickers.includes('trade:1m:' + doc3
 									string = "IOT" + string;
 									}
 								string = 't' + string;
-								console.log('string ' + string);
+								//console.log('string ' + string);
 								orders2[d].activeOrders = activeOrders[string]; 
 							}
 					trades.sort(sortFunction3);
