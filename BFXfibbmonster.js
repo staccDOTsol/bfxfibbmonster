@@ -996,10 +996,11 @@ string = "IOTA" + string;
 		dodoget(ks, i, ks.length);
 	}, seventeen * 22);
 	
-	}else{
+	}else{if ((i + 1) < ks.length - 1){
 		setTimeout(async function(){
 		dodoget(ks, i + 1, ks.length);
 	}, seventeen * 4);
+	}
 	}
 	}
 }
