@@ -238,10 +238,10 @@ async function oo(){
 	var string = orders[o].symbol.replace('/', "");
 	if (string.slice(-4) == "USDT"){
 		string = string.substr(0, string.length -1 );
-	}if (string.substr(0, 3) == "DASH"){
+	}if (string.startsWith("DASH"))
 		string = string.substr(3, string.length );
 		string = "DSH" + string;
-	}if (string.substr(0, 3) == "IOTA"){
+	}if (string.startsWith("IOTA"))
 		string = string.substr(3, string.length );
 		string = "IOT" + string;
 		}
