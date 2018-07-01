@@ -935,8 +935,8 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 						}if (string.startsWith('IOTA')){
 							string = string.substr(4, string.length);
 							string = "IOT" + string;
-						}if (string.slice(-3) == "USD"){
-							string+="T";
+						}if (string.slice(-4) == "USDT"){
+							string = string.substr(0, string.length - 1);
 						}
 						console.log(string);
 						string = 't'+string;
@@ -955,8 +955,6 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 									}
 								} else 
 								if (orders2[d].symbol.slice(-3) == "BTC"){
-									console.log(string);
-									console.log(bestBid[string]);
 									for (var s in totals['BTC']){
 										if (totals['BTC'][s].pair == orders2[d].symbol){
 									if (orders2[d].side == 'sell'){
