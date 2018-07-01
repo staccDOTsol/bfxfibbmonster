@@ -241,6 +241,8 @@ ws.onTicker({ symbol: k }, (ticker) => {
 var cancelOrders = []
 async function oo(){
 	activeOrders = []
+	 activeOrders['tFUNUSD'] = 3
+	 activeOrders['tFUNBTC'] = 3
 	 activeOrders['tBFTUSD'] = 3
 	 activeOrders['tBFTBTC'] = 3
 	 activeOrders['tELFUSD'] = 3
@@ -547,7 +549,7 @@ function buy(k, rate, rate2){ //rate2 for buy is higher
 		var amt = balances[0] / 8;
 		////console.log(amt);
 		for (var v in activeOrders){
-			if (v >= 22){
+			if (v >= 24){
 			amt = amt * 1.1;
 			}
 		}
@@ -765,7 +767,7 @@ rest.calcAvailableBalance(k, 1, rate, 'MARGIN').then(balances => {
 		var amt = balances[0] / 8;
 		////console.log(amt);
 		for (var v in activeOrders){
-			if (v >= 22){
+			if (v >= 24){
 			amt = amt * 1.1;
 			}
 		}
@@ -990,6 +992,8 @@ activeOrders['tBFTUSD'] = 3
 	 activeOrders['tDADBTC'] = 3
 	 activeOrders['tWAXUSD'] = 3
 	 activeOrders['tWAXBTC'] = 3
+	 activeOrders['tFUNUSD'] = 3
+	 activeOrders['tFUNBTC'] = 3
 var lpa = []
 var lpb = []
 // 'candles' here is an array
