@@ -727,8 +727,18 @@ async function doget(req, res){
 		let orders = await bitfinexapi.fetchOpenOrders();
 		
 		for (var o in orders){
+	var string = orders[o].symbol.replace('/', "");
+	string = 't' + string;
+	if (string.slice(-4) == "USDT"){
+		string = string.substr(0, string.length -1 );
+	}
+			if (!activeOrders.includes(string)){
+			activeOrders.push(string);
+			}
+			
 			orders2.push(orders[o]);
 		}
+			console.log(activeOrders);
 	dbo.listCollections().toArray(function(err, collInfos) {
         // collInfos is an array of collection info objects that look like:
         // { name: 'test', options: {} }
