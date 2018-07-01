@@ -869,7 +869,7 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 								//console.log(trades[d].symbol);
 								if (trades[d].symbol.slice(-4) == "USDT"){
 									for (var s in totals['USDT']){
-										if (totals['USDT'][s].pair = trades[d].symbol){
+										if (totals['USDT'][s].pair == trades[d].symbol){
 									
 							if (trades[d].side == 'sell'){
 											totals['USDT'][s].total += ( parseFloat(trades[d].price) * parseFloat(trades[d].amount ));
@@ -883,7 +883,7 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 								} else 
 								if (trades[d].symbol.slice(-3) == "BTC"){
 									for (var s in totals['BTC']){
-										if (totals['BTC'][s].pair = trades[d].symbol){
+										if (totals['BTC'][s].pair == trades[d].symbol){
 									if (trades[d].side == 'sell'){
 											totals['BTC'][s].total += ( parseFloat(trades[d].price) * parseFloat(trades[d].amount ));
 											//console.log(parseFloat(trades[d].price) * parseFloat(trades[d].amount ));
@@ -897,7 +897,7 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 								if (trades[d].symbol.slice(-3) == "ETH"){
 									
 									for (var s in totals['ETH']){
-										if (totals['ETH'][s].pair = trades[d].symbol){
+										if (totals['ETH'][s].pair == trades[d].symbol){
 									if (trades[d].side == 'sell'){
 											totals['ETH'][s].total += ( parseFloat(trades[d].price) * parseFloat(trades[d].amount ));
 											//console.log(parseFloat(trades[d].price) * parseFloat(trades[d].amount ));
