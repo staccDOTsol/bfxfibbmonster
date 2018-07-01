@@ -1104,6 +1104,7 @@ setInterval(function(){
 	doks();
 }, 600000);
 function doks(){
+	trades = []
 	trades2 = []
 	if (godoks == true){
 	godoks = false;
@@ -1139,10 +1140,10 @@ string = "IOTA" + string;
 		
 							var ts = Math.round(new Date().getTime() / 1000) - 1000;
 							var tsYesterday = ts - (24 * 3600) - 1000;
-	let trades2 = await bitfinexapi.fetchMyTrades(string, tsYesterday);
-	for (var o in trades2){
+	let trades3 = await bitfinexapi.fetchMyTrades(string, tsYesterday);
+	for (var o in trades3){
 		////console.log(trades2[o])
-		trades2.push(trades2[o]);
+		trades2.push(trades3[o]);
 	}
 		if ((i + 1) < ks.length - 1){
 			//console.log('dodoagain');
