@@ -239,10 +239,17 @@ async function oo(){
 	string = 't' + string;
 	if (string.slice(-4) == "USDT"){
 		string = string.substr(0, string.length -1 );
-	}
+	}if (string.substr(0, 4) == "DASH"){
+		string = string.substr(4, string.length );
+		string = "DSH" + string;
+	}if (string.substr(0, 4) == "IOTA"){
+		string = string.substr(4, string.length );
+		string = "IOT" + string;
+		}
+		console.log(string);
 			if (!activeOrders.includes(string)){
 			activeOrders.push(string);
-			}
+}
 			
 		}
 		//console.log('activeorders');
