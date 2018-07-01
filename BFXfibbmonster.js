@@ -1084,9 +1084,7 @@ function doks(){
 }
 }
 async function dodoget(ks, i, length){
-if (maxclosed < trades.length){
-	maxclosed = trades.length;
-}
+
 	////console.log('length ' + length);
 	////console.log(ks[i]);
 	if (ks[i]){
@@ -1115,6 +1113,9 @@ string = "IOTA" + string;
 		////console.log(trades2[o])
 		trades.push(trades2[o]);
 	}
+	if (maxclosed < trades.length){
+	maxclosed = trades.length;
+}
 		if ((i + 1) < ks.length - 1){
 			//console.log('dodoagain');
 	setTimeout(async function(){
