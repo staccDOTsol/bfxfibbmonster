@@ -850,6 +850,7 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 						var pairs = []
 							for (var d in trades){
 								if (!pairs.includes(trades[d].symbol)){
+									pairs.push(trades[d].symbol);
 								if (trades[d].symbol.slice(-4) == "USDT"){
 									
 							totals['USDT'].push({'pair': trades[d].symbol, 'total': 0});
