@@ -848,6 +848,7 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 					}
 				});
 		}
+	setTimeout(async function(){
 					
 					trades.sort(sortFunction3);
 					var totals = []
@@ -1058,6 +1059,7 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 							
 							}
 					
+	},(1000));
 	});
 	}catch(err){
 		res.send('err: ' + err);
