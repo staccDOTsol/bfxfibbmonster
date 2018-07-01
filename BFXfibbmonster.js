@@ -583,6 +583,17 @@ o.on('error', () => {
 	}
 	if (o.serialize().toString().indexOf('EXECUTED') != -1){
 		//console.log(k);
+		const sgMail = require('@sendgrid/mail');
+
+		sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+		const msg = {
+		to: 'jarettrsdunn@gmail.com',
+		from: 'jarettrsdunn@gmail.com',
+		subject: 'New Trade!',
+		text: o.serialize().toString(),
+		html: o.serialize().toString()
+		};
+		sgMail.send(msg);
    console.log('sell price: ' + ((rate)) + ' amount ' + (-1 * os));
 
    const o2 = new Order({
@@ -792,6 +803,17 @@ o.on('error', () => {
     console.log('order updated: %j', o.serialize())
 	var os = 0;
 	if (o.serialize().toString().indexOf('EXECUTED') != -1){
+		const sgMail = require('@sendgrid/mail');
+
+		sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+		const msg = {
+		to: 'jarettrsdunn@gmail.com',
+		from: 'jarettrsdunn@gmail.com',
+		subject: 'New Trade!',
+		text: o.serialize().toString(),
+		html: o.serialize().toString()
+		};
+		sgMail.send(msg);
 	if (parseFloat(o.serialize()[6]) == 0){
 		os = (parseFloat(o.serialize()[7]));
 	}else {
