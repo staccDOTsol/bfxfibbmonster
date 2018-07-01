@@ -271,7 +271,7 @@ async function oo(){
 		if (p[2] <= 0){
 			console.log(string);
 			console.log('sell ' + p[3] / bestAsk[string]);
-			if (p[3] / bestAsk[string] < 0.97){
+			if (p[3] / bestAsk[string] < 0.94){
 			cancelOrders.push(string);
    const o2 = new Order({
     cid: Date.now(),
@@ -368,7 +368,7 @@ var collection = dbo.collection(string);
 
 			console.log(string);
 			console.log('buy ' + bestBid[string] / p[3]);
-			if (bestBid[string] / p[3] < 0.97){
+			if (bestBid[string] / p[3] < 0.94){
 				
    const o2 = new Order({
     cid: Date.now(),
