@@ -878,32 +878,43 @@ async function doget(req, res){
 						
 						//////////console.log(doc3[d].trades);
 						if (doc3[d].trades){
-							
+							if (activeOrders[doc3[d].trades.k] == undefined){
+								(activeOrders[doc3[d].trades.k]) = 0;
+							}
 						if (doc3[d].trades.bought1 == false){
 							var sl = {'activeOrders': activeOrders[doc3[d].trades.k], 'direction': 'buy1', 'pair' : doc3[d].trades.k, 'stoplimit': doc3[d].trades.buy1, 'currentAsk': bestAsk[doc3[d].trades.k], 'percent': (parseFloat(bestAsk[doc3[d].trades.k]) / parseFloat(doc3[d].trades.buy1))}
+						if ((activeOrders[doc3[d].trades.k] <= 1) &&  tickers.includes('trade:1m:' + doc3[d].trades.k)){
 						stoplimits.push(sl);
 							
+						}
 						}
 						if (doc3[d].trades.bought2 == false){
 							if (doc3[d].trades.buy2 != undefined){
 							console.log(bestAsk);
 							var sl = {'activeOrders': activeOrders[doc3[d].trades.k], 'direction': 'buy2', 'pair' : doc3[d].trades.k, 'stoplimit': doc3[d].trades.buy2, 'currentAsk': bestAsk[doc3[d].trades.k], 'percent': (parseFloat(bestAsk[doc3[d].trades.k]) / parseFloat(doc3[d].trades.buy2))}
 							
+if ((activeOrders[doc3[d].trades.k] <= 1)&&  tickers.includes('trade:1m:' + doc3[d].trades.k)){
 						stoplimits.push(sl);
-													
+							
+						}								
 							}
 						} 
 						if (doc3[d].trades.sold1 == false){
 							var sl = {'activeOrders': activeOrders[doc3[d].trades.k], 'direction': 'sell1', 'pair' : doc3[d].trades.k, 'stoplimit': doc3[d].trades.sell1, 'currentBid': bestBid[doc3[d].trades.k], 'percent': (parseFloat(doc3[d].trades.sell1 / parseFloat(bestBid[doc3[d].trades.k])))}
+if ((activeOrders[doc3[d].trades.k] <= 1)&&  tickers.includes('trade:1m:' + doc3[d].trades.k)){
 						stoplimits.push(sl);
+							
+						}							
 						}
 						if (doc3[d].trades.sold2 == false){
 							if (doc3[d].trades.sell2 != undefined){
 
 							var sl = {'activeOrders': activeOrders[doc3[d].trades.k], 'direction': 'sell2', 'pair' : doc3[d].trades.k, 'stoplimit': doc3[d].trades.sell2, 'currentBid': bestBid[doc3[d].trades.k], 'percent': (parseFloat(doc3[d].trades.sell2) / parseFloat(bestBid[doc3[d].trades.k]))}
 							
+if ((activeOrders[doc3[d].trades.k] <= 1)&&  tickers.includes('trade:1m:' + doc3[d].trades.k)){
 						stoplimits.push(sl);
-											
+							
+						}								
 							}
 						} 
 						}
