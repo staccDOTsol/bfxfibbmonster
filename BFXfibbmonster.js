@@ -247,7 +247,9 @@ function buy(k, rate, rate2){ //rate2 for buy is higher
 		var amt = balances[0] / 11;
 		//console.log(amt);
 		for (var v in activeOrders){
+			if (v >= 22){
 			amt = amt * 1.1;
+			}
 		}
 	
 		//console.log(amt);
@@ -459,7 +461,9 @@ rest.calcAvailableBalance(k, 1, rate, 'MARGIN').then(balances => {
 		var amt = balances[0] / 11;
 		//console.log(amt);
 		for (var v in activeOrders){
+			if (v >= 22){
 			amt = amt * 1.1;
+			}
 		}
 	console.log(k);
   console.log('sell price: ' + (rate) + ' amount ' + (-1 * amt * (1 / rate)));
