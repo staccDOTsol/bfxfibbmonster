@@ -111,7 +111,7 @@ ws.on('open', () => {
 })
 
 function subs(ss, count){
-	if (!activeOrders.includes(ss) && count <= 3){
+	if ((activeOrders[ss] <= 1) && count <= 3){
 	setTimeout(function(){
 		
             ws.subscribeTicker( ss) //'trade:1m:' + 
@@ -238,7 +238,30 @@ ws.onTicker({ symbol: k }, (ticker) => {
 });
 }
 async function oo(){
-	 activeOrders = [ 'tBFTUSD', 'tBFTBTC', 'tELFUSD', 'tZRXUSD', 'tTRXUSD', 'tDADBTC' , 'tDATUSD', 'tZRXUSD', 'tZRXBTC', 'tTRXUSD', 'tTRXBTC', 'tELFUSD', 'tELFBTC','tBFTUSD', 'tBFTBTC',  'tODEUSD', 'tODEBTC', 'tXLMUSD', 'tXLMBTC', 'tDADUSD', 'tDADBTC', 'tWAXUSD', 'tWAXBTC']
+	activeOrders = []
+	 activeOrders['tBFTUSD'] = 3
+	 activeOrders['tBFTBTC'] = 3
+	 activeOrders['tELFUSD'] = 3
+	 activeOrders['tZRXUSD'] = 3
+	 activeOrders['tTRXUSD'] = 3
+	 activeOrders['tDADBTC'] = 3
+	 activeOrders['tDATUSD'] = 3
+	 activeOrders['tZRXUSD'] = 3
+	 activeOrders['tZRXBTC'] = 3
+	 activeOrders['tTRXUSD'] = 3
+	 activeOrders['tTRXBTC'] = 3
+	 activeOrders['tELFUSD'] = 3
+	 activeOrders['tELFBTC'] = 3
+	 activeOrders['tBFTUSD'] = 3
+	 activeOrders['tBFTBTC'] = 3
+	 activeOrders['tODEUSD'] = 3
+	 activeOrders['tODEBTC'] = 3
+	 activeOrders['tXLMUSD'] = 3
+	 activeOrders['tXLMBTC'] = 3
+	 activeOrders['tDADUSD'] = 3
+	 activeOrders['tDADBTC'] = 3
+	 activeOrders['tWAXUSD'] = 3
+	 activeOrders['tWAXBTC'] = 3
 
 	let orders = await bitfinexapi.fetchOpenOrders();
 		
@@ -255,8 +278,14 @@ async function oo(){
 		}
 	string = 't' + string;
 		console.log(string);
-			if (!activeOrders.includes(string)){
-			activeOrders.push(string);
+		if (activeOders[string] == undefined){
+					activeOders[string] = 0;
+				}
+			if (activeOrders[string] <= 1){
+				if (activeOders[string] == undefined){
+					activeOders[string] = 0;
+				}
+			activeOrders[string] += 1;
 }
 			
 		}
@@ -273,9 +302,15 @@ ws.once('auth', () => {
 function buy(k, rate, rate2){ //rate2 for buy is higher
 	setTimeout(function(){
 		try{
-	if (!activeOrders.includes(k)){
+			if (activeOders[k] == undefined){
+					activeOders[k] = 0;
+				}
+			if (activeOrders[k] <= 1){
+				if (activeOders[k] == undefined){
+					activeOders[k] = 0;
+				}
 		  console.log('buy buy !! ' + k + ' ' + (rate));
-	activeOrders.push(k);
+			activeOrders[k] += 1;
 	////console.log(activeOrders);
 	
 	rest.calcAvailableBalance(k, 1, rate, 'MARGIN').then(balances => {
@@ -342,7 +377,7 @@ o2.on('error', () => {
   o2.on('close', () => {
 	  
     console.log('order closed: %s', o2.status)
-	activeOrders.splice( k, 1 );
+	activeOrders[k] = activeOrders[k] - 1
 	////console.log(activeOrders);
 var collection = dbo.collection(k);
 		collection.find({
@@ -488,10 +523,15 @@ function sell(k, rate, rate2){ //rate2 for sell is lower
 //console.log(rate);
 //console.log(rate2);
 setTimeout(function(){
-		try {
-	if (!activeOrders.includes(k)){
+		try {if (activeOders[k] == undefined){
+					activeOders[k] = 0;
+				}
+			if (activeOrders[k] <= 1){
+				if (activeOders[k] == undefined){
+					activeOders[k] = 0;
+				}
 		  ////console.log('sell sell !! ' + k + ' ' + (rate));
-	activeOrders.push(k);
+			activeOrders[k] += 1;
 	////console.log(activeOrders);
 	
 rest.calcAvailableBalance(k, 1, rate, 'MARGIN').then(balances => {
@@ -580,7 +620,7 @@ o2.on('error', () => {
 	}
 					}
 					});
-	activeOrders.splice( k, 1 );
+	activeOrders[k] = activeOrders[k] - 1
 	////console.log(activeOrders);
     closed2 = true
   })
@@ -700,7 +740,30 @@ var eths = []
         
 					var volTot = 0;
 					var volKs= [];
-var activeOrders = [ 'tBFTUSD', 'tBFTBTC', 'tELFUSD', 'tZRXUSD', 'tTRXUSD', 'tDADBTC' , 'tDATUSD', 'tZRXUSD', 'tZRXBTC', 'tTRXUSD', 'tTRXBTC', 'tELFUSD', 'tELFBTC','tBFTUSD', 'tBFTBTC',  'tODEUSD', 'tODEBTC', 'tXLMUSD', 'tXLMBTC', 'tDADUSD', 'tDADBTC', 'tWAXUSD', 'tWAXBTC']
+	var activeOrders = []
+activeOrders['tBFTUSD'] = 3
+	 activeOrders['tBFTBTC'] = 3
+	 activeOrders['tELFUSD'] = 3
+	 activeOrders['tZRXUSD'] = 3
+	 activeOrders['tTRXUSD'] = 3
+	 activeOrders['tDADBTC'] = 3
+	 activeOrders['tDATUSD'] = 3
+	 activeOrders['tZRXUSD'] = 3
+	 activeOrders['tZRXBTC'] = 3
+	 activeOrders['tTRXUSD'] = 3
+	 activeOrders['tTRXBTC'] = 3
+	 activeOrders['tELFUSD'] = 3
+	 activeOrders['tELFBTC'] = 3
+	 activeOrders['tBFTUSD'] = 3
+	 activeOrders['tBFTBTC'] = 3
+	 activeOrders['tODEUSD'] = 3
+	 activeOrders['tODEBTC'] = 3
+	 activeOrders['tXLMUSD'] = 3
+	 activeOrders['tXLMBTC'] = 3
+	 activeOrders['tDADUSD'] = 3
+	 activeOrders['tDADBTC'] = 3
+	 activeOrders['tWAXUSD'] = 3
+	 activeOrders['tWAXBTC'] = 3
 var lpa = []
 var lpb = []
 // 'candles' here is an array
@@ -773,9 +836,14 @@ async function doget(req, res){
 	string = 't' + string;
 	if (string.slice(-4) == "USDT"){
 		string = string.substr(0, string.length -1 );
-	}
-			if (!activeOrders.includes(string)){
-			activeOrders.push(string);
+	}if (activeOders[string] == undefined){
+					activeOders[string] = 0;
+				}
+			if (activeOrders[string] <= 1){
+				if (activeOders[string] == undefined){
+					activeOders[string] = 0;
+				}
+			activeOrders[string] += 1;
 			}
 			
 			orders2.push(orders[o]);
@@ -812,7 +880,7 @@ async function doget(req, res){
 							
 						if (doc3[d].trades.bought1 == false){
 							var sl = {'direction': 'buy1', 'pair' : doc3[d].trades.k, 'stoplimit': doc3[d].trades.buy1, 'currentAsk': bestAsk[doc3[d].trades.k], 'percent': (parseFloat(bestAsk[doc3[d].trades.k]) / parseFloat(doc3[d].trades.buy1))}
-						if (!activeOrders.includes(doc3[d].trades.k) &&  tickers.includes('trade:1m:' + doc3[d].trades.k)){
+						if ((activeOrders[doc3[d].trades.k] <= 1) &&  tickers.includes('trade:1m:' + doc3[d].trades.k)){
 						stoplimits.push(sl);
 							
 						}
@@ -822,7 +890,7 @@ async function doget(req, res){
 							console.log(bestAsk);
 							var sl = {'direction': 'buy2', 'pair' : doc3[d].trades.k, 'stoplimit': doc3[d].trades.buy2, 'currentAsk': bestAsk[doc3[d].trades.k], 'percent': (parseFloat(bestAsk[doc3[d].trades.k]) / parseFloat(doc3[d].trades.buy2))}
 							
-if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + doc3[d].trades.k)){
+if ((activeOrders[doc3[d].trades.k] <= 1)&&  tickers.includes('trade:1m:' + doc3[d].trades.k)){
 						stoplimits.push(sl);
 							
 						}								
@@ -830,7 +898,7 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 						} 
 						if (doc3[d].trades.sold1 == false){
 							var sl = {'direction': 'sell1', 'pair' : doc3[d].trades.k, 'stoplimit': doc3[d].trades.sell1, 'currentBid': bestBid[doc3[d].trades.k], 'percent': (parseFloat(doc3[d].trades.sell1 / parseFloat(bestBid[doc3[d].trades.k])))}
-if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + doc3[d].trades.k)){
+if ((activeOrders[doc3[d].trades.k] <= 1)&&  tickers.includes('trade:1m:' + doc3[d].trades.k)){
 						stoplimits.push(sl);
 							
 						}							
@@ -840,7 +908,7 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 
 							var sl = {'direction': 'sell2', 'pair' : doc3[d].trades.k, 'stoplimit': doc3[d].trades.sell2, 'currentBid': bestBid[doc3[d].trades.k], 'percent': (parseFloat(doc3[d].trades.sell2) / parseFloat(bestBid[doc3[d].trades.k]))}
 							
-if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + doc3[d].trades.k)){
+if ((activeOrders[doc3[d].trades.k] <= 1)&&  tickers.includes('trade:1m:' + doc3[d].trades.k)){
 						stoplimits.push(sl);
 							
 						}								
@@ -1104,7 +1172,6 @@ setInterval(function(){
 	doks();
 }, 600000);
 function doks(){
-	trades = []
 	trades2 = []
 	if (godoks == true){
 	godoks = false;
@@ -1410,7 +1477,7 @@ async function collectionDo(collection){
 									if (d3d.trades.bought1 == true){
 									////console.log('bought1 and bought2 true');
 								} 
-								activeOrders.splice( d3d.trades.k, 1 );
+								activeOrders[d3d.trades.k] = activeOrders[d3d.trades.k] - 1
 									d3d.trades.bought1 = false;
 									d3d.trades.bought2 = false;
 									d3d.trades.buyorder1 = 0;
@@ -1435,7 +1502,7 @@ async function collectionDo(collection){
 									if (d3d.trades.sold1 == true){
 									////console.log('sold1 and sold2 true');
 								}
-								activeOrders.splice( d3d.trades.k, 1 );
+								activeOrders[d3d.trades.k] = activeOrders[d3d.trades.k] - 1
 									d3d.trades.sold1 = false;
 									d3d.trades.sold2 = false;
 									collection.update({
