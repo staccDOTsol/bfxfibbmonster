@@ -1053,8 +1053,6 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 		+ 'hours: ' + hours + '<br>'
 		+ 'percent: ' + percent3 + '%<br>'
 		+ '<h1>percent/hr: ' + percentHr + '%</h1>'
-		+ 'trades now: ' + trades.length
-		+ '<br>max. trades recorded: ' + maxclosed
 		+ '<h1>total gains (usdt): ' + thetotalusdt + '</h1>'
 		+ '<h1>total gains (sats): ' + thetotalbtc + '</h1>'
 		+ '<h1>total gains (wei): ' + thetotaleth + '</h1>'
@@ -1085,7 +1083,7 @@ setInterval(function(){
 	doks();
 }, 600000);
 function doks(){
-	trades = []
+	trades2 = []
 	if (godoks == true){
 	godoks = false;
 	setTimeout(function(){
@@ -1122,16 +1120,19 @@ string = "IOTA" + string;
 	let trades2 = await bitfinexapi.fetchMyTrades(string, tsYesterday);
 	for (var o in trades2){
 		////console.log(trades2[o])
-		trades.push(trades2[o]);
+		trades2.push(trades2[o]);
 	}
-	if (maxclosed < trades.length){
-	maxclosed = trades.length;
-}
 		if ((i + 1) < ks.length - 1){
 			//console.log('dodoagain');
 	setTimeout(async function(){
 		dodoget(ks, i + 1, ks.length);
 	}, seventeen * 4);
+		}
+		else{
+			trades = trades2;
+			if (maxclosed < trades.length){
+			maxclosed = trades.length;
+		}
 		}
 	}catch(err){
 	if (err.toString().indexOf('Rate') != -1){
