@@ -1590,7 +1590,7 @@ MongoClient.connect(process.env.mongodb || mongodb, function(err, db) {
 						doCollections(collections);
                 setInterval(function() {
                     doCollections(collections);
-                }, 15500);
+                }, 25500);
     });
 });
 }, 10000);
