@@ -1074,6 +1074,7 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 		+ 'hours: ' + hours + '<br>'
 		+ 'percent: ' + percent3 + '%<br>'
 		+ '<h1>percent/hr: ' + percentHr + '%</h1>'
+		+ 'maxclosed: ' + maxclosed + ''
 		+ '<h1>total gains (usdt): ' + thetotalusdt + '</h1>'
 		+ '<h1>total gains (sats): ' + thetotalbtc + '</h1>'
 		+ '<h1>total gains (wei): ' + thetotaleth + '</h1>'
@@ -1143,7 +1144,7 @@ string = "IOTA" + string;
 		////console.log(trades2[o])
 		trades2.push(trades2[o]);
 	}
-		if ((i + 1) < ks.length - 1){
+		if ((i + 1) <= ks.length - 1){
 			//console.log('dodoagain');
 	setTimeout(async function(){
 		dodoget(ks, i + 1, ks.length);
@@ -1153,6 +1154,9 @@ string = "IOTA" + string;
 			trades = trades2;
 			if (maxclosed < trades.length){
 			maxclosed = trades.length;
+				console.log('maxclosed: ' + maxclosed);
+				console.log('ks length: ' + ks.length);
+				console.log('i: ' + i);
 		}
 		}
 	}catch(err){
