@@ -1254,7 +1254,7 @@ var collections = []
 setTimeout(function(){
 MongoClient.connect(process.env.mongodb || mongodb, function(err, db) {
 	
-    var dbo = db.db('polomonster138-jare2211332')
+    var dbo = db.db(monster)
 	var count = 0;
     dbo.listCollections().toArray(function(err, collInfos) {
         // collInfos is an array of collection info objects that look like:
@@ -1563,12 +1563,12 @@ godosell = false;
 						})
 					}
 					
-					
+			var monster = 'polomonster138-jare' + Math.random().toString(36).substring(7);		
    
 var dbo;
 				MongoClient.connect(process.env.mongodb || mongodb, function(err, db) {
 					
-				dbo = db.db('polomonster138-jare2211332')
+				dbo = db.db(monster)
 				////////console.log('dbo');
 				
 				});
