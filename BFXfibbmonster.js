@@ -364,11 +364,11 @@ var collection = dbo.collection(string);
 				});
   });
 		}else{			
-		cancelOrders.push(string);
 
 			console.log(string);
 			console.log('buy ' + bestBid[string] / p[3]);
 			if (bestBid[string] / p[3] < 0.94){
+		cancelOrders.push(string);
 				
    const o2 = new Order({
     cid: Date.now(),
