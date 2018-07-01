@@ -546,12 +546,12 @@ function buy(k, rate, rate2){ //rate2 for buy is higher
 	
 	rest.calcAvailableBalance(k, 1, rate, 'MARGIN').then(balances => {
 	////console.log(balances[0]);
-		var amt = balances[0] / 12;
+		var amt = balances[0] / 10;
 		////console.log(amt);
 		var lala = 0;
 		for (var v in activeOrders){
 			lala++;
-			if (lala >= 24){
+			if (lala >= 20){
 			amt = amt * 1.1;
 			}
 		}
@@ -778,12 +778,12 @@ setTimeout(function(){
 	
 rest.calcAvailableBalance(k, 1, rate, 'MARGIN').then(balances => {
 	////console.log(balances[0]);
-		var amt = balances[0] / 12;
+		var amt = balances[0] / 10;
 		////console.log(amt);
 		var lala = 0;
 		for (var v in activeOrders){
 			lala++;
-			if (lala >= 24){
+			if (lala >= 20){
 			amt = amt * 1.1;
 			}
 		}
