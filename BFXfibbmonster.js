@@ -130,6 +130,7 @@ ws.onTicker({ symbol: k }, (ticker) => {
 		//console.log(k);
 	}
 	if (btcusd != 0&& ethusd != 0){
+		if (dbo){
 			var  collection = dbo.collection(k);
 								collection.find({
 
@@ -236,6 +237,7 @@ ws.onTicker({ symbol: k }, (ticker) => {
 											
 										
 								insert(winners[k], collection);
+								ks.push(k);	
 									}
 									updateStoplimits(winners[k], collection);
 								}
@@ -243,6 +245,7 @@ ws.onTicker({ symbol: k }, (ticker) => {
 						}
 					}
 										});
+		}
 	} else {
 		if (k == "tBTCUSD"){
 			btcusd = ticker.ask;
@@ -1120,6 +1123,9 @@ var godoks = true;
 setInterval(function(){
 	doks();
 }, 600000);
+setTimeout(function(){
+doks();
+}, 10000);
 function doks(){
 	trades2 = []
 	if (godoks == true){
@@ -1133,7 +1139,7 @@ function doks(){
 async function dodoget(ks, i, length){
 
 	////console.log('length ' + length);
-	////console.log(ks[i]);
+	console.log('ks[i]: ' + ks[i]);
 	if (ks[i]){
 	var string = ks[i].replace(/(?=.{3}$)/,'/');
 	string = string.substr(1, string.length);
@@ -1161,10 +1167,10 @@ string = "IOTA" + string;
 		trades2.push(trades2[o]);
 	}
 		if ((i + 1) <= ks.length - 1){
-			//console.log('dodoagain');
+			console.log('dodoagain');
 	setTimeout(async function(){
-		if (maxclosed < trades.length){
-			maxclosed = trades.length;
+		if (maxclosed < trades2.length){
+			maxclosed = trades2.length;
 				console.log('maxclosed: ' + maxclosed);
 				console.log('ks length: ' + ks.length);
 				console.log('i: ' + i);
