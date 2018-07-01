@@ -1139,8 +1139,10 @@ function doks(){
 async function dodoget(ks, i, length){
 
 	////console.log('length ' + length);
-	console.log('ks[i]: ' + ks[i]);
 	if (ks[i]){
+	console.log('ks[i]: ' + ks[i]);
+	console.log('ks length: ' + ks.length);
+				console.log('i: ' + i);
 	var string = ks[i].replace(/(?=.{3}$)/,'/');
 	string = string.substr(1, string.length);
 	//console.log(string);
@@ -1172,8 +1174,7 @@ string = "IOTA" + string;
 		if (maxclosed < trades2.length){
 			maxclosed = trades2.length;
 				console.log('maxclosed: ' + maxclosed);
-				console.log('ks length: ' + ks.length);
-				console.log('i: ' + i);
+				
 		}
 		dodoget(ks, i + 1, ks.length);
 	}, seventeen * 4);
