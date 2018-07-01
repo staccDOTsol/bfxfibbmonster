@@ -239,11 +239,11 @@ async function oo(){
 	string = 't' + string;
 	if (string.slice(-4) == "USDT"){
 		string = string.substr(0, string.length -1 );
-	}if (string.substr(0, 4) == "DASH"){
-		string = string.substr(4, string.length );
+	}if (string.substr(0, 3) == "DASH"){
+		string = string.substr(3, string.length );
 		string = "DSH" + string;
-	}if (string.substr(0, 4) == "IOTA"){
-		string = string.substr(4, string.length );
+	}if (string.substr(0, 3) == "IOTA"){
+		string = string.substr(3, string.length );
 		string = "IOT" + string;
 		}
 		console.log(string);
