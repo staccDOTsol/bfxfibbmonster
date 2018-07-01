@@ -90,11 +90,15 @@ ws.on('open', () => {
 		tickerticker("tBTCUSD");
 		tickerticker("tETHUSD");
 		for (var d in doc3){
+			if (!ks.includes(doc3[d].trades.k)){
+							ks.push(doc3[d].trades.k);
+						}
 						if (doc3[d].trades.k == 'tZCNETH'){
 							//console.log('tZCNETH');
 						}
 					subs(doc3[d].trades.k, 0);
 					}
+					doks();
 				});
 		}
 		});
@@ -104,6 +108,7 @@ ws.on('open', () => {
         
     })
 })
+
 function subs(ss, count){
 	if (!activeOrders.includes(ss) && count <= 3){
 	setTimeout(function(){
@@ -259,7 +264,7 @@ async function oo(){
 }
 ws.once('auth', () => {
 	oo();
-	setTimeout(function(){
+	setInterval(function(){
 		oo();
 	}, 180000);
 ////console.log('auth');
@@ -747,11 +752,11 @@ function sortFunction(a,b){
 	return dateA > dateB ? 1 : -1;  
 }; 
 var trades = []
+					var ks = []
 async function doget(req, res){
 	try{
 		var gosend = true;
 		godoks = true;
-					var ks = []
 	stoplimits = []
 		count = 0;
 		dbs = []
@@ -796,9 +801,7 @@ async function doget(req, res){
 
                 }).toArray(async function(err, doc3) {
 					for (var d in doc3){
-						if (!ks.includes(doc3[d].trades.k)){
-							ks.push(doc3[d].trades.k);
-						}
+						
 					//	////////console.log(doc3[d])
 						
 						//////////console.log(doc3[d].trades);
@@ -849,7 +852,6 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 		//console.log((seventeen * ks.length + 5000));
 		//console.log('seventeen seventeen');
 						
-						doks(ks);
 						//console.log(ks);
 					
 	setTimeout(async function(){
@@ -1048,7 +1050,7 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 							
 							}
 					
-	},(seventeen * 5.33 * ks.length + 1000));
+	},(1000));
 					}, 1000);
 					
 	});
@@ -1056,9 +1058,12 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 		res.send('err: ' + err);
 	}
 }
-var seventeen = 105;
+var seventeen = 1200;
 var godoks = true;
-function doks(ks){
+setInterval(function(){
+	doks();
+}, 300000);
+function doks(){
 	if (godoks == true){
 	godoks = false;
 	setTimeout(function(){
