@@ -921,10 +921,10 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 								
 						var string = orders2[d].symbol.replace('/','');
 						if (string.startsWith('DSH')){
-							string = string.subst(3. string.length);
+							string = string.subst(3, string.length);
 							string = "DASH" + string;
 						}if (string.startsWith('IOT')){
-							string = string.subst(3. string.length);
+							string = string.subst(3, string.length);
 							string = "IOTA" + string;
 						}if (string.slice(-4) == "USDT"){
 							string = string.subst(0, string.length - 1);
