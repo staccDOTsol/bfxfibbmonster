@@ -238,6 +238,7 @@ ws.onTicker({ symbol: k }, (ticker) => {
 	}
 });
 }
+var cancelOrders = []
 async function oo(){
 	activeOrders = []
 	 activeOrders['tBFTUSD'] = 3
@@ -263,11 +264,230 @@ async function oo(){
 	 activeOrders['tDADBTC'] = 3
 	 activeOrders['tWAXUSD'] = 3
 	 activeOrders['tWAXBTC'] = 3
+	let positions = await rest.positions()
+	for (let i = 0; i < positions.length; i += 1) {
+		var p = positions[i];
+		var string = p[0];
+		if (p[2] <= 0){
+			console.log(string);
+			console.log('sell ' + p[3] / bestAsk[string]);
+			if (p[3] / bestAsk[string] < 0.97){
+			cancelOrders.push(string);
+   const o2 = new Order({
+    cid: Date.now(),
+    symbol: string,
+    amount: (-1 * p[2]),
+    type: Order.type.MARKET
+  }, ws)
+
+  let closed2 = false
+
+  // Enable automatic updates
+  o2.registerListeners()
+
+o2.on('error', () => {
+	console.log('error');
+});
+  o2.on('update', () => {
+    console.log('order updated: %j', o2.serialize())
+  })
+
+  o2.on('close', () => {
+	  
+    console.log('order closed: %s', o2.status)
+	activeOrders[string] = activeOrders[string] - 1
+	////console.log(activeOrders);
+var collection = dbo.collection(string);
+		collection.find({
+
+                }, {
+                    $exists: true
+                }).sort({
+                    _id: -1
+
+                }).toArray(function(err, doc3) {
+                    for (var d in doc3) {
+						if (doc3[d].trades){
+							doc3[d].trades.buyorder2 = 0;
+							doc3[d].trades.bought2 = false;
+							
+	 collection.update({
+	},{
+                            $set: {
+                                'trades': doc3[d].trades
+                            }
+                        }, {
+		
+	},
+	function(err, result) {
+		////////console.log(result.result);
+	});
+	}
+					}
+					});
+    closed2 = true
+  })
+
+  console.log('submitting order %d', o2.cid)
+
+  o2.submit().then(() => {
+   console.log('got submit confirmation for order %d [%d]', o2.cid, o2.id)
+	var collection = dbo.collection(string);
+		collection.find({
+
+                }, {
+                    $exists: true
+                }).sort({
+                    _id: -1
+
+                }).toArray(function(err, doc3) {
+                    for (var d in doc3) {
+						if (doc3[d].trades){
+							doc3[d].trades.buyorder2 = 0;
+							doc3[d].trades.buyorder1 = 0;
+							doc3[d].trades.sellorder1 = 0;
+							doc3[d].trades.sellorder2 = 0;
+							
+	 collection.update({
+	},{
+                            $set: {
+                                'trades': doc3[d].trades
+                            }
+                        }, {
+		
+	},
+	function(err, result) {
+		////////console.log(result.result);
+	});
+			}
+					}
+				});
+  });
+		}else{			
+		cancelOrders.push(string);
+
+			console.log(string);
+			console.log('buy ' + bestBid[string] / p[3]);
+			if (bestBid[string] / p[3] < 0.97){
+				
+   const o2 = new Order({
+    cid: Date.now(),
+    symbol: string,
+    amount: (-1 * p[2]),
+    type: Order.type.MARKET
+  }, ws)
+
+  let closed2 = false
+
+  // Enable automatic updates
+  o2.registerListeners()
+
+o2.on('error', () => {
+	console.log('error');
+});
+  o2.on('update', () => {
+    console.log('order updated: %j', o2.serialize())
+  })
+
+  o2.on('close', () => {
+	  
+    console.log('order closed: %s', o2.status)
+	activeOrders[string] = activeOrders[string] - 1
+	////console.log(activeOrders);
+var collection = dbo.collection(string);
+		collection.find({
+
+                }, {
+                    $exists: true
+                }).sort({
+                    _id: -1
+
+                }).toArray(function(err, doc3) {
+                    for (var d in doc3) {
+						if (doc3[d].trades){
+							doc3[d].trades.buyorder2 = 0;
+							doc3[d].trades.bought2 = false;
+							
+	 collection.update({
+	},{
+                            $set: {
+                                'trades': doc3[d].trades
+                            }
+                        }, {
+		
+	},
+	function(err, result) {
+		////////console.log(result.result);
+	});
+						
+	}
+					}
+					});
+    closed2 = true
+  })
+
+  console.log('submitting order %d', o2.cid)
+
+  o2.submit().then(() => {
+   console.log('got submit confirmation for order %d [%d]', o2.cid, o2.id)
+	var collection = dbo.collection(string);
+		collection.find({
+
+                }, {
+                    $exists: true
+                }).sort({
+                    _id: -1
+
+                }).toArray(function(err, doc3) {
+                    for (var d in doc3) {
+						if (doc3[d].trades){
+							doc3[d].trades.buyorder2 = 0;
+							doc3[d].trades.buyorder1 = 0;
+							doc3[d].trades.sellorder1 = 0;
+							doc3[d].trades.sellorder2 = 0;
+							
+	 collection.update({
+	},{
+                            $set: {
+                                'trades': doc3[d].trades
+                            }
+                        }, {
+		
+	},
+	function(err, result) {
+		////////console.log(result.result);
+	});}
+					}
+				});
+  });
+			}
+		}
+				}
+	}
+/*
+		const data = [
+		  p.symbol, p.status, p.amount, p.basePrice, p.marginFunding,
+		  Number(p.marginFunding) + (Number(p.amount) * Number(p.basePrice))
+		]
+
+		if (PL_ENABLED) {
+		  const nv = Number(lastPrices[p.symbol]) * Number(p.amount)
+		  const pl = nv - (p.basePrice * p.amount)
+		  const plPerc = (pl / nv) * 100.0
+
+		  data.push(nv)
+		  data.push(pl)
+		  data.push(plPerc)
+		}
+
+		t.push(data)*/
+	
 
 	let orders = await bitfinexapi.fetchOpenOrders();
 		
-		for (var o in orders){
-	var string = orders[o].symbol.replace('/', "");
+		for (var o2 in orders){
+			//console.log(orders[o]);
+	var string = orders[o2].symbol.replace('/', "");
 	if (string.slice(-4) == "USDT"){
 		string = string.substr(0, string.length -1 );
 	}if (string.startsWith("DASH")){
@@ -278,6 +498,11 @@ async function oo(){
 		string = "IOT" + string;
 		}
 	string = 't' + string;
+	if (cancelOrders.includes(string)){
+		const o = bitfinexapi.cancelOrder(orders[o2].id)
+
+	}
+	else {
 		console.log(string);
 		if (activeOrders[string] == undefined){
 					activeOrders[string] = 0;
@@ -287,17 +512,20 @@ async function oo(){
 					activeOrders[string] = 0;
 				}
 			activeOrders[string] += 1;
-}
-			
+
 		}
 		//console.log('activeorders');
 		//console.log(activeOrders);
+	}
+}
 }
 ws.once('auth', () => {
+	setTimeout(function(){
 	oo();
+	}, 10000);
 	setInterval(function(){
 		oo();
-	}, 180000);
+	}, 60000);
 ////console.log('auth');
 });
 function buy(k, rate, rate2){ //rate2 for buy is higher
@@ -528,7 +756,7 @@ setTimeout(function(){
 				if (activeOrders[k] == undefined){
 					activeOrders[k] = 0;
 				}
-		  ////console.log('sell sell !! ' + k + ' ' + (rate));
+		  console.log('sell sell !! ' + k + ' ' + (rate));
 			activeOrders[k] += 1;
 	////console.log(activeOrders);
 	
@@ -542,12 +770,12 @@ rest.calcAvailableBalance(k, 1, rate, 'MARGIN').then(balances => {
 			}
 		}
 	//console.log(k);
-  console.log('sell price: ' + (rate2) + ' amount ' + (-1 * amt * (1 / rate)));
+  console.log('sell price: ' + (rate) + ' amount ' + (-1 * amt * (1 / rate)));
   const o = new Order({
     cid: Date.now(),
     symbol: k,
     price: rate,
-    amount: -1 * amt *.9995,
+    amount: -1 * amt,
     type: Order.type.LIMIT
   }, ws)
 
@@ -567,7 +795,7 @@ o.on('error', () => {
 	}else {
 		os = parseFloat(o.serialize()[6]);
 	}
-  console.log('buyl price: ' + (rate) + ' amount ' + (-1 * os));
+  console.log('buyl price: ' + (rate2) + ' amount ' + (-1 * os));
    const o2 = new Order({
     cid: Date.now(),
     symbol: k,
@@ -1299,7 +1527,7 @@ app.get('/', function(req, res) {
 							doc3[d].trades.buy2 = wp.buy2;
 							doc3[d].trades.sell1 = wp.sell1;
 							doc3[d].trades.sell2 = wp.sell2;
-	console.log(doc3[d].trades);						
+							
 	 collection.update({
 	},{
                             $set: {
@@ -1310,7 +1538,7 @@ app.get('/', function(req, res) {
 	},
 	function(err, result) {
 	
-		console.log(result.result);
+		//console.log(result.result);
 	});
 	}
 					}
