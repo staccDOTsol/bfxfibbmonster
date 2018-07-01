@@ -41,11 +41,12 @@ ws.on('open', () => {
 			if ( symbols[s].toUpperCase().slice(-3) == "ETH" ||  symbols[s].toUpperCase().slice(-3) == "BTC" ||  symbols[s].toUpperCase().slice(-3) == "USD"){
             keys.push('trade:1m:t' + symbols[s].toUpperCase());
 			keys2.push('t' + symbols[s].toUpperCase());
-			subs(symbols[s].toUpperCase(), symbols.length);
+			subs('t' + symbols[s].toUpperCase(), symbols.length);
+			
 			
 	
 			}
-        }/*
+        }
 			ws.subscribeTicker("tBTCUSD");
 		ws.subscribeTicker("tETHUSD");
 		tickerticker("tBTCUSD");
@@ -55,7 +56,7 @@ ws.on('open', () => {
 		ws.subscribeTicker(keys2[k]);
 			tickerticker(keys2[k]);
 			
-		}*/
+		}
         for (var k in keys) {
 			
             //////console.log(keys[k]);
