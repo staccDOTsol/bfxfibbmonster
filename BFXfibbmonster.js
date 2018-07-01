@@ -299,7 +299,7 @@ o.on('error', () => {
 	}
 	if (o.serialize().toString().indexOf('EXECUTED') != -1){
 		//console.log(k);
-   console.log('sell price: ' + ((rate * 1.007)) + ' amount ' + (-1 * os));
+   console.log('sell price: ' + ((rate)) + ' amount ' + (-1 * os));
 
    const o2 = new Order({
     cid: Date.now(),
@@ -914,15 +914,18 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 									
 							}
 							for (var d in orders2){
+								
+						var string = orders2[d].symbol.replace('/','');
+						string = 't'+string;
 								if (orders2[d].symbol.slice(-4) == "USDT"){
 									for (var s in totals['USDT']){
 										if (totals['USDT'][s].pair == orders2[d].symbol){
 									
 							if (orders2[d].side == 'sell'){
-											totals['USDT'][s].total += ( parseFloat(bestBid[doc3[d].trades.k]) * parseFloat(orders2[d].amount ));
+											totals['USDT'][s].total += ( parseFloat(bestBid[string]) * parseFloat(orders2[d].amount ));
 											//console.log(parseFloat(orders2[d].price) * parseFloat(orders2[d].amount ));
 										}else {
-											totals['USDT'][s].total = totals['USDT'][s].total - (parseFloat(bestAsk[doc3[d].trades.k]) * parseFloat(orders2[d].amount));
+											totals['USDT'][s].total = totals['USDT'][s].total - (parseFloat(bestAsk[string]) * parseFloat(orders2[d].amount));
 										}
 								cccu++;
 										}
@@ -932,10 +935,10 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 									for (var s in totals['BTC']){
 										if (totals['BTC'][s].pair == orders2[d].symbol){
 									if (orders2[d].side == 'sell'){
-											totals['BTC'][s].total += ( parseFloat(bestBid[doc3[d].trades.k])* parseFloat(orders2[d].amount ));
+											totals['BTC'][s].total += ( parseFloat(bestBid[string])* parseFloat(orders2[d].amount ));
 											//console.log(parseFloat(orders2[d].price) * parseFloat(orders2[d].amount ));
 										}else {
-											totals['BTC'][s].total = totals['BTC'][s].total - (parseFloat(bestAsk[doc3[d].trades.k]) * parseFloat(orders2[d].amount));
+											totals['BTC'][s].total = totals['BTC'][s].total - (parseFloat(bestAsk[string]) * parseFloat(orders2[d].amount));
 										}
 								cccb++;
 										}
@@ -946,10 +949,10 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 									for (var s in totals['ETH']){
 										if (totals['ETH'][s].pair == orders2[d].symbol){
 									if (orders2[d].side == 'sell'){
-											totals['ETH'][s].total += ( parseFloat(bestBid[doc3[d].trades.k]) * parseFloat(orders2[d].amount ));
+											totals['ETH'][s].total += ( parseFloat(bestBid[string]) * parseFloat(orders2[d].amount ));
 											//console.log(parseFloat(orders2[d].price) * parseFloat(orders2[d].amount ));
 										}else {
-											totals['ETH'][s].total = totals['ETH'][s].total - (parseFloat(bestAsk[doc3[d].trades.k]) * parseFloat(orders2[d].amount));
+											totals['ETH'][s].total = totals['ETH'][s].total - (parseFloat(bestAsk[string]) * parseFloat(orders2[d].amount));
 										}
 								ccce++;
 										}
@@ -1369,7 +1372,7 @@ async function collectionDo(collection){
 							if (godobuy == true){
 								godobuy = false;
 
-							////console.log('dobuy:');
+							console.log('dobuy:');
 							////console.log(d3d);
 							collection.update({
 								}, {
@@ -1384,7 +1387,7 @@ async function collectionDo(collection){
 														
 
 								});
-							buy(d3d.trades.k, d3d.trades.buy1, d3d.trades.sell1);
+							buy(d3d.trades.k, d3d.trades.sell1, d3d.trades.buy1);
 							}
                         }
 						}
@@ -1408,8 +1411,8 @@ godobuy = false;
 														
 
 								});
-							////console.log('dobuy2:');
-							buy(d3d.trades.k, d3d.trades.buy2, d3d.trades.buy1);
+							console.log('dobuy2:');
+							buy(d3d.trades.k, d3d.trades.buy1, d3d.trades.buy2);
                             }
 							}
                         }
@@ -1427,7 +1430,7 @@ godobuy = false;
 							if (godosell == true){
 								godosell = false;
 
-							//console.log('dosell');
+							console.log('dosell');
 							//console.log(d3d);
 							collection.update({
 								}, {
@@ -1466,7 +1469,7 @@ godosell = false;
 														
 
 								});
-							////console.log('dosell:');
+							console.log('dosell2:');
 						sell(d3d.trades.k, d3d.trades.sell2, d3d.trades.sell1);
                             }
 							}
