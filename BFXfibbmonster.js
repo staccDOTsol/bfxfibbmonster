@@ -1147,17 +1147,18 @@ string = "IOTA" + string;
 		if ((i + 1) <= ks.length - 1){
 			//console.log('dodoagain');
 	setTimeout(async function(){
-		dodoget(ks, i + 1, ks.length);
-	}, seventeen * 4);
-		}
-		else{
-			trades = trades2;
-			if (maxclosed < trades.length){
+		if (maxclosed < trades.length){
 			maxclosed = trades.length;
 				console.log('maxclosed: ' + maxclosed);
 				console.log('ks length: ' + ks.length);
 				console.log('i: ' + i);
 		}
+		dodoget(ks, i + 1, ks.length);
+	}, seventeen * 4);
+		}
+		else{
+			trades = trades2;
+			
 		}
 	}catch(err){
 	if (err.toString().indexOf('Rate') != -1){
