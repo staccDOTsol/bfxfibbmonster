@@ -583,12 +583,12 @@ o.on('error', () => {
 	}
 	if (o.serialize().toString().indexOf('EXECUTED') != -1){
 		//console.log(k);
-   console.log('sell price: ' + ((rate)) + ' amount ' + (-1 * os));
+   console.log('sell price: ' + ((rate2)) + ' amount ' + (-1 * os));
 
    const o2 = new Order({
     cid: Date.now(),
     symbol: k,
-    price: (rate2 * 0.99925),
+    price: (rate2),
     amount: (-1 * os),
     type: Order.type.LIMIT
   }, ws)
@@ -801,7 +801,7 @@ o.on('error', () => {
    const o2 = new Order({
     cid: Date.now(),
     symbol: k,
-    price: rate * 1.00075,
+    price: rate,
     amount: -1 * os,
     type: Order.type.LIMIT
   }, ws)
