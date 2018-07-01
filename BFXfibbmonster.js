@@ -45,7 +45,7 @@ ws.on('open', () => {
 			
 	
 			}
-        }
+        }/*
 			ws.subscribeTicker("tBTCUSD");
 		ws.subscribeTicker("tETHUSD");
 		tickerticker("tBTCUSD");
@@ -55,7 +55,7 @@ ws.on('open', () => {
 		ws.subscribeTicker(keys2[k]);
 			tickerticker(keys2[k]);
 			
-		}
+		}*/
         for (var k in keys) {
 			
             //////console.log(keys[k]);
@@ -130,25 +130,9 @@ ws.onTicker({ symbol: k }, (ticker) => {
 		//console.log(k);
 	}
 	if (btcusd != 0&& ethusd != 0){
-		if (dbo != undefined){
-			var  collection = dbo.collection(k);
-								collection.find({
-
-										}, {
-											$exists: true
-										}).sort({
-											_id: -1
-
-										}).toArray(function(err, doc3) {
-											for (var d in doc3) {
-												if (doc3[d].trades){
-													winnas.push(doc3[d].trades.k);
-												}
-											}
+		
 	if (k.slice(-3)== "USD"){
 						var amt = btcusd;
-										
-								
 					if (!volKs.includes(k) && ((ticker.volume * ticker.ask) / amt)){						
 					volKs.push(k);
 						volTot += (ticker.volume * ticker.ask) / amt;
@@ -234,18 +218,15 @@ ws.onTicker({ symbol: k }, (ticker) => {
 								winners[k].cancelled = false;
 									if (!winnas.includes(k)){
 										winnas.push(k);
-											
-										
-								insert(winners[k], collection);
-								ks.push(k);	
+															
+									
+								//insert(winners[k], collection);
 									}
 									updateStoplimits(winners[k], collection);
 								}
 									
 						}
 					}
-										});
-		}
 	} else {
 		if (k == "tBTCUSD"){
 			btcusd = ticker.ask;
@@ -780,11 +761,6 @@ async function doget(req, res){
 	try{
 		var gosend = true;
 		godoks = true;
-						totals = []
-					totals['USDT'] = []
-					totals['BTC'] = []
-					totals['ETH'] = []
-					
 	stoplimits = []
 		count = 0;
 		dbs = []
@@ -829,7 +805,7 @@ async function doget(req, res){
                 }).toArray(async function(err, doc3) {
 					for (var d in doc3){
 						
-					console.log(doc3[d])
+					//	////////console.log(doc3[d])
 						
 						//////////console.log(doc3[d].trades);
 						if (doc3[d].trades){
@@ -871,6 +847,11 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 							}
 						} 
 						}
+						totals = []
+					totals['USDT'] = []
+					totals['BTC'] = []
+					totals['ETH'] = []
+					
 						var cccu = 0;
 						var cccb = 0;
 						var ccce = 0;
@@ -1093,7 +1074,6 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 		+ 'hours: ' + hours + '<br>'
 		+ 'percent: ' + percent3 + '%<br>'
 		+ '<h1>percent/hr: ' + percentHr + '%</h1>'
-		+ 'maxclosed: ' + maxclosed + ''
 		+ '<h1>total gains (usdt): ' + thetotalusdt + '</h1>'
 		+ '<h1>total gains (sats): ' + thetotalbtc + '</h1>'
 		+ '<h1>total gains (wei): ' + thetotaleth + '</h1>'
@@ -1123,9 +1103,6 @@ var godoks = true;
 setInterval(function(){
 	doks();
 }, 600000);
-setTimeout(function(){
-doks();
-}, 10000);
 function doks(){
 	trades2 = []
 	if (godoks == true){
@@ -1138,11 +1115,10 @@ function doks(){
 }
 async function dodoget(ks, i, length){
 
-	////console.log('length ' + length);
 	if (ks[i]){
-	console.log('ks[i]: ' + ks[i]);
-	console.log('ks length: ' + ks.length);
-				console.log('i: ' + i);
+	console.log('length ' + length);
+	console.log(ks[i]);
+	console.log(i);
 	var string = ks[i].replace(/(?=.{3}$)/,'/');
 	string = string.substr(1, string.length);
 	//console.log(string);
@@ -1168,20 +1144,18 @@ string = "IOTA" + string;
 		////console.log(trades2[o])
 		trades2.push(trades2[o]);
 	}
-		if ((i + 1) <= ks.length - 1){
-			console.log('dodoagain');
+		if ((i + 1) < ks.length - 1){
+			//console.log('dodoagain');
 	setTimeout(async function(){
-		if (maxclosed < trades2.length){
-			maxclosed = trades2.length;
-				console.log('maxclosed: ' + maxclosed);
-				
-		}
 		dodoget(ks, i + 1, ks.length);
 	}, seventeen * 4);
 		}
 		else{
+		console.log('trades exec 1');
 			trades = trades2;
-			
+			if (maxclosed < trades.length){
+			maxclosed = trades.length;
+		}
 		}
 	}catch(err){
 	if (err.toString().indexOf('Rate') != -1){
@@ -1193,9 +1167,17 @@ string = "IOTA" + string;
 		setTimeout(async function(){
 		dodoget(ks, i + 1, ks.length);
 	}, seventeen * 4);
+	} else {
+		console.log('trades exec 3');
+				trades = trades2;
+
 	}
 	}
 	}
+	} else {
+		console.log('trades exec 2');
+		trades = trades2;
+
 	}
 }
 app.get('/', function(req, res) {
@@ -1254,7 +1236,7 @@ app.get('/', function(req, res) {
  
  function insert(wp, collection){
 	//console.log(wp);
-	 console.log('insert');
+	 //console.log('insert');
 	
 			
 			collection.insertOne({
@@ -1267,10 +1249,6 @@ app.get('/', function(req, res) {
 			}
 			  //////console.log(res.result);
 			}); 
-			MongoClient.connect(process.env.mongodb || mongodb, function(err, db) {
-	console.log(monster)
-    dbo = db.db(monster)
-			});
  }
  
  var btceth = 0;
@@ -1281,8 +1259,8 @@ var dbs = []
 var collections = []
 setTimeout(function(){
 MongoClient.connect(process.env.mongodb || mongodb, function(err, db) {
-	console.log(monster)
-    var dbo = db.db(monster)
+	
+    var dbo = db.db('polomonster138-jare211332')
 	var count = 0;
     dbo.listCollections().toArray(function(err, collInfos) {
         // collInfos is an array of collection info objects that look like:
@@ -1590,28 +1568,13 @@ godosell = false;
 						}
 						})
 					}
-
-function randLetter(letter, callback) {
-    var letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-    letter += letters[Math.floor(Math.random() * letters.length)];
-	console.log(letter);
-	console.log(letter.length);
-	if (letter.length <= 32){
-    randLetter(letter, callback);
-	}
-	else {
-		callback(letter);
-	}
-}
+					
+					
+   
 var dbo;
-var monster;
-   randLetter('jare', function(data){
-	  monster = data;
 				MongoClient.connect(process.env.mongodb || mongodb, function(err, db) {
-					console.log(monster)
-				dbo = db.db(monster)
+					
+				dbo = db.db('polomonster138-jare211332')
 				////////console.log('dbo');
 				
 				});
-
-   });
