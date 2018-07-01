@@ -948,7 +948,7 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 		res.send('err: ' + err);
 	}
 }
-var seventeen = 75;
+var seventeen = 175;
 var godoks = true;
 function doks(ks){
 	if (godoks == true){
