@@ -241,10 +241,10 @@ async function oo(){
 	if (string.slice(-4) == "USDT"){
 		string = string.substr(0, string.length -1 );
 	}if (string.startsWith("DASH")){
-		string = string.substr(3, string.length );
+		string = string.substr(4, string.length );
 		string = "DSH" + string;
 	}if (string.startsWith("IOTA")){
-		string = string.substr(3, string.length );
+		string = string.substr(4, string.length );
 		string = "IOT" + string;
 		}
 	string = 't' + string;
