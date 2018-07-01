@@ -1039,7 +1039,7 @@ if (!activeOrders.includes(doc3[d].trades.k)&&  tickers.includes('trade:1m:' + d
 		+ '<br>BCH Balance: ' + bchbal + '<br>'
 		+ 'minutes: ' + minutes + '<br>'
 		+ 'hours: ' + hours + '<br>'
-		+ 'percent: ' + percent + '%<br>'
+		+ 'percent: ' + percent3 + '%<br>'
 		+ '<h1>percent/hr: ' + percentHr + '%</h1><br>'
 		+ '<h1>total gains (usdt): ' + thetotalusdt + '</h1>'
 		+ '<h1>total gains (sats): ' + thetotalbtc + '</h1>'
