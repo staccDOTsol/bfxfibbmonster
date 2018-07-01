@@ -338,6 +338,7 @@ var collection = dbo.collection(k);
                     for (var d in doc3) {
 						if (doc3[d].trades){
 							doc3[d].trades.buyorder2 = 0;
+							doc3[d].trades.bought2 = false;
 							
 	 collection.update({
 	},{
@@ -404,6 +405,7 @@ var collection = dbo.collection(k);
                     for (var d in doc3) {
 						if (doc3[d].trades){
 							doc3[d].trades.buyorder1 = 0;
+							doc3[d].trades.bought1 = false;
 							
 	 collection.update({
 	},{
@@ -544,6 +546,7 @@ o2.on('error', () => {
                     for (var d in doc3) {
 						if (doc3[d].trades){
 							doc3[d].trades.sellorder2 = 0;
+							doc3[d].trades.sold2 = false;
 							
 	 collection.update({
 	},{
@@ -613,6 +616,7 @@ o2.on('error', () => {
                 }).toArray(function(err, doc3) {
                     for (var d in doc3) {
 						if (doc3[d].trades){
+							doc3[d].trades.sold1 = false;
 							doc3[d].trades.sellorder1 = 0;
 							
 	 collection.update({
