@@ -1901,7 +1901,7 @@ godosell = false;
 
 								});
 							console.log('dosell2:');
-						sell(d3d.trades.k, d3d.trades.sell1, d3d.trades.sell2);
+						sell(d3d.trades.k, d3d.trades.sell2, d3d.trades.sell1);
                             }
 							}
                         }
