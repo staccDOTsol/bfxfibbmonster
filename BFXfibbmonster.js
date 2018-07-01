@@ -1246,8 +1246,15 @@ async function collectionDo(collection){
 							////console.log(d3d.trades.currencyPair);
 							//////console.log('ds: ');
 							//////console.log(ds);
+							
+							
+							
+							
+							
+							
+							// you can simulate closed orders by .. closing orders
+							
 							if (d3d.trades.currencyPair){
-								if (d3d.trades.buy2){
 								if (d3d.trades.bought1 == true && d3d.trades.bought2 == true && ((d3d.trades.buyorder1 == 0) &&((d3d.trades.buyorder2 == 0)))){
 									if (d3d.trades.bought1 == true){
 									////console.log('bought1 and bought2 true');
@@ -1269,7 +1276,7 @@ async function collectionDo(collection){
 															
 
 									});
-								}
+								
 								} 
 								
 								if (d3d.trades.sold1 == true && d3d.trades.sold2 == true && ((d3d.trades.buyorder1 == 0 ) &&((d3d.trades.buyorder2 == 0 )))){
