@@ -198,12 +198,12 @@ ws.onTicker({ symbol: k }, (ticker) => {
 									
 								}
 								if (lesser[0] != undefined){
-									winners[k].buy1 = lesser[0]
+									winners[k].buy1 = lesser[1]
 									winners[k].sl = lesser[0] * 0.01; //0.93
 									
 								}
 								if (lesser[1] != undefined){
-									winners[k].buy2 = lesser[1]
+									winners[k].buy2 = lesser[0]
 									winners[k].sl = lesser[1] * 0.01; //.93
 									
 								}
