@@ -232,16 +232,18 @@ ws.onTicker({ symbol: k }, (ticker) => {
 });
 }
 async function oo(){
+	 activeOrders = [ 'tBFTUSD', 'tBFTBTC', 'tELFUSD', 'tZRXUSD', 'tTRXUSD', 'tDADBTC' , 'tDATUSD', 'tZRXUSD', 'tZRXBTC', 'tTRXUSD', 'tTRXBTC', 'tELFUSD', 'tELFBTC','tBFTUSD', 'tBFTBTC',  'tODEUSD', 'tODEBTC', 'tXLMUSD', 'tXLMBTC', 'tDADUSD', 'tDADBTC', 'tWAXUSD', 'tWAXBTC']
+
 	let orders = await bitfinexapi.fetchOpenOrders();
 		
 		for (var o in orders){
 	var string = orders[o].symbol.replace('/', "");
 	if (string.slice(-4) == "USDT"){
 		string = string.substr(0, string.length -1 );
-	}if (string.startsWith("DASH"))
+	}if (string.startsWith("DASH")){
 		string = string.substr(3, string.length );
 		string = "DSH" + string;
-	}if (string.startsWith("IOTA"))
+	}if (string.startsWith("IOTA")){
 		string = string.substr(3, string.length );
 		string = "IOT" + string;
 		}
@@ -257,6 +259,9 @@ async function oo(){
 }
 ws.once('auth', () => {
 	oo();
+	setTimeout(function(){
+		oo();
+	}, 180000);
 ////console.log('auth');
 });
 function buy(k, rate, rate2){ //rate2 for buy is higher
