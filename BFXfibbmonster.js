@@ -1165,7 +1165,7 @@ async function setBal(){
 	console.log(btcusd);
 	rest.calcAvailableBalance('tBTCUSD', 1, btcusd, 'MARGIN').then(balances => {
 	var btcusdavail = (balances[0] * btcusd);
-	divisor = btcusdavail / 19
+	divisor = btcusdavail / 40
 	console.log('divisor: ' + divisor);
 	if (divisor <= .8){
 		godosell = false;
