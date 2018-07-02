@@ -5,7 +5,7 @@ let poloniex
 				var bestAsk = []
 
 				const ccxt = require ('ccxt');
-				var plstart = -0.15178285;
+				var plstart = -	;
 
 				var bestBid = []
 				const bfx = require('./bfx.js')
@@ -1667,7 +1667,7 @@ string = "IOTA" + string;
 		+ '<br>BCH Balance: ' + bchbal + '<br>'
 		+ 'minutes: ' + minutes + '<br>'
 		+ 'hours: ' + hours + '<br>'
-		+ '<h1>PL: ' + (PL - plstart) + '%<</h1>>'
+		+ '<h1>PL: ' + (PL - plstart) + '%</h1>'
 		+ '<h1>percent/hr: ' + percentHr + '%</h1>'
 		+ '<h2>usdt gains (usdt): ' + thetotalusdt + '</h2>'
 		+ '<h2>btc gains (btc only) (sats): ' + thetotalbtc + '</h2>'
