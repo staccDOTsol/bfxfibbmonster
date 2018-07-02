@@ -1540,7 +1540,9 @@ app.get('/', function(req, res) {
  var basePairs = [];
 
 	function updateStoplimits(wp, collection){
-		
+		if (wp.k == 'tXMRBTC'){
+		console.log(wp);
+		}
 
 		collection.find({
 
