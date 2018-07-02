@@ -556,7 +556,7 @@ function buy(k, rate, rate2){ //rate2 for buy is higher
 	
 	rest.calcAvailableBalance(k, 1, rate, 'MARGIN').then(balances => {
 	////console.log(balances[0]);
-		var amt = balances[0] / parseFloat(process.env.divisor);
+		var amt = balances[0] / parseFloat(divisor);
 		////console.log(amt);
 		lala = 0;
 		for (var v in activeOrders){
@@ -825,7 +825,7 @@ setTimeout(function(){
 	
 rest.calcAvailableBalance(k, 1, rate, 'MARGIN').then(balances => {
 	////console.log(balances[0]);
-		var amt = balances[0] / parseFloat(process.env.divisor);
+		var amt = balances[0] / parseFloat(divisor);
 		////console.log(amt);
 		lala2 = 0;
 		for (var v in activeOrders){
@@ -1159,16 +1159,18 @@ function sortFunction(a,b){
 }; 
 async function setBal(){
 	var mi = await rest.marginInfo()
-	process.env.divisor = mi[1][2] / 40
-	process.env.PL = mi[1][0]
-	console.log('PL: ' + process.env.PL);
-	console.log('divisor: ' + process.env.divisor);
+	divisor = mi[1][2] / 40
+	PL = mi[1][0]
+	console.log('PL: ' + PL);
+	console.log('divisor: ' + divisor);
 }
 setBal();
 setInterval(function(){
 	setBal();
 }, 60000);
 var trades = []
+var divisor = 1
+var PL = 1
 						var totals = []
 					var ks = []
 async function doget(req, res){
@@ -1479,7 +1481,7 @@ if ((activeOrders[doc3[d].trades.k] <= 1)&&  tickers.includes('trade:1m:' + doc3
 					var diff2 = Math.abs(new Date() - startDate);
 					var minutes = Math.floor((diff2/1000)/60);
 					var hours = ((diff2/1000)/60 / 60).toFixed(8);
-					var percentHr = ((process.env.PL - plstart) / hours).toFixed(4);
+					var percentHr = ((PL - plstart) / hours).toFixed(4);
 							//////////console.log(balances.BTC);
 							trades.sort(sortFunction3);
 							stoplimits.sort(sortFunction);
@@ -1507,7 +1509,7 @@ if ((activeOrders[doc3[d].trades.k] <= 1)&&  tickers.includes('trade:1m:' + doc3
 		+ '<br>BCH Balance: ' + bchbal + '<br>'
 		+ 'minutes: ' + minutes + '<br>'
 		+ 'hours: ' + hours + '<br>'
-		+ 'PL: ' + (process.env.PL - plstart) + '%<br>'
+		+ 'PL: ' + (PL - plstart) + '%<br>'
 		+ '<h1>percent/hr: ' + percentHr + '%</h1>'
 		+ '<h1>total gains (usdt): ' + thetotalusdt + '</h1>'
 		+ '<h1>total gains (sats): ' + thetotalbtc + '</h1>'
