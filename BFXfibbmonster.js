@@ -124,11 +124,16 @@ function subs(ss, count){
 var tickers = []
 	var winners = {};
 	var winnas = []
+	var tickercount = []
 function tickerticker(k){
 	
 ws.onTicker({ symbol: k }, (ticker) => {
-	if (k == 'tZCNETH'){
-		//console.log(k);
+	if (tickercount[k] == undefined){
+		tickercount[k] = 0;
+	}
+	tickercount[k]++;
+	if (k == 'tXMRBTC'){
+		console.log(tickercount[k]);
 	}
 	if (btcusd != 0&& ethusd != 0){
 		
@@ -224,8 +229,13 @@ ws.onTicker({ symbol: k }, (ticker) => {
 									
 							//insert(winners[k], collection);
 									}
+									
+									if (tickercount[k] >= 75){
 									updateStoplimits(winners[k], collection);
+									tickercount[k]=0;
 								}
+								
+							}
 								
 					}
 	} else {
@@ -546,7 +556,7 @@ function buy(k, rate, rate2){ //rate2 for buy is higher
 	
 	rest.calcAvailableBalance(k, 1, rate, 'MARGIN').then(balances => {
 	////console.log(balances[0]);
-		var amt = balances[0] / 10;
+		var amt = balances[0] / 5;
 		////console.log(amt);
 		lala = 0;
 		for (var v in activeOrders){
@@ -597,13 +607,48 @@ o.on('error', () => {
 		html: o.serialize().toString()
 		};
 		sgMail.send(msg);
-   console.log('sell price: ' + ((rate)) + ' amount ' + (-1 * os));
+   console.log('sell price: ' + ((rate)) + ' amount ' + ((-1 * os) / 2));
+	var ran = ((Math.random() * 3) + 1)
+  console.log('sell price: ' + ((rate * 0.009 * ran)) + ' amount ' + ((-1 * os) / 2));
+   const o3 = new Order({
+    cid: Date.now(),
+    symbol: k,
+    price_trailing: (rate * 0.009 * ran),
+    amount: (-1 * os) / 2,
+    type: Order.type['TRAILING STOP']
+  }, ws)
 
+  let closed3 = false
+
+  // Enable automatic updates
+  o3.registerListeners()
+
+o3.on('error', () => {
+	console.log('error');
+});
+  o3.on('update', () => {
+    console.log('order updated: %j', o3.serialize())
+  })
+
+  o3.on('close', () => {
+	  
+    console.log('order closed: %s', o3.status)
+	////console.log(activeOrders);
+					
+    closed3 = true
+	})
+
+  console.log('submitting order %d', o3.cid)
+
+  o3.submit().then(() => {
+	     console.log('got submit confirmation for order %d [%d]', o3.cid, o3.id)
+
+  });
    const o2 = new Order({
     cid: Date.now(),
     symbol: k,
     price: (rate),
-    amount: (-1 * os),
+    amount: (-1 * os) / 2,
     type: Order.type.LIMIT
   }, ws)
 
@@ -780,7 +825,7 @@ setTimeout(function(){
 	
 rest.calcAvailableBalance(k, 1, rate, 'MARGIN').then(balances => {
 	////console.log(balances[0]);
-		var amt = balances[0] / 10;
+		var amt = balances[0] / 5;
 		////console.log(amt);
 		lala2 = 0;
 		for (var v in activeOrders){
@@ -827,12 +872,48 @@ o.on('error', () => {
 	}else {
 		os = parseFloat(o.serialize()[6]);
 	}
-  console.log('buyl price: ' + (rate2) + ' amount ' + (-1 * os));
+	var ran = ((Math.random() * 3) + 1)
+  console.log('buyl price: ' + (rate2 * 0.009 * ran) + ' amount ' + ((-1 * os) /2));
+   const o3 = new Order({
+    cid: Date.now(),
+    symbol: k,
+    price_trailing: (rate2 * 0.009 * ran),
+    amount: (-1 * os) / 2,
+    type: Order.type['TRAILING STOP']
+  }, ws)
+
+  let closed3 = false
+
+  // Enable automatic updates
+  o3.registerListeners()
+
+o3.on('error', () => {
+	console.log('error');
+});
+  o3.on('update', () => {
+    console.log('order updated: %j', o3.serialize())
+  })
+
+  o3.on('close', () => {
+	  
+    console.log('order closed: %s', o3.status)
+	////console.log(activeOrders);
+					
+    closed3 = true
+	})
+
+  console.log('submitting order %d', o3.cid)
+
+  o3.submit().then(() => {
+	     console.log('got submit confirmation for order %d [%d]', o3.cid, o3.id)
+
+  });
+  console.log('buyl price: ' + (rate2) + ' amount ' + ((-1 * os) /2));
    const o2 = new Order({
     cid: Date.now(),
     symbol: k,
     price: rate2,
-    amount: -1 * os,
+    amount: (-1 * os) / 2,
     type: Order.type.LIMIT
   }, ws)
 
