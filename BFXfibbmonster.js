@@ -548,10 +548,10 @@ function buy(k, rate, rate2){ //rate2 for buy is higher
 	////console.log(balances[0]);
 		var amt = balances[0] / 10;
 		////console.log(amt);
-		var lala = 0;
+		lala = 0;
 		for (var v in activeOrders){
 			lala++;
-			if (lala >= 10){
+			if (lala >= 20){
 			amt = amt * 1.1;
 			}
 		}
@@ -764,6 +764,8 @@ function sell(k, rate, rate2){ //rate2 for sell is lower
 //console.log(k);
 //console.log(rate);
 //console.log(rate2);
+		var lala = 0;
+		var lala2 = 0;
 setTimeout(function(){
 		try {if (activeOrders[k] == undefined){
 					activeOrders[k] = 0;
@@ -780,10 +782,10 @@ rest.calcAvailableBalance(k, 1, rate, 'MARGIN').then(balances => {
 	////console.log(balances[0]);
 		var amt = balances[0] / 10;
 		////console.log(amt);
-		var lala = 0;
+		lala2 = 0;
 		for (var v in activeOrders){
-			lala++;
-			if (lala >= 10){
+			lala2++;
+			if (lala2 >= 20){
 			amt = amt * 1.1;
 			}
 		}
