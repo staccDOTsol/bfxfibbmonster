@@ -132,7 +132,7 @@ ws.onTicker({ symbol: k }, (ticker) => {
 		tickercount[k] = 0;
 	}
 	tickercount[k]++;
-	if (k == 'tXMRBTC'){
+	if (k == 'tBTCUSD'){
 		console.log(tickercount[k]);
 	}
 	if (btcusd != 0&& ethusd != 0){
@@ -1157,10 +1157,17 @@ function sortFunction(a,b){
 	var dateB = (b.percent);
 	return dateA > dateB ? 1 : -1;  
 }; 
+
+		godosell = false;
+		godobuy = false;
 async function setBal(){
 	var mi = await rest.marginInfo()
-	divisor = mi[1][2] / 40
-	if (divisor <= 2){
+	console.log(btcusd);
+	rest.calcAvailableBalance('tBTCUSD', 1, btcusd, 'MARGIN').then(balances => {
+	var btcusdavail = (balances[0] * btcusd);
+	divisor = btcusdavail / 40
+	console.log('divisor: ' + divisor);
+	if (divisor <= 1.1){
 		godosell = false;
 		godobuy = false;
 		console.log('NONO buy buy! NONO sell sell!');
@@ -1170,12 +1177,13 @@ async function setBal(){
 		godobuy = true;
 		console.log('buy buy! sell sell!');
 	}
-	
+	});
 	PL = mi[1][0]
 	console.log('PL: ' + PL);
-	console.log('divisor: ' + divisor);
 }
+setTimeout(function(){
 setBal();
+}, 2000);
 setInterval(function(){
 	setBal();
 }, 120000);
@@ -1759,8 +1767,8 @@ function doCollections(collections, balances){
 							}
         
 }
-var godobuy = true;
-var godosell = true;
+var godobuy = false;
+var godosell = false;
 
 async function collectionDo(collection){
 							var ds = []
@@ -1882,7 +1890,6 @@ async function collectionDo(collection){
 									function(err, result) {
 									   
 										//////console.log(result.result);
-									godobuy = true;
 															
 
 									});
@@ -1905,7 +1912,6 @@ async function collectionDo(collection){
 									function(err, result) {
 									   
 										//////console.log(result.result);
-									godobuy = true;
 															
 
 									});
