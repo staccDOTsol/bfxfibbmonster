@@ -589,11 +589,7 @@ o.on('error', () => {
   o.on('update', () => {
     console.log('order updated: %j', o.serialize())
 	var os = 0;
-	if (parseFloat(o.serialize()[6]) == 0){
-		os = (parseFloat(o.serialize()[7]));
-	}else {
-		os = parseFloat(o.serialize()[6]);
-	}
+	os = o['AMOUNT']
 	if (o.serialize().toString().indexOf('EXECUTED') != -1){
 		//console.log(k);
 		const sgMail = require('@sendgrid/mail');
@@ -607,15 +603,15 @@ o.on('error', () => {
 		html: o.serialize().toString()
 		};
 		sgMail.send(msg);
-   console.log('sell price: ' + ((rate)) + ' amount ' + ((-1 * os) / 2));
+   console.log('sell price: ' + ((rate)) + ' amount ' + ((-1 * ( os / 2 ))));
 	var ran = ((Math.random() * 3) + 1)
-  console.log('sell price: ' + ((rate * 0.009 * ran)) + ' amount ' + ((-1 * os) / 2));
+  console.log('sell price: ' + ((rate * 0.009 * ran)) + ' amount ' + ((-1 * ( os / 2 ))));
    const o3 = new Order({
     cid: Date.now(),
     symbol: k,
     price_trailing: (rate * 0.009 * ran),
     price: (rate * 0.009 * ran),
-    amount: (-1 * os) / 2,
+    amount: (-1 * ( os / 2 )),
     type: Order.type['TRAILING STOP']
   }, ws)
 
@@ -649,7 +645,7 @@ o3.on('error', () => {
     cid: Date.now(),
     symbol: k,
     price: (rate),
-    amount: (-1 * os) / 2,
+    amount: (-1 * ( os / 2 )),
     type: Order.type.LIMIT
   }, ws)
 
@@ -855,7 +851,7 @@ o.on('error', () => {
 });
   o.on('update', () => {
     console.log('order updated: %j', o.serialize())
-	var os = 0;
+	var os2 = 0;
 	if (o.serialize().toString().indexOf('EXECUTED') != -1){
 		const sgMail = require('@sendgrid/mail');
 
@@ -868,19 +864,15 @@ o.on('error', () => {
 		html: o.serialize().toString()
 		};
 		sgMail.send(msg);
-	if (parseFloat(o.serialize()[6]) == 0){
-		os = (parseFloat(o.serialize()[7]));
-	}else {
-		os = parseFloat(o.serialize()[6]);
-	}
+	os2 = o['AMOUNT']
 	var ran = ((Math.random() * 3) + 1)
-  console.log('buyl price: ' + (rate2 * 0.009 * ran) + ' amount ' + ((-1 * os) /2));
+  console.log('buyl price: ' + (rate2 * 0.009 * ran) + ' amount ' + ((-1 * ( os2 / 2 ))));
    const o3 = new Order({
     cid: Date.now(),
     symbol: k,
     price_trailing: (rate2 * 0.009 * ran),
 	price: (rate2 * 0.009 * ran),
-    amount: (-1 * os) / 2,
+    amount: (-1 * ( os2 / 2 )),
     type: Order.type['TRAILING STOP']
   }, ws)
 
@@ -910,12 +902,12 @@ o3.on('error', () => {
 	     console.log('got submit confirmation for order %d [%d]', o3.cid, o3.id)
 
   });
-  console.log('buyl price: ' + (rate2) + ' amount ' + ((-1 * os) /2));
+  console.log('buyl price: ' + (rate2) + ' amount ' + ((-1 * ( os / 2 ))));
    const o2 = new Order({
     cid: Date.now(),
     symbol: k,
     price: rate2,
-    amount: (-1 * os) / 2,
+    amount: (-1 * ( os / 2 )),
     type: Order.type.LIMIT
   }, ws)
 
