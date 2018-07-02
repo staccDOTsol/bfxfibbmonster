@@ -223,10 +223,10 @@ ws.onTicker({ symbol: k }, (ticker) => {
 									
 							//insert(winners[k], collection);
 									}
-									updateStoplimits(winners[k], collection);
 								}
 									
 						}
+									updateStoplimits(winners[k], collection);
 					}
 	} else {
 		if (k == "tBTCUSD"){
