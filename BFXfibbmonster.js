@@ -5,7 +5,7 @@ let poloniex
 				var bestAsk = []
 
 				const ccxt = require ('ccxt');
-				var plstart = -	;
+				var plstart = -0.15178285;
 
 				var bestBid = []
 				const bfx = require('./bfx.js')
