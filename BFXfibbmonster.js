@@ -789,7 +789,7 @@ rest.calcAvailableBalance(k, 1, rate, 'MARGIN').then(balances => {
 			amt = amt * 1.1;
 			}
 		}
-		console.log('lala ' + lala);
+		console.log('lala ' + lala2);
 	//console.log(k);
   console.log('sell price: ' + (rate) + ' amount ' + (-1 * amt * (1 / rate)));
   const o = new Order({
