@@ -161,6 +161,7 @@ ws.onTicker({ symbol: k }, (ticker) => {
 						if (!tickers.includes('trade:1m:' + k)){
 							//console.log(k);
 						tickers.push('trade:1m:' + k)
+						}
 						bestAsk[k] = ticker.ask;
 						bestBid[k] = ticker.bid;
 						avg = ((parseFloat(ticker['high']) + parseFloat(ticker['low'])) / 2);
@@ -223,10 +224,9 @@ ws.onTicker({ symbol: k }, (ticker) => {
 									
 							//insert(winners[k], collection);
 									}
-								}
-									
-						}
 									updateStoplimits(winners[k], collection);
+								}
+								
 					}
 	} else {
 		if (k == "tBTCUSD"){
