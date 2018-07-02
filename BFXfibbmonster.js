@@ -1568,11 +1568,13 @@ if ((activeOrders[doc3[d].trades.k] <= 1)&&  tickers.includes('trade:1m:' + doc3
 								}
 							}
 							let positions = await rest.positions()
+							//console.log(positions);
 	for (let i = 0; i < positions.length; i += 1) {
 		var p = positions[i];
 		var string2 = p[0];
 		var amount = p[2]
 		var price = p[3]
+		var thepl = p[6]
 		
 	var string = string2.replace(/(?=.{3}$)/,'/');
 	string = string.substr(1, string.length);
@@ -1594,7 +1596,7 @@ string = "IOTA" + string;
 									for (var s in totals['USDT']){
 										if (totals['USDT'][s].pair == string){
 									
-											totals['USDT'][s].total += -1 * ( parseFloat(amount) * parseFloat(price ));
+											totals['USDT'][s].total += -1 * ( parseFloat(amount) * parseFloat(price ) + parseFloat(thepl));
 										}
 									}
 								} else 
@@ -1602,7 +1604,7 @@ string = "IOTA" + string;
 								if (string.slice(-3) == "BTC"){
 									for (var s in totals['BTC']){
 										if (totals['BTC'][s].pair == string){
-											totals['BTC'][s].total +=  -1 * ( parseFloat(amount) * parseFloat(price ));
+											totals['BTC'][s].total +=  -1 * ( parseFloat(amount) * parseFloat(price ) + parseFloat(thepl));
 								
 									
 										}
@@ -1612,7 +1614,7 @@ string = "IOTA" + string;
 									
 									for (var s in totals['ETH']){
 										if (totals['ETH'][s].pair == string){
-											totals['ETH'][s].total += -1 * ( parseFloat(amount) * parseFloat(price ));
+											totals['ETH'][s].total += -1 * ( parseFloat(amount) * parseFloat(price ) + parseFloat(thepl));
 										}
 									}
 								}
