@@ -614,6 +614,7 @@ o.on('error', () => {
     cid: Date.now(),
     symbol: k,
     price_trailing: (rate * 0.009 * ran),
+    price: (rate * 0.009 * ran),
     amount: (-1 * os) / 2,
     type: Order.type['TRAILING STOP']
   }, ws)
@@ -878,6 +879,7 @@ o.on('error', () => {
     cid: Date.now(),
     symbol: k,
     price_trailing: (rate2 * 0.009 * ran),
+	price: (rate2 * 0.009 * ran),
     amount: (-1 * os) / 2,
     type: Order.type['TRAILING STOP']
   }, ws)
