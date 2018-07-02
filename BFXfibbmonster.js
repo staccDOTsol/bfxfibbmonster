@@ -1167,7 +1167,7 @@ async function setBal(){
 	var btcusdavail = (balances[0] * btcusd);
 	divisor = btcusdavail / 40 * .8
 	console.log('divisor: ' + divisor);
-	if (divisor <= 1.8){
+	if (divisor <= 1.3){
 		godosell = false;
 		godobuy = false;
 		console.log('NONO buy buy! NONO sell sell!');
