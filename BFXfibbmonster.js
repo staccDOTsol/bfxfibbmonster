@@ -1528,7 +1528,7 @@ if ((activeOrders[doc3[d].trades.k] <= 1)&&  tickers.includes('trade:1m:' + doc3
 		+ '<br>BCH Balance: ' + bchbal + '<br>'
 		+ 'minutes: ' + minutes + '<br>'
 		+ 'hours: ' + hours + '<br>'
-		+ 'PL: ' + (PL - plstart) + '%<br>'
+		+ 'PL: ' + ((PL - plstart) * 100) + '%<br>'
 		+ '<h1>percent/hr: ' + percentHr + '%</h1>'
 		+ '<h1>total gains (usdt): ' + thetotalusdt + '</h1>'
 		+ '<h1>total gains (sats): ' + thetotalbtc + '</h1>'
