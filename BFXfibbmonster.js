@@ -1399,9 +1399,91 @@ if ((activeOrders[doc3[d].trades.k] <= 1)&&  tickers.includes('trade:1m:' + doc3
 									string = string.substr(4, string.length );
 									string = "IOT" + string;
 									}
+								
+								if (orders2[d].symbol.slice(-4) == "USDT"){
+									for (var s in totals['USDT']){
+										if (totals['USDT'][s].pair == orders2[d].symbol){
+									
+							if (orders2[d].side == 'sell'){
+																						if (bestAsk[string]){
+											totals['USDT'][s].total += ( parseFloat(bestAsk[string]) * parseFloat(orders2[d].amount ));
+																						}
+																						else {
+											totals['USDT'][s].total += ( parseFloat(orders2[d].price) * parseFloat(orders2[d].amount ));
+
+																						}
+											//console.log(parseFloat(trades[d].price) * parseFloat(trades[d].amount ));
+										}else {
+																						if (bestBid[string]){
+
+											totals['USDT'][s].total = totals['USDT'][s].total - (parseFloat(bestBid[string]) * parseFloat(orders2[d].amount));
+																						}
+																						else {
+											totals['USDT'][s].total = totals['USDT'][s].total - (parseFloat(orders2[d].price) * parseFloat(orders2[d].amount));
+
+																						}
+										}
+								cccu++;
+										}
+									}
+								} else 
+								if (orders2[d].symbol.slice(-3) == "BTC"){
+									for (var s in totals['BTC']){
+										if (totals['BTC'][s].pair == orders2[d].symbol){
+									if (orders2[d].side == 'sell'){
+																																if (bestAsk[string]){
+
+											totals['BTC'][s].total += ( parseFloat(bestAsk[string]) * parseFloat(orders2[d].amount ));
+																																} else {
+											totals['BTC'][s].total += ( parseFloat(orders2[d].price) * parseFloat(orders2[d].amount ));
+
+																																}
+											//console.log(parseFloat(orders2[d].price) * parseFloat(orders2[d].amount ));
+										}else {
+											if (bestBid[string]){
+											totals['BTC'][s].total = totals['BTC'][s].total - (parseFloat(bestBid[string]) * parseFloat(orders2[d].amount));
+											}
+											else {
+											totals['BTC'][s].total = totals['BTC'][s].total - (parseFloat(orders2[d].price) * parseFloat(orders2[d].amount));
+											}
+										}
+								cccb++;
+								
+									
+										}
+									}
+								} else 
+								if (orders2[d].symbol.slice(-3) == "ETH"){
+									
+									for (var s in totals['ETH']){
+										if (totals['ETH'][s].pair == orders2[d].symbol){
+									if (orders2[d].side == 'sell'){																						if (bestAsk[string]){
+
+											totals['ETH'][s].total += ( parseFloat(bestAsk[string]) * parseFloat(orders2[d].amount ));
+									}
+									else {
+											totals['ETH'][s].total += ( parseFloat(orders2[d].price) * parseFloat(orders2[d].amount ));
+
+									}
+											//console.log(parseFloat(orders2[d].price) * parseFloat(orders2[d].amount ));
+										}else {
+																						if (bestBid[string]){
+
+											totals['ETH'][s].total = totals['ETH'][s].total - (parseFloat(bestBid[string]) * parseFloat(orders2[d].amount));
+																						}
+																						else {
+											totals['ETH'][s].total = totals['ETH'][s].total - (parseFloat(orders2[d].price) * parseFloat(orders2[d].amount));
+
+																						}
+										}
+								ccce++;
+										}
+									}
+								}
 								string = 't' + string;
 								//console.log('string ' + string);
 								orders2[d].activeOrders = activeOrders[string]; 
+								
 							}
 					trades.sort(sortFunction3);
 					
