@@ -1551,7 +1551,7 @@ if ((activeOrders[doc3[d].trades.k] <= 1)&&  tickers.includes('trade:1m:' + doc3
 	},(1000));
 	});
 	}catch(err){
-		res.send('err: ' + err);
+		res.send('<head><link rel="icon" href="https://polofibbmonster.herokuapp.com/favicon.ico?v=2" /><meta http-equiv="refresh" content="120"></head>err: ' + err);
 	}
 }
 var seventeen = 1200;
