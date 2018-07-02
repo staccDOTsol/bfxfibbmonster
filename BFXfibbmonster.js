@@ -213,7 +213,7 @@ ws.onTicker({ symbol: k }, (ticker) => {
 									winners[k].sl = lesser[1] * 0.01; //.93
 									
 								}
-								
+								    
 								winners[k].bought1 = false;
 								winners[k].bought2 = false;
 								winners[k].sold1 = false;
@@ -227,7 +227,7 @@ ws.onTicker({ symbol: k }, (ticker) => {
 										winnas.push(k);
 															
 									
-							//insert(winners[k], collection);
+							insert(winners[k], collection);
 									}
 									
 									if (tickercount[k] >= 75){
@@ -587,9 +587,11 @@ o.on('error', () => {
 	console.log('error');
 });
   o.on('update', () => {
+	  								godobuy = true;
+
     console.log('order updated: %j', o.serialize())
 	var os = 0;
-	os = o['AMOUNT']
+	os = o.serialize()[7]
 	if (o.serialize().toString().indexOf('EXECUTED') != -1){
 		//console.log(k);
 		const sgMail = require('@sendgrid/mail');
@@ -851,6 +853,8 @@ o.on('error', () => {
 });
   o.on('update', () => {
     console.log('order updated: %j', o.serialize())
+									godosell = true;
+
 	var os2 = 0;
 	if (o.serialize().toString().indexOf('EXECUTED') != -1){
 		const sgMail = require('@sendgrid/mail');
@@ -864,7 +868,7 @@ o.on('error', () => {
 		html: o.serialize().toString()
 		};
 		sgMail.send(msg);
-	os2 = o['AMOUNT']
+	os2 = o.serialize()[7]
 	var ran = ((Math.random() * 3) + 1)
   console.log('buyl price: ' + (rate2 * 0.009 * ran) + ' amount ' + ((-1 * ( os2 / 2 ))));
    const o3 = new Order({
@@ -902,12 +906,12 @@ o3.on('error', () => {
 	     console.log('got submit confirmation for order %d [%d]', o3.cid, o3.id)
 
   });
-  console.log('buyl price: ' + (rate2) + ' amount ' + ((-1 * ( os / 2 ))));
+  console.log('buyl price: ' + (rate2) + ' amount ' + ((-1 * ( os2 / 2 ))));
    const o2 = new Order({
     cid: Date.now(),
     symbol: k,
     price: rate2,
-    amount: (-1 * ( os / 2 )),
+    amount: (-1 * ( os2 / 2 )),
     type: Order.type.LIMIT
   }, ws)
 
@@ -1655,10 +1659,18 @@ app.get('/', function(req, res) {
  
  function insert(wp, collection){
 	//console.log(wp);
-	 console.log('insert');
 	
-			
-			collection.insertOne({
+			collection.find({
+
+                }, {
+                    $exists: true
+                }).sort({
+                    _id: -1
+
+                }).toArray(function(err, doc3) {
+					if (doc3.length == 0){
+	 console.log('insert');
+						collection.insertOne({
 				'trades': wp
 			}, function(err, res) {
 				if (err) 
@@ -1668,6 +1680,9 @@ app.get('/', function(req, res) {
 			}
 			  //////console.log(res.result);
 			}); 
+					}
+				})
+			
  }
  
  var btceth = 0;
@@ -1679,7 +1694,7 @@ var collections = []
 setTimeout(function(){
 MongoClient.connect(process.env.mongodb || mongodb, function(err, db) {
 	
-    var dbo = db.db('polomonster138-jare265211332')
+    var dbo = db.db('polomonster138-jare22222265211332')
 	var count = 0;
     dbo.listCollections().toArray(function(err, collInfos) {
         // collInfos is an array of collection info objects that look like:
@@ -1893,7 +1908,6 @@ async function collectionDo(collection){
 								function(err, result) {
 								   
 									//////console.log(result.result);
-								godobuy = true;
 														
 
 								});
@@ -1917,7 +1931,6 @@ godobuy = false;
 								function(err, result) {
 								   
 									//////console.log(result.result);
-								godobuy = true;
 														
 
 								});
@@ -1951,7 +1964,6 @@ godobuy = false;
 								function(err, result) {
 								   
 									//////console.log(result.result);
-								godosell = true;
 														
 
 								});
@@ -1975,7 +1987,6 @@ godosell = false;
 								function(err, result) {
 								   
 									//////console.log(result.result);
-								godosell = true;
 														
 
 								});
@@ -1993,7 +2004,7 @@ godosell = false;
 var dbo;
 				MongoClient.connect(process.env.mongodb || mongodb, function(err, db) {
 					
-				dbo = db.db('polomonster138-jare265211332')
+				dbo = db.db('polomonster138-jare22222265211332')
 				////////console.log('dbo');
 				
 				});
