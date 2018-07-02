@@ -1388,6 +1388,7 @@ if ((activeOrders[doc3[d].trades.k] <= 1)&&  tickers.includes('trade:1m:' + doc3
 									}
 								}
 							}
+							
 							for (var d in orders2){
 								var string = orders2[d].symbol.replace('/', "");
 								if (string.slice(-4) == "USDT"){
@@ -1427,6 +1428,7 @@ if ((activeOrders[doc3[d].trades.k] <= 1)&&  tickers.includes('trade:1m:' + doc3
 										}
 									}
 								} else 
+									
 								if (orders2[d].symbol.slice(-3) == "BTC"){
 									for (var s in totals['BTC']){
 										if (totals['BTC'][s].pair == orders2[d].symbol){
@@ -1565,7 +1567,56 @@ if ((activeOrders[doc3[d].trades.k] <= 1)&&  tickers.includes('trade:1m:' + doc3
 							btcbal +=parseFloat(balances[b].amount);		
 								}
 							}
-							
+							let positions = await rest.positions()
+	for (let i = 0; i < positions.length; i += 1) {
+		var p = positions[i];
+		var string2 = p[0];
+		var amount = p[2]
+		var price = p[3]
+		
+	var string = string2.replace(/(?=.{3}$)/,'/');
+	string = string.substr(1, string.length);
+	//console.log(string);
+
+		if (string.slice(-3) == "USD"){
+		string += "T";	
+		}
+		if (string.substr(0, 3) == "DSH"){
+		string = string.substr(3, string.length);
+string = "DASH" + string;		
+		}
+		
+		if (string.substr(0, 3) == "IOT"){
+		string = string.substr(3, string.length);
+string = "IOTA" + string;		
+		}
+	if (string.slice(-4) == "USDT"){
+									for (var s in totals['USDT']){
+										if (totals['USDT'][s].pair == string){
+									
+											totals['USDT'][s].total += -1 * ( parseFloat(amount) * parseFloat(price ));
+										}
+									}
+								} else 
+									
+								if (string.slice(-3) == "BTC"){
+									for (var s in totals['BTC']){
+										if (totals['BTC'][s].pair == string){
+											totals['BTC'][s].total +=  -1 * ( parseFloat(amount) * parseFloat(price ));
+								
+									
+										}
+									}
+								} else 
+								if (string.slice(-3) == "ETH"){
+									
+									for (var s in totals['ETH']){
+										if (totals['ETH'][s].pair == string){
+											totals['ETH'][s].total += -1 * ( parseFloat(amount) * parseFloat(price ));
+										}
+									}
+								}
+	}
 							////console.log(orders);
 							//for (var o in orders){
 							//	//console.log(o);
