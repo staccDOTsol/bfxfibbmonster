@@ -1596,7 +1596,7 @@ string = "IOTA" + string;
 									for (var s in totals['USDT']){
 										if (totals['USDT'][s].pair == string){
 									
-											totals['USDT'][s].total += -1 * ( parseFloat(amount) * parseFloat(price ) + parseFloat(thepl));
+											totals['USDT'][s].total += ( parseFloat(amount) * parseFloat(price ) + parseFloat(thepl));
 										}
 									}
 								} else 
@@ -1604,7 +1604,7 @@ string = "IOTA" + string;
 								if (string.slice(-3) == "BTC"){
 									for (var s in totals['BTC']){
 										if (totals['BTC'][s].pair == string){
-											totals['BTC'][s].total +=  -1 * ( parseFloat(amount) * parseFloat(price ) + parseFloat(thepl));
+											totals['BTC'][s].total +=   ( parseFloat(amount) * parseFloat(price ) + parseFloat(thepl));
 								
 									
 										}
@@ -1614,7 +1614,7 @@ string = "IOTA" + string;
 									
 									for (var s in totals['ETH']){
 										if (totals['ETH'][s].pair == string){
-											totals['ETH'][s].total += -1 * ( parseFloat(amount) * parseFloat(price ) + parseFloat(thepl));
+											totals['ETH'][s].total += ( parseFloat(amount) * parseFloat(price ) + parseFloat(thepl));
 										}
 									}
 								}
