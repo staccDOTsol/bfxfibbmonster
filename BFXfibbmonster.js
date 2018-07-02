@@ -1160,6 +1160,17 @@ function sortFunction(a,b){
 async function setBal(){
 	var mi = await rest.marginInfo()
 	divisor = mi[1][2] / 40
+	if (divisor <= 2){
+		godosell = false;
+		godobuy = false;
+		console.log('NONO buy buy! NONO sell sell!');
+	}
+	else {
+		godosell = true;
+		godobuy = true;
+		console.log('buy buy! sell sell!');
+	}
+	
 	PL = mi[1][0]
 	console.log('PL: ' + PL);
 	console.log('divisor: ' + divisor);
@@ -1167,7 +1178,7 @@ async function setBal(){
 setBal();
 setInterval(function(){
 	setBal();
-}, 60000);
+}, 120000);
 var trades = []
 var divisor = 1
 var PL = 1
