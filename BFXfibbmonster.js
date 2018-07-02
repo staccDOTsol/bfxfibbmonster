@@ -1651,6 +1651,12 @@ string = "IOTA" + string;
 		for (var t in totals['BTC']){
 			thetotalbtc+=totals['BTC'][t].total;
 		}
+		var totaltotal = thetotalbtc * btcusd;
+		totaltotal += thetotalusdt;
+		totaltotal += thetotaleth * ethusd;
+		totaltotal = totaltotal / btcusd;
+		
+		totaltotal = totaltotal * Math.pow(10, 8);
 		if (gosend == true){
 			gosend = false;
 		thetotalbtc = thetotalbtc * Math.pow(10, 8);
@@ -1661,11 +1667,12 @@ string = "IOTA" + string;
 		+ '<br>BCH Balance: ' + bchbal + '<br>'
 		+ 'minutes: ' + minutes + '<br>'
 		+ 'hours: ' + hours + '<br>'
-		+ 'PL: ' + (PL - plstart) + '%<br>'
+		+ '<h1>PL: ' + (PL - plstart) + '%<</h1>>'
 		+ '<h1>percent/hr: ' + percentHr + '%</h1>'
-		+ '<h1>total gains (usdt): ' + thetotalusdt + '</h1>'
-		+ '<h1>total gains (sats): ' + thetotalbtc + '</h1>'
-		+ '<h1>total gains (wei): ' + thetotaleth + '</h1>'
+		+ '<h2>usdt gains (usdt): ' + thetotalusdt + '</h2>'
+		+ '<h2>btc gains (btc only) (sats): ' + thetotalbtc + '</h2>'
+		+ '<h2>eth gains (wei): ' + thetotaleth + '</h2>'
+		+ '<h1>total gains (sats): ' + totaltotal + '</h1>'
 		+ '<div style="display:none;" id="stoplimits">' + JSON.stringify(stoplimits) + '</div>'
 		+ '<div style="display:none;" id="orders2">' + JSON.stringify(orders2) + '</div>'
 		+ '<div style="display:none;" id="trades">' + JSON.stringify(trades) + '</div>'
