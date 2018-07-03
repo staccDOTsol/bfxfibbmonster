@@ -819,7 +819,7 @@ setTimeout(function(){
 				if (activeOrders[k] == undefined){
 					activeOrders[k] = 0;
 				}
-		  console.log('sell sell !! ' + k + ' ' + (rate) + ' ' + rate2);
+		  console.log('	! ' + k + ' ' + (rate) + ' ' + rate2);
 			activeOrders[k] += 1;
 	////console.log(activeOrders);
 	
@@ -2109,7 +2109,7 @@ godobuy = false;
 
 								});
 							console.log('dobuy2:');
-							buy(d3d.trades.k, d3d.trades.buy1, d3d.trades.buy2);
+							buy(d3d.trades.k, d3d.trades.buy2, d3d.trades.buy1);
                             }
 							}
                         }
