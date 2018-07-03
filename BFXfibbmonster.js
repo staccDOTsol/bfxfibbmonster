@@ -592,7 +592,7 @@ o.on('error', () => {
     console.log('order updated: %j', o.serialize())
 	var os = 0;
 	os = o.serialize()[7]
-	if (o.serialize().toString().indexOf('EXECUTED') != -1){
+	if (o.serialize().toString().indexOf('EXECUTED') != -1 && o.serialize().toString().indexOf('PARTIALLY') == -1){
 		//console.log(k);
 		const sgMail = require('@sendgrid/mail');
 
@@ -858,7 +858,7 @@ o.on('error', () => {
 									godosell = true;
 
 	var os2 = 0;
-	if (o.serialize().toString().indexOf('EXECUTED') != -1){
+	if (o.serialize().toString().indexOf('EXECUTED') != -1 && o.serialize().toString().indexOf('PARTIALLY') == -1){
 		const sgMail = require('@sendgrid/mail');
 
 		sgMail.setApiKey(process.env.SENDGRID_API_KEY);
