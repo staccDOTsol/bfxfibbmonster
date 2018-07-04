@@ -649,7 +649,8 @@ o3.on('error', () => {
     symbol: k,
     price: (rate),
     amount: (-1 * ( os / 2 )),
-    type: Order.type.LIMIT
+    type: Order.type.LIMIT,
+    priceAuxLimit: rate2 * 1.07
   }, ws)
 
   let closed2 = false
@@ -915,7 +916,9 @@ o3.on('error', () => {
     symbol: k,
     price: rate2,
     amount: (-1 * ( os2 / 2 )),
-    type: Order.type.LIMIT
+    type: Order.type.LIMIT,
+	priceAuxLimit: rate * .98
+
   }, ws)
 
   let closed2 = false
