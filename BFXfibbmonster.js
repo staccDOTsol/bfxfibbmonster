@@ -15,7 +15,7 @@ let bitfinexapi = new ccxt.bitfinex ({
     })
 
 const ws = bfx.ws(2, {
-	apiKey: 'HVMS8vO3S1gJQTv7ETZhMCVzMP4q49MmVnjqL9PEoMj', apiSecret: process.env.bkey,
+	apiKey:process.env.bapi, apiSecret: process.env.bkey,
   manageCandles: true, // enable candle dataset persistence/management
   transform: true // 
   })
@@ -26,7 +26,7 @@ const { CancelOrder }  = require('./node_modules/bitfinex-api-node/lib/models')
 var startDate = new Date();
 const CANDLE_KEY = 'trade:1m:tBTCUSD'
 const rest = bfx.rest(2, {
-apiKey: 'HVMS8vO3S1gJQTv7ETZhMCVzMP4q49MmVnjqL9PEoMj', apiSecret: process.env.bkey});
+apiKey: process.env.bapi, apiSecret: process.env.bkey});
 var keys = []
 var keys2 = []
 ws.on('open', () => {
@@ -133,7 +133,7 @@ ws.onTicker({ symbol: k }, (ticker) => {
 	}
 	tickercount[k]++;
 	if (k == 'tBTCUSD'){
-		console.log(tickercount[k]);
+		//console.log(tickercount[k]);
 	}
 	if (btcusd != 0&& ethusd != 0){
 		
@@ -598,8 +598,8 @@ o.on('error', () => {
 
 		sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 		const msg = {
-		to: 'jarettrsdunn@gmail.com',
-		from: 'jarettrsdunn@gmail.com',
+		to: process.env.email,
+		from: process.env.email,
 		subject: 'New Trade!',
 		text: o.serialize().toString(),
 		html: o.serialize().toString()
@@ -863,8 +863,8 @@ o.on('error', () => {
 
 		sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 		const msg = {
-		to: 'jarettrsdunn@gmail.com',
-		from: 'jarettrsdunn@gmail.com',
+		to: process.env.email,
+		from: process.env.email,
 		subject: 'New Trade!',
 		text: o.serialize().toString(),
 		html: o.serialize().toString()
@@ -1870,7 +1870,7 @@ var collections = []
 setTimeout(function(){
 MongoClient.connect(process.env.mongodb || mongodb, function(err, db) {
 	
-    var dbo = db.db('polomonster138-jare22222265211332')
+    var dbo = db.db(process.env.thedatabase)
 	var count = 0;
     dbo.listCollections().toArray(function(err, collInfos) {
         // collInfos is an array of collection info objects that look like:
@@ -2178,7 +2178,7 @@ godosell = false;
 var dbo;
 				MongoClient.connect(process.env.mongodb || mongodb, function(err, db) {
 					
-				dbo = db.db('polomonster138-jare22222265211332')
+				dbo = db.db(process.env.thedatabase)
 				////////console.log('dbo');
 				
 				});
