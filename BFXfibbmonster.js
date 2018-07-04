@@ -1863,6 +1863,7 @@ app.get('/', function(req, res) {
 
                 }).toArray(function(err, doc3) {
 					console.log(err);
+					if (doc3){
 					if (doc3.length == 0){
 	 console.log('insert');
 						collection.insertOne({
@@ -1876,6 +1877,19 @@ app.get('/', function(req, res) {
 			  //////console.log(res.result);
 			}); 
 					}
+					} 	else {
+ console.log('insert');
+						collection.insertOne({
+				'trades': wp
+			}, function(err, res) {
+				if (err) 
+				
+			if (wp.currencyPair == "BTC_BCH"){
+				////////console.log(wp);
+			}
+			  //////console.log(res.result);
+			}); 
+					}					
 				})
 			
  }
