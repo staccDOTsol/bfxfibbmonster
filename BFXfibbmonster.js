@@ -224,14 +224,14 @@ ws.onTicker({ symbol: k }, (ticker) => {
 								
 								
 								winners[k].cancelled = false;
-								ccollection.find({
+								collection.find({
 
 								}, {
 								}).sort({
 									_id: -1
 
 								}).toArray(function(err, doc3) {
-									if (doc3.length == 0){
+									if (!doc3){
 									if (!winnas.includes(k)){
 										winnas.push(k);
 															
@@ -239,6 +239,7 @@ ws.onTicker({ symbol: k }, (ticker) => {
 							insert(winners[k], collection);
 									}
 									}
+									});
 									if (tickercount[k] >= 75){
 									updateStoplimits(winners[k], collection);
 									tickercount[k]=0;
