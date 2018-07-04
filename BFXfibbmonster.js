@@ -1862,6 +1862,7 @@ app.get('/', function(req, res) {
                     _id: -1
 
                 }).toArray(function(err, doc3) {
+					console.log(err);
 					if (doc3.length == 0){
 	 console.log('insert');
 						collection.insertOne({
