@@ -1863,7 +1863,7 @@ app.get('/', function(req, res) {
 
                 }).toArray(function(err, doc3) {
 					console.log(err);
-					if (doc3){
+					if (doc3 != undefined){
 					if (doc3.length == 0){
 	 console.log('insert');
 						collection.insertOne({
