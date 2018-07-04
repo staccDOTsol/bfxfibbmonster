@@ -1165,6 +1165,7 @@ function sortFunction(a,b){
 
 		godosell = false;
 		godobuy = false;
+		var mnstart =  132.50258064;
 async function setBal(){
 	var mi = await rest.marginInfo()
 	console.log(btcusd);
@@ -1183,7 +1184,11 @@ async function setBal(){
 		console.log('buy buy! sell sell!');
 	}
 	});
-	PL = mi[1][0]
+	console.log(mi);
+	
+	var MN = mi[1][3]
+	
+	PL = -1 * (1-(MN / mnstart)) * 100;
 	console.log('PL: ' + PL);
 }
 setTimeout(function(){
