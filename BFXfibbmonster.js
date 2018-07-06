@@ -221,22 +221,14 @@ ws.onTicker({ symbol: k }, (ticker) => {
 								
 								
 								winners[k].cancelled = false;
-								collection.find({
-
-								}, {
-								}).sort({
-									_id: -1
-
-								}).toArray(function(err, doc3) {
-									if (!doc3){
+								
 									if (!winnas.includes(k)){
 										winnas.push(k);
 															
 									
 							insert(winners[k], collection);
 									}
-									}
-									});
+									
 									if (tickercount[k] >= 75){
 									updateStoplimits(winners[k], collection);
 									tickercount[k]=0;
@@ -1849,46 +1841,33 @@ app.get('/', function(req, res) {
 					}
 					});
 				}
- 
+
  function insert(wp, collection){
 	//console.log(wp);
 	
 			collection.find({
 
                 }, {
-                    $exists: true
                 }).sort({
                     _id: -1
 
                 }).toArray(function(err, doc3) {
-					console.log(err);
-					if (doc3 != undefined){
+					console.log(doc3);
 					if (doc3.length == 0){
 	 console.log('insert');
 						collection.insertOne({
 				'trades': wp
 			}, function(err, res) {
-				if (err) 
+				if (err) console.log(err);
 				
 			if (wp.currencyPair == "BTC_BCH"){
 				////////console.log(wp);
 			}
 			  //////console.log(res.result);
 			}); 
+					} else {
+						console.log('already there');
 					}
-					} 	else {
- console.log('insert');
-						collection.insertOne({
-				'trades': wp
-			}, function(err, res) {
-				if (err) 
-				
-			if (wp.currencyPair == "BTC_BCH"){
-				////////console.log(wp);
-			}
-			  //////console.log(res.result);
-			}); 
-					}					
 				})
 			
  }
@@ -1899,9 +1878,12 @@ app.get('/', function(req, res) {
  var msgcount = 0;
 var dbs = []
 var collections = []
+
+ 	  
 setTimeout(function(){
 MongoClient.connect(process.env.mongodb || mongodb, function(err, db) {
 	
+	//insert(
     var dbo = db.db(process.env.thedatabase)
 	var count = 0;
     dbo.listCollections().toArray(function(err, collInfos) {
