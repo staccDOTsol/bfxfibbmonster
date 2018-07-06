@@ -13,12 +13,12 @@ const bfx = new BFX({
   apiSecret: API_SECRET,
 
   ws: {
-    url: WS_URL,
+    url: "wss://api.ethfinex.com/ws/2",
     agent
   },
 
   rest: {
-    url: REST_URL,
+    url: "https://api.ethfinex.com",
     agent
   }
 })

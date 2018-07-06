@@ -38,7 +38,7 @@ ws.on('open', () => {
 	})
     rest.symbols().then(symbols => {
         for (var s in symbols) {
-            // ////console.log('t' + symbols[s].toUpperCase());
+            //console.log('t' + symbols[s].toUpperCase());
 			if ( symbols[s].toUpperCase().slice(-3) == "ETH" ||  symbols[s].toUpperCase().slice(-3) == "BTC" ||  symbols[s].toUpperCase().slice(-3) == "USD"){
             keys.push('trade:1m:t' + symbols[s].toUpperCase());
 			keys2.push('t' + symbols[s].toUpperCase());
@@ -48,9 +48,7 @@ ws.on('open', () => {
 	
 			}
         }
-			ws.subscribeTicker("tBTCUSD");
 		ws.subscribeTicker("tETHUSD");
-		tickerticker("tBTCUSD");
 		tickerticker("tETHUSD");
 		for (var k in keys) {
 			//console.log(keys2[k]);	
@@ -88,9 +86,7 @@ ws.on('open', () => {
 
                 }).toArray(function(err, doc3) {
         //////////console.log(dbs);
-		ws.subscribeTicker("tBTCUSD");
 		ws.subscribeTicker("tETHUSD");
-		tickerticker("tBTCUSD");
 		tickerticker("tETHUSD");
 		for (var d in doc3){
 			if (!ks.includes(doc3[d].trades.k)){
@@ -129,6 +125,7 @@ var tickers = []
 function tickerticker(k){
 	
 ws.onTicker({ symbol: k }, (ticker) => {
+	//console.log(ticker)
 	if (tickercount[k] == undefined){
 		tickercount[k] = 0;
 	}
@@ -1126,6 +1123,7 @@ ws.on('error', (err) => {
 	if (err.toString().indexOf('recv update') == -1){
   //console.log(err)
 	}
+	console.log(err);
   if (err.toString().indexOf('EAI_AGAIN') != -1){
   setTimeout(function(){
 	  ws.open()
@@ -1177,9 +1175,10 @@ function sortFunction(a,b){
 		var mnstart =  132.50258064;
 async function setBal(){
 	var mi = await rest.marginInfo()
-	console.log(btcusd);
-	rest.calcAvailableBalance('tBTCUSD', 1, btcusd, 'MARGIN').then(balances => {
-	var btcusdavail = (balances[0] * btcusd);
+	console.log(ethusd);
+	rest.calcAvailableBalance('tETHUSD', 1, ethusd, 'MARGIN').then(balances => {
+	var btcusdavail = (balances[0] * ethusd);
+	console.log(btcusdavail);
 	divisor = btcusdavail / 50
 	console.log('divisor: ' + divisor);
 	if (divisor <= .8){
@@ -1202,7 +1201,7 @@ async function setBal(){
 }
 setTimeout(function(){
 setBal();
-}, 2000);
+}, 5000);
 setInterval(function(){
 	setBal();
 }, 120000);
@@ -2097,7 +2096,7 @@ async function collectionDo(collection){
 							
 						if (d3d.trades.bought1 == false){
 							
-                        if (parseFloat(bestAsk[d3d.trades.k]) <= d3d.trades.buy1 && parseFloat(bestAsk[d3d.trades.k]) > 0.00000200)	 {
+                        if (parseFloat(bestAsk[d3d.trades.k]) <= (d3d.trades.buy1 * .99) && parseFloat(bestAsk[d3d.trades.k]) > 0.00000200)	 {
                             //////////console.log(d3d.trades.last);
 							//////////console.log(d3d.trades);
 							d3d.trades.bought1 = true;
@@ -2123,7 +2122,7 @@ async function collectionDo(collection){
                         }
 						}
                         if (d3d.trades.buy2) {
-                            if (parseFloat(bestAsk[d3d.trades.k])<= d3d.trades.buy2 && d3d.trades.bought2 == false && parseFloat(bestAsk[d3d.trades.k]) > 0.00000200) {
+                            if (parseFloat(bestAsk[d3d.trades.k])<= (d3d.trades.buy2 * .99) && d3d.trades.bought2 == false && parseFloat(bestAsk[d3d.trades.k]) > 0.00000200) {
 							//////////console.log(d3d.trades.last);
 							//////////console.log(d3d.trades);
 							d3d.trades.bought2 = true;
@@ -2153,7 +2152,7 @@ godobuy = false;
 						//console.log(d3d.trades.sell1);
 						}
 						if (d3d.trades.sold1 == false){
-                        if (parseFloat(bestBid[d3d.trades.k]) >= d3d.trades.sell1 && parseFloat(bestAsk[d3d.trades.k]) > 0.00000200) {
+                        if (parseFloat(bestBid[d3d.trades.k]) >= (d3d.trades.sell1 * 1.01) && parseFloat(bestAsk[d3d.trades.k]) > 0.00000200) {
                             //////////console.log(d3d.trades.last);
 							//////////console.log(d3d.trades);
 							d3d.trades.sold1 = true;
@@ -2179,7 +2178,7 @@ godobuy = false;
                         }
 						}
                         if (d3d.trades.sell2) {
-                            if (parseFloat(bestBid[d3d.trades.k]) >= d3d.trades.sell2 && d3d.trades.sold2 == false && parseFloat(bestAsk[d3d.trades.k]) > 0.00000200 ){
+                            if (parseFloat(bestBid[d3d.trades.k]) >= (d3d.trades.sell2 * 1.01) && d3d.trades.sold2 == false && parseFloat(bestAsk[d3d.trades.k]) > 0.00000200 ){
 							//////////console.log(d3d.trades.last);
 							//////////console.log(d3d.trades);
 							d3d.trades.sold2 = true;
