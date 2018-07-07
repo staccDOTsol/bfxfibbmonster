@@ -10,9 +10,9 @@ let poloniex
 				var bestBid = []
 				const bfx = require('./bfx.js')
 let bitfinexapi = new ccxt.bitfinex ({
-        apiKey: 'dF16tezPk2yu5UmkoYXK9VyBLfdrdYeklj39xb27dsW',
-        secret: process.env.bkey2,
-    })
+		apiKey: process.env.bapi,
+		secret: process.env.bkey2,
+	})
 
 const ws = bfx.ws(2, {
 	apiKey:process.env.bapi, apiSecret: process.env.bkey,
@@ -32,22 +32,22 @@ var keys = []
 var keys2 = []
 ws.on('open', () => {
   ws.auth()
-    console.log('open')
+	console.log('open')
 	rest.calcAvailableBalance('tBTCUSD', 1, 0.090072, 'MARGIN').then(balances => {
 	////console.log(balances[0]);
 	})
-    rest.symbols().then(symbols => {
-        for (var s in symbols) {
-            //console.log('t' + symbols[s].toUpperCase());
+	rest.symbols().then(symbols => {
+		for (var s in symbols) {
+			//console.log('t' + symbols[s].toUpperCase());
 			if ( symbols[s].toUpperCase().slice(-3) == "ETH" ||  symbols[s].toUpperCase().slice(-3) == "BTC" ||  symbols[s].toUpperCase().slice(-3) == "USD"){
-            keys.push('trade:1m:t' + symbols[s].toUpperCase());
+			keys.push('trade:1m:t' + symbols[s].toUpperCase());
 			keys2.push('t' + symbols[s].toUpperCase());
 			subs('t' + symbols[s].toUpperCase(), symbols.length);
 			
 			
 	
 			}
-        }
+		}
 		ws.subscribeTicker("tETHUSD");
 		tickerticker("tETHUSD");
 		for (var k in keys) {
@@ -56,36 +56,36 @@ ws.on('open', () => {
 			tickerticker(keys2[k]);
 			
 		}
-        for (var k in keys) {
+		for (var k in keys) {
 			
-            //////console.log(keys[k]);
+			//////console.log(keys[k]);
 			lpa[keys[k]] = null 
 			lpb[keys[k]] = null 
 			prevTS[keys[k]] = null
-        }
+		}
 		
 		//prod
 		setTimeout(function(){
 		dbo.listCollections().toArray(function(err, collInfos) {
-        // collInfos is an array of collection info objects that look like:
-        // { name: 'test', options: {} }
-        for (col in collInfos) {
+		// collInfos is an array of collection info objects that look like:
+		// { name: 'test', options: {} }
+		for (col in collInfos) {
 
-            dbs.push(collInfos[col].name);
-            collections.push(dbo.collection(collInfos[col].name));
-        }
-        //////////console.log(dbs);
+			dbs.push(collInfos[col].name);
+			collections.push(dbo.collection(collInfos[col].name));
+		}
+		//////////console.log(dbs);
 		for (var c in collections){
 			var collection = collections[c];
-                collection.find({
+				collection.find({
 
-                }, {
-                    $exists: true
-                }).sort({
-                    _id: -1
+				}, {
+					$exists: true
+				}).sort({
+					_id: -1
 
-                }).toArray(function(err, doc3) {
-        //////////console.log(dbs);
+				}).toArray(function(err, doc3) {
+		//////////console.log(dbs);
 		ws.subscribeTicker("tETHUSD");
 		tickerticker("tETHUSD");
 		for (var d in doc3){
@@ -103,16 +103,16 @@ ws.on('open', () => {
 		});
 	
 	}, 2000);
-    }).catch(err => {
-        
-    })
+	}).catch(err => {
+		
+	})
 })
 
 function subs(ss, count){
 	if ((activeOrders[ss] <= 1) && count <= 3){
 	setTimeout(function(){
 		
-            ws.subscribeTicker( ss) //'trade:1m:' + 
+			ws.subscribeTicker( ss) //'trade:1m:' + 
 			tickerticker(ss);
 			//subs(ss, count + 1);
 }, Math.random() * 2000 * 40); 
@@ -211,7 +211,7 @@ ws.onTicker({ symbol: k }, (ticker) => {
 									winners[k].sl = lesser[1] * 0.01; //.93
 									
 								}
-								    
+									
 								winners[k].bought1 = false;
 								winners[k].bought2 = false;
 								winners[k].sold1 = false;
@@ -293,10 +293,10 @@ async function oo(){
 			if (p[3] / bestAsk[string] < 0.94){
 			cancelOrders.push(string);
    const o2 = new Order({
-    cid: Date.now(),
-    symbol: string,
-    amount: (-1 * p[2]),
-    type: Order.type.MARKET
+	cid: Date.now(),
+	symbol: string,
+	amount: (-1 * p[2]),
+	type: Order.type.MARKET
   }, ws)
 
   let closed2 = false
@@ -308,34 +308,34 @@ o2.on('error', () => {
 	console.log('error');
 });
   o2.on('update', () => {
-    console.log('order updated: %j', o2.serialize())
+	console.log('order updated: %j', o2.serialize())
   })
 
   o2.on('close', () => {
 	  
-    console.log('order closed: %s', o2.status)
+	console.log('order closed: %s', o2.status)
 	activeOrders[string] = activeOrders[string] - 1
 	////console.log(activeOrders);
 var collection = dbo.collection(string);
 		collection.find({
 
-                }, {
-                    $exists: true
-                }).sort({
-                    _id: -1
+				}, {
+					$exists: true
+				}).sort({
+					_id: -1
 
-                }).toArray(function(err, doc3) {
-                    for (var d in doc3) {
+				}).toArray(function(err, doc3) {
+					for (var d in doc3) {
 						if (doc3[d].trades){
 							doc3[d].trades.buyorder2 = 0;
 							doc3[d].trades.bought2 = false;
 							
 	 collection.update({
 	},{
-                            $set: {
-                                'trades': doc3[d].trades
-                            }
-                        }, {
+							$set: {
+								'trades': doc3[d].trades
+							}
+						}, {
 		
 	},
 	function(err, result) {
@@ -344,7 +344,7 @@ var collection = dbo.collection(string);
 	}
 					}
 					});
-    closed2 = true
+	closed2 = true
   })
 
   console.log('submitting order %d', o2.cid)
@@ -354,13 +354,13 @@ var collection = dbo.collection(string);
 	var collection = dbo.collection(string);
 		collection.find({
 
-                }, {
-                    $exists: true
-                }).sort({
-                    _id: -1
+				}, {
+					$exists: true
+				}).sort({
+					_id: -1
 
-                }).toArray(function(err, doc3) {
-                    for (var d in doc3) {
+				}).toArray(function(err, doc3) {
+					for (var d in doc3) {
 						if (doc3[d].trades){
 							doc3[d].trades.buyorder2 = 0;
 							doc3[d].trades.buyorder1 = 0;
@@ -369,10 +369,10 @@ var collection = dbo.collection(string);
 							
 	 collection.update({
 	},{
-                            $set: {
-                                'trades': doc3[d].trades
-                            }
-                        }, {
+							$set: {
+								'trades': doc3[d].trades
+							}
+						}, {
 		
 	},
 	function(err, result) {
@@ -390,10 +390,10 @@ var collection = dbo.collection(string);
 		cancelOrders.push(string);
 				
    const o2 = new Order({
-    cid: Date.now(),
-    symbol: string,
-    amount: (-1 * p[2]),
-    type: Order.type.MARKET
+	cid: Date.now(),
+	symbol: string,
+	amount: (-1 * p[2]),
+	type: Order.type.MARKET
   }, ws)
 
   let closed2 = false
@@ -405,34 +405,34 @@ o2.on('error', () => {
 	console.log('error');
 });
   o2.on('update', () => {
-    console.log('order updated: %j', o2.serialize())
+	console.log('order updated: %j', o2.serialize())
   })
 
   o2.on('close', () => {
 	  
-    console.log('order closed: %s', o2.status)
+	console.log('order closed: %s', o2.status)
 	activeOrders[string] = activeOrders[string] - 1
 	////console.log(activeOrders);
 var collection = dbo.collection(string);
 		collection.find({
 
-                }, {
-                    $exists: true
-                }).sort({
-                    _id: -1
+				}, {
+					$exists: true
+				}).sort({
+					_id: -1
 
-                }).toArray(function(err, doc3) {
-                    for (var d in doc3) {
+				}).toArray(function(err, doc3) {
+					for (var d in doc3) {
 						if (doc3[d].trades){
 							doc3[d].trades.buyorder2 = 0;
 							doc3[d].trades.bought2 = false;
 							
 	 collection.update({
 	},{
-                            $set: {
-                                'trades': doc3[d].trades
-                            }
-                        }, {
+							$set: {
+								'trades': doc3[d].trades
+							}
+						}, {
 		
 	},
 	function(err, result) {
@@ -442,7 +442,7 @@ var collection = dbo.collection(string);
 	}
 					}
 					});
-    closed2 = true
+	closed2 = true
   })
 
   console.log('submitting order %d', o2.cid)
@@ -452,13 +452,13 @@ var collection = dbo.collection(string);
 	var collection = dbo.collection(string);
 		collection.find({
 
-                }, {
-                    $exists: true
-                }).sort({
-                    _id: -1
+				}, {
+					$exists: true
+				}).sort({
+					_id: -1
 
-                }).toArray(function(err, doc3) {
-                    for (var d in doc3) {
+				}).toArray(function(err, doc3) {
+					for (var d in doc3) {
 						if (doc3[d].trades){
 							doc3[d].trades.buyorder2 = 0;
 							doc3[d].trades.buyorder1 = 0;
@@ -467,10 +467,10 @@ var collection = dbo.collection(string);
 							
 	 collection.update({
 	},{
-                            $set: {
-                                'trades': doc3[d].trades
-                            }
-                        }, {
+							$set: {
+								'trades': doc3[d].trades
+							}
+						}, {
 		
 	},
 	function(err, result) {
@@ -575,14 +575,14 @@ function buy(k, rate, rate2){ //rate2 for buy is higher
 		console.log('lala ' + lala);
 	*/
 		////console.log(amt);
-		    console.log('buyl price: ' + ((rate2)) + ' amount ' + amt);
+			console.log('buyl price: ' + ((rate2)) + ' amount ' + amt);
 
   const o = new Order({
-    cid: Date.now(),
-    symbol: k,
-    price: rate2,
-    amount: amt ,
-    type: Order.type.LIMIT
+	cid: Date.now(),
+	symbol: k,
+	price: rate2,
+	amount: amt ,
+	type: Order.type.LIMIT
   }, ws)
 
   let closed = false
@@ -596,7 +596,7 @@ o.on('error', () => {
   o.on('update', () => {
 	  								godobuy = true;
 
-    console.log('order updated: %j', o.serialize())
+	console.log('order updated: %j', o.serialize())
 	var os = 0;
 	os = o.serialize()[7]
 	if (o.serialize().toString().indexOf('EXECUTED') != -1 && o.serialize().toString().indexOf('PARTIALLY') == -1){
@@ -616,12 +616,12 @@ o.on('error', () => {
 	var ran = ((Math.random() * 3) + 1)
   console.log('sell price: ' + ((rate * 0.009 * ran)) + ' amount ' + ((-1 * ( os / 2 ))));
    const o3 = new Order({
-    cid: Date.now(),
-    symbol: k,
-    price_trailing: (rate * 0.009 * ran),
-    price: (rate * 0.009 * ran),
-    amount: (-1 * ( os / 2 )),
-    type: Order.type['TRAILING STOP']
+	cid: Date.now(),
+	symbol: k,
+	price_trailing: (rate * 0.009 * ran),
+	price: (rate * 0.009 * ran),
+	amount: (-1 * ( os / 2 )),
+	type: Order.type['TRAILING STOP']
   }, ws)
 
   let closed3 = false
@@ -633,30 +633,30 @@ o3.on('error', () => {
 	console.log('error');
 });
   o3.on('update', () => {
-    console.log('order updated: %j', o3.serialize())
+	console.log('order updated: %j', o3.serialize())
   })
 
   o3.on('close', () => {
 	  
-    console.log('order closed: %s', o3.status)
+	console.log('order closed: %s', o3.status)
 	////console.log(activeOrders);
 					
-    closed3 = true
+	closed3 = true
 	})
 
   console.log('submitting order %d', o3.cid)
 
   o3.submit().then(() => {
-	     console.log('got submit confirmation for order %d [%d]', o3.cid, o3.id)
+		 console.log('got submit confirmation for order %d [%d]', o3.cid, o3.id)
 
   });
    const o2 = new Order({
-    cid: Date.now(),
-    symbol: k,
-    price: (rate),
-    amount: (-1 * ( os / 2 )),
-    type: Order.type.LIMIT,
-    priceAuxLimit: rate2 * 1.07
+	cid: Date.now(),
+	symbol: k,
+	price: (rate),
+	amount: (-1 * ( os / 2 )),
+	type: Order.type.LIMIT,
+	priceAuxLimit: rate2 * 1.07
   }, ws)
 
   let closed2 = false
@@ -668,34 +668,34 @@ o2.on('error', () => {
 	console.log('error');
 });
   o2.on('update', () => {
-    console.log('order updated: %j', o2.serialize())
+	console.log('order updated: %j', o2.serialize())
   })
 
   o2.on('close', () => {
 	  
-    console.log('order closed: %s', o2.status)
+	console.log('order closed: %s', o2.status)
 	activeOrders[k] = activeOrders[k] - 1
 	////console.log(activeOrders);
 var collection = dbo.collection(k);
 		collection.find({
 
-                }, {
-                    $exists: true
-                }).sort({
-                    _id: -1
+				}, {
+					$exists: true
+				}).sort({
+					_id: -1
 
-                }).toArray(function(err, doc3) {
-                    for (var d in doc3) {
+				}).toArray(function(err, doc3) {
+					for (var d in doc3) {
 						if (doc3[d].trades){
 							doc3[d].trades.buyorder2 = 0;
 							doc3[d].trades.bought2 = false;
 							
 	 collection.update({
 	},{
-                            $set: {
-                                'trades': doc3[d].trades
-                            }
-                        }, {
+							$set: {
+								'trades': doc3[d].trades
+							}
+						}, {
 		
 	},
 	function(err, result) {
@@ -704,7 +704,7 @@ var collection = dbo.collection(k);
 	}
 					}
 					});
-    closed2 = true
+	closed2 = true
   })
 
   console.log('submitting order %d', o2.cid)
@@ -714,22 +714,22 @@ var collection = dbo.collection(k);
 	var collection = dbo.collection(k);
 		collection.find({
 
-                }, {
-                    $exists: true
-                }).sort({
-                    _id: -1
+				}, {
+					$exists: true
+				}).sort({
+					_id: -1
 
-                }).toArray(function(err, doc3) {
-                    for (var d in doc3) {
+				}).toArray(function(err, doc3) {
+					for (var d in doc3) {
 						if (doc3[d].trades){
 							doc3[d].trades.buyorder2 = o2.id;
 							
 	 collection.update({
 	},{
-                            $set: {
-                                'trades': doc3[d].trades
-                            }
-                        }, {
+							$set: {
+								'trades': doc3[d].trades
+							}
+						}, {
 		
 	},
 	function(err, result) {
@@ -746,23 +746,23 @@ var collection = dbo.collection(k);
 	  var collection = dbo.collection(k);
 		collection.find({
 
-                }, {
-                    $exists: true
-                }).sort({
-                    _id: -1
+				}, {
+					$exists: true
+				}).sort({
+					_id: -1
 
-                }).toArray(function(err, doc3) {
-                    for (var d in doc3) {
+				}).toArray(function(err, doc3) {
+					for (var d in doc3) {
 						if (doc3[d].trades){
 							doc3[d].trades.buyorder1 = 0;
 							doc3[d].trades.bought1 = false;
 							
 	 collection.update({
 	},{
-                            $set: {
-                                'trades': doc3[d].trades
-                            }
-                        }, {
+							$set: {
+								'trades': doc3[d].trades
+							}
+						}, {
 		
 	},
 	function(err, result) {
@@ -771,33 +771,33 @@ var collection = dbo.collection(k);
 	}
 					}
 					});
-    console.log('order closed: %s', o.status)
-    closed = true
+	console.log('order closed: %s', o.status)
+	closed = true
   })
 
   console.log('submitting order %d', o.cid)
 
   o.submit().then(() => {
-    console.log('got submit confirmation for order %d [%d]', o.cid, o.id)
+	console.log('got submit confirmation for order %d [%d]', o.cid, o.id)
 	var collection = dbo.collection(k);
 		collection.find({
 
-                }, {
-                    $exists: true
-                }).sort({
-                    _id: -1
+				}, {
+					$exists: true
+				}).sort({
+					_id: -1
 
-                }).toArray(function(err, doc3) {
-                    for (var d in doc3) {
+				}).toArray(function(err, doc3) {
+					for (var d in doc3) {
 						if (doc3[d].trades){
 							doc3[d].trades.buyorder1 = o.id;
 							
 	 collection.update({
 	},{
-                            $set: {
-                                'trades': doc3[d].trades
-                            }
-                        }, {
+							$set: {
+								'trades': doc3[d].trades
+							}
+						}, {
 		
 	},
 	function(err, result) {
@@ -807,7 +807,7 @@ var collection = dbo.collection(k);
 					}
 					});
   });	
-    });
+	});
 	}
 	}catch(err){}
 	}, Math.random() * 5000);
@@ -847,11 +847,11 @@ rest.calcAvailableBalance(k, 1, rate, 'MARGIN').then(balances => {
 	//console.log(k);
   console.log('sell price: ' + (rate) + ' amount ' + (-1 * amt * (1 / rate)));
   const o = new Order({
-    cid: Date.now(),
-    symbol: k,
-    price: rate,
-    amount: -1 * amt,
-    type: Order.type.LIMIT
+	cid: Date.now(),
+	symbol: k,
+	price: rate,
+	amount: -1 * amt,
+	type: Order.type.LIMIT
   }, ws)
 
   let closed = false
@@ -862,7 +862,7 @@ o.on('error', () => {
 	console.log('error');
 });
   o.on('update', () => {
-    console.log('order updated: %j', o.serialize())
+	console.log('order updated: %j', o.serialize())
 									godosell = true;
 
 	var os2 = 0;
@@ -882,12 +882,12 @@ o.on('error', () => {
 	var ran = ((Math.random() * 3) + 1)
   console.log('buyl price: ' + (rate2 * 0.009 * ran) + ' amount ' + ((-1 * ( os2 / 2 ))));
    const o3 = new Order({
-    cid: Date.now(),
-    symbol: k,
-    price_trailing: (rate2 * 0.009 * ran),
+	cid: Date.now(),
+	symbol: k,
+	price_trailing: (rate2 * 0.009 * ran),
 	price: (rate2 * 0.009 * ran),
-    amount: (-1 * ( os2 / 2 )),
-    type: Order.type['TRAILING STOP']
+	amount: (-1 * ( os2 / 2 )),
+	type: Order.type['TRAILING STOP']
   }, ws)
 
   let closed3 = false
@@ -899,30 +899,30 @@ o3.on('error', () => {
 	console.log('error');
 });
   o3.on('update', () => {
-    console.log('order updated: %j', o3.serialize())
+	console.log('order updated: %j', o3.serialize())
   })
 
   o3.on('close', () => {
 	  
-    console.log('order closed: %s', o3.status)
+	console.log('order closed: %s', o3.status)
 	////console.log(activeOrders);
 					
-    closed3 = true
+	closed3 = true
 	})
 
   console.log('submitting order %d', o3.cid)
 
   o3.submit().then(() => {
-	     console.log('got submit confirmation for order %d [%d]', o3.cid, o3.id)
+		 console.log('got submit confirmation for order %d [%d]', o3.cid, o3.id)
 
   });
   console.log('buyl price: ' + (rate2) + ' amount ' + ((-1 * ( os2 / 2 ))));
    const o2 = new Order({
-    cid: Date.now(),
-    symbol: k,
-    price: rate2,
-    amount: (-1 * ( os2 / 2 )),
-    type: Order.type.LIMIT,
+	cid: Date.now(),
+	symbol: k,
+	price: rate2,
+	amount: (-1 * ( os2 / 2 )),
+	type: Order.type.LIMIT,
 	priceAuxLimit: rate * .98
 
   }, ws)
@@ -936,31 +936,31 @@ o2.on('error', () => {
 	console.log('error');
 });
   o2.on('update', () => {
-    console.log('order updated: %j', o2.serialize())
+	console.log('order updated: %j', o2.serialize())
   })
 
   o2.on('close', () => {
-    console.log('order closed: %s', o2.status)
+	console.log('order closed: %s', o2.status)
 	var collection = dbo.collection(k);
 		collection.find({
 
-                }, {
-                    $exists: true
-                }).sort({
-                    _id: -1
+				}, {
+					$exists: true
+				}).sort({
+					_id: -1
 
-                }).toArray(function(err, doc3) {
-                    for (var d in doc3) {
+				}).toArray(function(err, doc3) {
+					for (var d in doc3) {
 						if (doc3[d].trades){
 							doc3[d].trades.sellorder2 = 0;
 							doc3[d].trades.sold2 = false;
 							
 	 collection.update({
 	},{
-                            $set: {
-                                'trades': doc3[d].trades
-                            }
-                        }, {
+							$set: {
+								'trades': doc3[d].trades
+							}
+						}, {
 		
 	},
 	function(err, result) {
@@ -971,7 +971,7 @@ o2.on('error', () => {
 					});
 	activeOrders[k] = activeOrders[k] - 1
 	////console.log(activeOrders);
-    closed2 = true
+	closed2 = true
   })
 
   console.log('submitting order %d', o2.cid)
@@ -981,22 +981,22 @@ o2.on('error', () => {
 	var collection = dbo.collection(k);
 		collection.find({
 
-                }, {
-                    $exists: true
-                }).sort({
-                    _id: -1
+				}, {
+					$exists: true
+				}).sort({
+					_id: -1
 
-                }).toArray(function(err, doc3) {
-                    for (var d in doc3) {
+				}).toArray(function(err, doc3) {
+					for (var d in doc3) {
 						if (doc3[d].trades){
 							doc3[d].trades.sellorder2 = o2.id;
 							
 	 collection.update({
 	},{
-                            $set: {
-                                'trades': doc3[d].trades
-                            }
-                        }, {
+							$set: {
+								'trades': doc3[d].trades
+							}
+						}, {
 		
 	},
 	function(err, result) {
@@ -1010,28 +1010,28 @@ o2.on('error', () => {
   })
 
   o.on('close', () => {
-    console.log('order closed: %s', o.status)
-    closed = true
+	console.log('order closed: %s', o.status)
+	closed = true
 	var collection = dbo.collection(k);
 		collection.find({
 
-                }, {
-                    $exists: true
-                }).sort({
-                    _id: -1
+				}, {
+					$exists: true
+				}).sort({
+					_id: -1
 
-                }).toArray(function(err, doc3) {
-                    for (var d in doc3) {
+				}).toArray(function(err, doc3) {
+					for (var d in doc3) {
 						if (doc3[d].trades){
 							doc3[d].trades.sold1 = false;
 							doc3[d].trades.sellorder1 = 0;
 							
 	 collection.update({
 	},{
-                            $set: {
-                                'trades': doc3[d].trades
-                            }
-                        }, {
+							$set: {
+								'trades': doc3[d].trades
+							}
+						}, {
 		
 	},
 	function(err, result) {
@@ -1045,26 +1045,26 @@ o2.on('error', () => {
   console.log('submitting order %d', o.cid)
 
   o.submit().then(() => {
-    console.log('got submit confirmation for order %d [%d]', o.cid, o.id)
+	console.log('got submit confirmation for order %d [%d]', o.cid, o.id)
 	var collection = dbo.collection(k);
 		collection.find({
 
-                }, {
-                    $exists: true
-                }).sort({
-                    _id: -1
+				}, {
+					$exists: true
+				}).sort({
+					_id: -1
 
-                }).toArray(function(err, doc3) {
-                    for (var d in doc3) {
+				}).toArray(function(err, doc3) {
+					for (var d in doc3) {
 						if (doc3[d].trades){
 							doc3[d].trades.sellorder1 = o.id;
 							
 	 collection.update({
 	},{
-                            $set: {
-                                'trades': doc3[d].trades
-                            }
-                        }, {
+							$set: {
+								'trades': doc3[d].trades
+							}
+						}, {
 		
 	},
 	function(err, result) {
@@ -1086,7 +1086,7 @@ var btcs = []
 var prevTS = []
 var eths = []
 
-        
+		
 					var volTot = 0;
 					var volKs= [];
 	var activeOrders = []
@@ -1152,7 +1152,7 @@ app.use(bodyParser.json()); // to support JSON-encoded bodies
 var sList = []
 var gobuy = [];
 app.use(bodyParser.urlencoded({ // to support URL-encoded bodies
-    extended: true
+	extended: true
 }));
 
 		var stoplimits = []
@@ -1241,26 +1241,26 @@ async function doget(req, res){
 			//console.log('activeOrders');
 			//console.log(activeOrders);
 	dbo.listCollections().toArray(function(err, collInfos) {
-        // collInfos is an array of collection info objects that look like:
-        // { name: 'test', options: {} }
-        for (col in collInfos) {
+		// collInfos is an array of collection info objects that look like:
+		// { name: 'test', options: {} }
+		for (col in collInfos) {
 
-            dbs.push(collInfos[col].name);
-            collections.push(dbo.collection(collInfos[col].name));
-        }
-        //////////console.log(dbs);				
+			dbs.push(collInfos[col].name);
+			collections.push(dbo.collection(collInfos[col].name));
+		}
+		//////////console.log(dbs);				
 		////console.log(tickers);
 
 		for (var c in collections){
 			var collection = collections[c];
-                collection.find({
+				collection.find({
 
-                }, {
-                    $exists: true
-                }).sort({
-                    _id: -1
+				}, {
+					$exists: true
+				}).sort({
+					_id: -1
 
-                }).toArray(async function(err, doc3) {
+				}).toArray(async function(err, doc3) {
 					for (var d in doc3){
 						
 					//	////////console.log(doc3[d])
@@ -1804,7 +1804,7 @@ app.get('/', function(req, res) {
 	}
 });
 
-            app.listen(process.env.PORT || 8080, function() {});
+			app.listen(process.env.PORT || 8080, function() {});
 						////console.log('2');
 //poloniex.subscribe('BTC_ETC');
  var vols = [];
@@ -1820,13 +1820,13 @@ app.get('/', function(req, res) {
 
 		collection.find({
 
-                }, {
-                    $exists: true
-                }).sort({
-                    _id: -1
+				}, {
+					$exists: true
+				}).sort({
+					_id: -1
 
-                }).toArray(function(err, doc3) {
-                    for (var d in doc3) {
+				}).toArray(function(err, doc3) {
+					for (var d in doc3) {
 						if (doc3[d].trades){
 							doc3[d].trades.buy1 = wp.buy1;
 							doc3[d].trades.buy2 = wp.buy2;
@@ -1835,10 +1835,10 @@ app.get('/', function(req, res) {
 							
 	 collection.update({
 	},{
-                            $set: {
-                                'trades': doc3[d].trades
-                            }
-                        }, {
+							$set: {
+								'trades': doc3[d].trades
+							}
+						}, {
 		
 	},
 	function(err, result) {
@@ -1855,12 +1855,12 @@ app.get('/', function(req, res) {
 	
 			collection.find({
 
-                }, {
-                    $exists: true
-                }).sort({
-                    _id: -1
+				}, {
+					$exists: true
+				}).sort({
+					_id: -1
 
-                }).toArray(function(err, doc3) {
+				}).toArray(function(err, doc3) {
 					console.log(err);
 					if (doc3 != undefined){
 					if (doc3.length == 0){
@@ -1902,23 +1902,23 @@ var collections = []
 setTimeout(function(){
 MongoClient.connect(process.env.mongodb || mongodb, function(err, db) {
 	
-    var dbo = db.db(process.env.thedatabase)
+	var dbo = db.db(process.env.thedatabase)
 	var count = 0;
-    dbo.listCollections().toArray(function(err, collInfos) {
-        // collInfos is an array of collection info objects that look like:
-        // { name: 'test', options: {} }
-        for (col in collInfos) {
+	dbo.listCollections().toArray(function(err, collInfos) {
+		// collInfos is an array of collection info objects that look like:
+		// { name: 'test', options: {} }
+		for (col in collInfos) {
 
-            dbs.push(collInfos[col].name);
-            collections.push(dbo.collection(collInfos[col].name));
-        }
-        //////////console.log(dbs);
+			dbs.push(collInfos[col].name);
+			collections.push(dbo.collection(collInfos[col].name));
+		}
+		//////////console.log(dbs);
 						////////////console.log('settimeout');
 						doCollections(collections);
-                setInterval(function() {
-                    doCollections(collections);
-                }, 25500);
-    });
+				setInterval(function() {
+					doCollections(collections);
+				}, 25500);
+	});
 });
 }, 10000);
 
@@ -1927,20 +1927,20 @@ function doCollections(collections, balances){
 							
 						//////console.log('8'); 
 			
-    
+	
 			
-            //////////console.log(balances.BTC);
+			//////////console.log(balances.BTC);
 			
 			var count = 0;
 							
-            for (var c in collections) {
-                var collection = collections[c];
-                collectionDo(collection);
+			for (var c in collections) {
+				var collection = collections[c];
+				collectionDo(collection);
 
 
 
 							}
-        
+		
 }
 var godobuy = false;
 var godosell = false;
@@ -1950,14 +1950,14 @@ async function collectionDo(collection){
 
 	collection.find({
 
-                }, {
-                    $exists: true
-                }).sort({
-                    _id: -1
+				}, {
+					$exists: true
+				}).sort({
+					_id: -1
 
-                }).toArray(function(err, doc3) {
+				}).toArray(function(err, doc3) {
 
-                    for (var d in doc3) {
+					for (var d in doc3) {
 						if (doc3[d].trades){
 							 var d3d = doc3[d];
 					var ts = Math.round(new Date().getTime() / 1000) - 1000;
@@ -2096,8 +2096,8 @@ async function collectionDo(collection){
 							
 						if (d3d.trades.bought1 == false){
 							
-                        if (parseFloat(bestAsk[d3d.trades.k]) <= (d3d.trades.buy1 * .99) && parseFloat(bestAsk[d3d.trades.k]) > 0.00000200)	 {
-                            //////////console.log(d3d.trades.last);
+						if (parseFloat(bestAsk[d3d.trades.k]) <= (d3d.trades.buy1 * .99) && parseFloat(bestAsk[d3d.trades.k]) > 0.00000200)	 {
+							//////////console.log(d3d.trades.last);
 							//////////console.log(d3d.trades);
 							d3d.trades.bought1 = true;
 							if (godobuy == true){
@@ -2119,10 +2119,10 @@ async function collectionDo(collection){
 								});
 							buy(d3d.trades.k, d3d.trades.sell1, d3d.trades.buy1);
 							}
-                        }
 						}
-                        if (d3d.trades.buy2) {
-                            if (parseFloat(bestAsk[d3d.trades.k])<= (d3d.trades.buy2 * .99) && d3d.trades.bought2 == false && parseFloat(bestAsk[d3d.trades.k]) > 0.00000200) {
+						}
+						if (d3d.trades.buy2) {
+							if (parseFloat(bestAsk[d3d.trades.k])<= (d3d.trades.buy2 * .99) && d3d.trades.bought2 == false && parseFloat(bestAsk[d3d.trades.k]) > 0.00000200) {
 							//////////console.log(d3d.trades.last);
 							//////////console.log(d3d.trades);
 							d3d.trades.bought2 = true;
@@ -2142,9 +2142,9 @@ godobuy = false;
 								});
 							console.log('dobuy2:');
 							buy(d3d.trades.k, d3d.trades.buy2, d3d.trades.buy1);
-                            }
 							}
-                        }
+							}
+						}
 						if (d3d.trades.k == 'tSNTUSD'){
 						//console.log(d3d.trades.k);
 						//console.log(d3d.trades.sold1);
@@ -2152,8 +2152,8 @@ godobuy = false;
 						//console.log(d3d.trades.sell1);
 						}
 						if (d3d.trades.sold1 == false){
-                        if (parseFloat(bestBid[d3d.trades.k]) >= (d3d.trades.sell1 * 1.01) && parseFloat(bestAsk[d3d.trades.k]) > 0.00000200) {
-                            //////////console.log(d3d.trades.last);
+						if (parseFloat(bestBid[d3d.trades.k]) >= (d3d.trades.sell1 * 1.01) && parseFloat(bestAsk[d3d.trades.k]) > 0.00000200) {
+							//////////console.log(d3d.trades.last);
 							//////////console.log(d3d.trades);
 							d3d.trades.sold1 = true;
 							if (godosell == true){
@@ -2175,10 +2175,10 @@ godobuy = false;
 								});
 						sell(d3d.trades.k, d3d.trades.sell1, d3d.trades.buy1);
 							}
-                        }
 						}
-                        if (d3d.trades.sell2) {
-                            if (parseFloat(bestBid[d3d.trades.k]) >= (d3d.trades.sell2 * 1.01) && d3d.trades.sold2 == false && parseFloat(bestAsk[d3d.trades.k]) > 0.00000200 ){
+						}
+						if (d3d.trades.sell2) {
+							if (parseFloat(bestBid[d3d.trades.k]) >= (d3d.trades.sell2 * 1.01) && d3d.trades.sold2 == false && parseFloat(bestAsk[d3d.trades.k]) > 0.00000200 ){
 							//////////console.log(d3d.trades.last);
 							//////////console.log(d3d.trades);
 							d3d.trades.sold2 = true;
@@ -2198,9 +2198,9 @@ godosell = false;
 								});
 							console.log('dosell2:');
 						sell(d3d.trades.k, d3d.trades.sell2, d3d.trades.sell1);
-                            }
 							}
-                        }
+							}
+						}
 						}
 						})
 					}
