@@ -5,7 +5,7 @@ let poloniex
 				var bestAsk = []
 
 				const ccxt = require ('ccxt');
-				var plstart = parseFloat(process.env.plstart);
+				
 
 				var bestBid = []
 				const bfx = require('./bfx.js')
@@ -1578,7 +1578,7 @@ if ((activeOrders[doc3[d].trades.k] <= 1)&&  tickers.includes('trade:1m:' + doc3
 				});
 		}
 	setTimeout(async function(){
-							
+							var plstart = parseFloat(process.env.plstart);
 							//console.log(totals);
 						////console.log('1');
 							////console.log(balances[0]);
