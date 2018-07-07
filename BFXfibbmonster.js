@@ -2106,7 +2106,7 @@ async function collectionDo(collection){
 							
 						if (d3d.trades.bought1 == false){
 							
-						if (parseFloat(bestAsk[d3d.trades.k]) <= (d3d.trades.buy1 * .99) && parseFloat(bestAsk[d3d.trades.k]) > 0.00000200)	 {
+						if (parseFloat(bestAsk[d3d.trades.k]) <= (d3d.trades.buy1 * 1.005) && parseFloat(bestAsk[d3d.trades.k]) > 0.00000200)	 {
 							//////////console.log(d3d.trades.last);
 							//////////console.log(d3d.trades);
 							d3d.trades.bought1 = true;
@@ -2132,7 +2132,7 @@ async function collectionDo(collection){
 						}
 						}
 						if (d3d.trades.buy2) {
-							if (parseFloat(bestAsk[d3d.trades.k])<= (d3d.trades.buy2 * .99) && d3d.trades.bought2 == false && parseFloat(bestAsk[d3d.trades.k]) > 0.00000200) {
+							if (parseFloat(bestAsk[d3d.trades.k])<= (d3d.trades.buy2 * 1.005) && d3d.trades.bought2 == false && parseFloat(bestAsk[d3d.trades.k]) > 0.00000200) {
 							//////////console.log(d3d.trades.last);
 							//////////console.log(d3d.trades);
 							d3d.trades.bought2 = true;
@@ -2162,7 +2162,7 @@ godobuy = false;
 						//console.log(d3d.trades.sell1);
 						}
 						if (d3d.trades.sold1 == false){
-						if (parseFloat(bestBid[d3d.trades.k]) >= (d3d.trades.sell1 * 1.01) && parseFloat(bestAsk[d3d.trades.k]) > 0.00000200) {
+						if (parseFloat(bestBid[d3d.trades.k]) >= (d3d.trades.sell1 * 0.995) && parseFloat(bestAsk[d3d.trades.k]) > 0.00000200) {
 							//////////console.log(d3d.trades.last);
 							//////////console.log(d3d.trades);
 							d3d.trades.sold1 = true;
@@ -2188,7 +2188,7 @@ godobuy = false;
 						}
 						}
 						if (d3d.trades.sell2) {
-							if (parseFloat(bestBid[d3d.trades.k]) >= (d3d.trades.sell2 * 1.01) && d3d.trades.sold2 == false && parseFloat(bestAsk[d3d.trades.k]) > 0.00000200 ){
+							if (parseFloat(bestBid[d3d.trades.k]) >= (d3d.trades.sell2 * 0.995) && d3d.trades.sold2 == false && parseFloat(bestAsk[d3d.trades.k]) > 0.00000200 ){
 							//////////console.log(d3d.trades.last);
 							//////////console.log(d3d.trades);
 							d3d.trades.sold2 = true;
