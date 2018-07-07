@@ -26,6 +26,7 @@ const { CancelOrder }  = require('./node_modules/bitfinex-api-node/lib/models')
 var startDate = new Date();
 const CANDLE_KEY = 'trade:1m:tBTCUSD'
 console.log('bapi: ' + process.env.bapi);
+var btcusd = process.env.btcusd;
 const rest = bfx.rest(2, {
 apiKey: process.env.bapi, apiSecret: process.env.bkey});
 var keys = []
