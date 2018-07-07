@@ -5,12 +5,12 @@ let poloniex
 				var bestAsk = []
 
 				const ccxt = require ('ccxt');
-				var plstart = -0.15178285;
+				var plstart = 0;
 
 				var bestBid = []
 				const bfx = require('./bfx.js')
-let bitfinexapi = new ccxt.ethfinex ({
-		apiKey: process.env.bapi,
+let bitfinexapi = new ccxt.bitfinex ({
+		apiKey: process.env.bapi2,
 		secret: process.env.bkey2,
 	})
 
@@ -1538,7 +1538,7 @@ if ((activeOrders[doc3[d].trades.k] <= 1)&&  tickers.includes('trade:1m:' + doc3
 									if (trades[d].symbol == "BCH/BTC"){
 										if (substrbch == true){
 											substrbch = false;
-											totals['BTC'][s].total = totals['BTC'][s].total - 0.004797753407399999;
+											//totals['BTC'][s].total = totals['BTC'][s].total - 0.004797753407399999;
 										}
 									}
 										}
@@ -1683,11 +1683,9 @@ string = "IOTA" + string;
 		thetotaleth = thetotaleth  * Math.pow(10, 18);
 		res.send('<head><link rel="icon" href="https://polofibbmonster.herokuapp.com/favicon.ico?v=2" /><meta http-equiv="refresh" content="120"><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script></head><h1>Don\'t Panic! If the data seems off, wait a minute or so.</h1>'
 		+ 'current time: ' + new Date()
-		+ '<br>BTC Balance: ' + btcbal + '<br>'
-		+ '<br>BCH Balance: ' + bchbal + '<br>'
 		+ 'minutes: ' + minutes + '<br>'
 		+ 'hours: ' + hours + '<br>'
-		+ '<h1>PL (since done with fake orders): ' + (PL - plstart) + '%</h1>'
+		+ '<h1>PL: ' + (PL - plstart) + '%</h1>'
 		+ '<h1>percent/hr: ' + percentHr + '%</h1>'
 		+ '<h2>usdt gains (usdt): ' + thetotalusdt + '</h2>'
 		+ '<h2>btc gains (btc only) (sats): ' + thetotalbtc + '</h2>'
