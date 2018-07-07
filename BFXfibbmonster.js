@@ -126,6 +126,7 @@ function tickerticker(k){
 	
 ws.onTicker({ symbol: k }, (ticker) => {
 	//console.log(ticker)
+
 	if (tickercount[k] == undefined){
 		tickercount[k] = 0;
 	}
@@ -133,32 +134,38 @@ ws.onTicker({ symbol: k }, (ticker) => {
 	if (k == 'tBTCUSD'){
 		//console.log(tickercount[k]);
 	}
-	if (btcusd != 0&& ethusd != 0){
+	if (btceth != 0 && ethusd != 0){
 		
 	if (k.slice(-3)== "USD"){
-						var amt = btcusd;
+						var amt = ethusd;
+						//console.log(amt);
 					if (!volKs.includes(k) && ((ticker.volume * ticker.ask) / amt)){						
 					volKs.push(k);
 						volTot += (ticker.volume * ticker.ask) / amt;
 					}
 					}
 					else if (k.slice(-3)== "ETH"){
-						var amt = ethusd;
+						var amt = 1;
+						//console.log(amt);
 					if (!volKs.includes(k) && ((ticker.volume * ticker.ask) / amt)){						
-	
+					//console.log(k)
 					volKs.push(k);
 						volTot += (ticker.volume * ticker.ask) / amt;
 					}
 					}
 					else if (k.slice(-3)== "BTC"){
-						var amt = 1;
+						var amt = btceth * ethusd;
+						//console.log(amt);
 					if (!volKs.includes(k) && ((ticker.volume * ticker.ask) / amt)){						
 
 					volKs.push(k);
 						volTot += (ticker.volume * ticker.ask) / amt;
 					}
 					}
+					//console.log(volTot);
+					
 					var avg = volTot / volKs.length;
+					//console.log(avg);
 					if ((ticker.volume * ticker.ask) / amt > (avg / 20)){
 						
 						if (!tickers.includes('trade:1m:' + k)){
@@ -190,6 +197,7 @@ ws.onTicker({ symbol: k }, (ticker) => {
 										greater.push(f[fibb]);
 									}
 							}
+							
 							winners[k] = {}
 							if ((greater.length >= 1 && lesser.length >= 1)){
 								
@@ -219,7 +227,7 @@ ws.onTicker({ symbol: k }, (ticker) => {
 								winners[k].k = k;
 								winners[k].currencyPair = k;
 								
-								
+								//console.log(winners[k]);
 								winners[k].cancelled = false;
 								collection.find({
 
@@ -228,7 +236,8 @@ ws.onTicker({ symbol: k }, (ticker) => {
 									_id: -1
 
 								}).toArray(function(err, doc3) {
-									if (!doc3){
+									console.log(doc3);
+									if (doc3.length == 0){
 									if (!winnas.includes(k)){
 										winnas.push(k);
 															
@@ -246,8 +255,9 @@ ws.onTicker({ symbol: k }, (ticker) => {
 								
 					}
 	} else {
-		if (k == "tBTCUSD"){
-			btcusd = ticker.ask;
+		if (k == "tETHBTC"){
+			console.log(ticker);
+			btceth = ticker.ask;
 		}
 		else if (k == "tETHUSD"){
 			ethusd = ticker.ask;
@@ -1081,7 +1091,7 @@ o2.on('error', () => {
 }
 var usds = []
 var ethusd = 0;
-var btcusd = 0;
+var btceth = 0;
 var btcs = []
 var prevTS = []
 var eths = []
