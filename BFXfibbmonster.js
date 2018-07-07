@@ -9,7 +9,7 @@ let poloniex
 
 				var bestBid = []
 				const bfx = require('./bfx.js')
-let bitfinexapi = new ccxt.bitfinex ({
+let bitfinexapi = new ccxt.ethfinex ({
 		apiKey: process.env.bapi2,
 		secret: process.env.bkey2,
 	})
