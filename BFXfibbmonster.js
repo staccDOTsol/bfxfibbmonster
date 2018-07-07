@@ -1681,17 +1681,16 @@ string = "IOTA" + string;
 		for (var t in totals['BTC']){
 			thetotalbtc+=totals['BTC'][t].total;
 		}
-		var totaltotal = thetotalbtc / btcusd;
+		var totaltotal = thetotalbtc * btcusd;
 		console.log(totaltotal);
 		totaltotal += thetotalusdt;
 		console.log(totaltotal);
 		
-		totaltotal += thetotaleth / ethusd;
+		totaltotal += thetotaleth * ethusd;
 		console.log(totaltotal);
 		totaltotal = totaltotal;
 		console.log(totaltotal);
 		
-		totaltotal = totaltotal * Math.pow(10, 8);
 		console.log(totaltotal);
 		if (gosend == true){
 			gosend = false;
