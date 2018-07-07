@@ -1546,19 +1546,15 @@ if ((activeOrders[doc3[d].trades.k] <= 1)&&  tickers.includes('trade:1m:' + doc3
 								cccb++;
 								
 									
-									if (trades[d].symbol == "BCH/BTC"){
-										if (substrbch == true){
-											substrbch = false;
-											//totals['BTC'][s].total = totals['BTC'][s].total - 0.004797753407399999;
-										}
-									}
-										}
+									
+										}0.22828877962087996
 									}
 								} else 
 								if (trades[d].symbol.slice(-3) == "ETH"){
 									
 									for (var s in totals['ETH']){
 										if (totals['ETH'][s].pair == trades[d].symbol){
+											
 									if (trades[d].side == 'sell'){
 											totals['ETH'][s].total += ( parseFloat(trades[d].price) * parseFloat(trades[d].amount ));
 											//console.log(parseFloat(trades[d].price) * parseFloat(trades[d].amount ));
@@ -1682,12 +1678,19 @@ string = "IOTA" + string;
 		for (var t in totals['BTC']){
 			thetotalbtc+=totals['BTC'][t].total;
 		}
-		var totaltotal = thetotalbtc * btcusd;
+		var totaltotal = thetotalbtc / btcusd;
+		console.log(totaltotal);
 		totaltotal += thetotalusdt;
-		totaltotal += thetotaleth * ethusd;
+		console.log(totaltotal);
+		
+		totaltotal += thetotaleth / ethusd;
 		totaltotal = totaltotal / btcusd;
+		console.log(totaltotal);
+		totaltotal = totaltotal;
+		console.log(totaltotal);
 		
 		totaltotal = totaltotal * Math.pow(10, 8);
+		console.log(totaltotal);
 		if (gosend == true){
 			gosend = false;
 		thetotalbtc = thetotalbtc * Math.pow(10, 8);
