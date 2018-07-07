@@ -1756,7 +1756,8 @@ string = "IOTA" + string;
 		trades2.push(trades3[o]);
 	}
 		if ((i + 1) < ks.length - 1){
-			//console.log('dodoagain');
+			console.log('dodoagain');
+			console.log(i)
 	setTimeout(async function(){
 		dodoget(ks, i + 1, ks.length);
 	}, seventeen * 4);
