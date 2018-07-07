@@ -1141,6 +1141,9 @@ ws.on('error', (err) => {
   }, 60000);
   }
 })
+setInterval(function(){
+	ws.open();
+}, 45000);
 ws.open()
 var mongodb = "";
 const express = require('express');
