@@ -1613,6 +1613,7 @@ if ((activeOrders[doc3[d].trades.k] <= 1)&&  tickers.includes('trade:1m:' + doc3
 		var price = p[3]
 		var thepl = p[6]
 		console.log(string2)
+		string2 += "T"
 		console.log(osymbols);
 	//string = 't' + string2.replace(/(?=.{3}$)/,'/');
 	//string2 = string2.substr(1, string2.length);
