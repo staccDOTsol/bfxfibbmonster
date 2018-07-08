@@ -4,6 +4,36 @@ The bot is currently set up to run on Ethfinex:
 
 https://www.ethfinex.com/?refcode=hfT8i73kyT
 
+Donations also welcome:
+
+0x3CE52a2a8c60fA944d2ff7ccDA563fe81d0D16F7 (Eth)
+
+If you wanted to fork this repo and replace these lines in BFX.js it'll work perfectly on Bitfinex, however they don't run a referral program so do consider a donation:
+
+ ws: {
+    url: "wss://api.ethfinex.com/ws/2",
+    agent
+  },
+
+  rest: {
+    url: "https://api.ethfinex.com",
+    agent
+  }
+  
+  with:
+  
+   ws: {
+    url: WS_URL,
+    agent
+  },
+
+  rest: {
+    url: REST_URL,
+    agent
+  }
+
+Pull requests also welcome :)
+
 Here's my first two ref signups:
 
 first guy:
@@ -13,6 +43,30 @@ https://dimas16ethfinexbot.herokuapp.com/
 2nd guy (coinbase withdrawal delayed):
 
 https://kwitzachethfinexbot.herokuapp.com/
+
+Yes, absolutely, for those concerned with the security of their API keys they can run their own bot on their own Node server.
+
+Step 1. sign up for Heroku (free)
+Step 2. Fork my bot repo https://github.com/DunnCreativeSS?tab=repositories bfxfibbmonster is the Ethfinex one, bitmexfibbmarginmonster for bitmex (which is largely untested).
+Step 3. get a MongoDb somewhere on the cloud (you can get one free from MongoDB Atlas)
+Step 4. in Heroku under Settings -> Reveal config vars, you'll want to set up your process.env. variables. 
+
+Note that you can git clone the code to your local machine, rather than run it in the cloud. You can also run mongod server on your local machine and use the environment variable $env:mongodb="mongodb://localhost:27017" In Windows powershell you can set environment variables for that session like:
+
+$env:thedatabase="thedb"
+
+These are:
+
+bapi: 1st Ethfinex api key
+bkey: 2nd Ethfinex api secret
+bapi2: 2nd Ethfinex api key
+bkey2: 2nd Ethfinex api secret
+btcusd: the value of btcusd, can update this daily, it's used only for the web app to show you your usd earnings and not for anything else in the script
+email: Your email for trade notifications. Be sure to whitelist jarettrsdunn@gmail.com in your email client.
+mnstart: your net USD worth of Eth/Tokens you deposit into Ethfinex. This is used to calculate your % winnings/losings on the site.
+mongodb: will look like this, you'll get it from your provider. If you do use Atlas remember to whitelist the 0.0.0.0/0 IPs. mongodb+srv://jare:<PASSWORD>@cluster0-8dygf.mongodb.net/test?retryWrites=true
+SENDGRID_API_KEY: you can use mine I'm unsure what the limit on emails are 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
+thedatabase: (any unique name)
 
 I built a bot first for Poloniex then for Bitfinex and it's as easy as switching 2 lines of code to get it to work on Ethfinex. Note that the attached backtests are for the bot running Ethfinex pairs on Bitfinex because the backtest suite didn't support Ethfinex out of the box.
 
