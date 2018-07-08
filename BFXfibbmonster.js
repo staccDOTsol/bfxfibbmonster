@@ -550,6 +550,21 @@ var collection = dbo.collection(string);
 }
 }
 ws.once('auth', () => {
+	
+ws.onOrderSnapshot({}, (orders) => {
+  if (orders.length === 0) {
+    console.log('no open orders')
+    return
+  }
+
+  console.log(`recv ${orders.length} open orders`)
+/*
+  ws.cancelOrders(orders).then(() => {
+    console.log('cancelled orders')
+  })*/
+})
+
+ws.open()
 	setTimeout(function(){
 	oo();
 	}, 10000);
@@ -1624,6 +1639,7 @@ if ((activeOrders[doc3[d].trades.k] <= 1)&&  tickers.includes('trade:1m:' + doc3
 		}
 		var amount = p[2]
 		poscounts[string2] = poscounts[string2] + parseFloat(amount);
+		
 		var price = p[3]
 		var thepl = p[6]
 		lalapositions.push({'pair': string2, 'amount': amount, 'price': price, 'profit/loss': thepl});
@@ -1634,21 +1650,16 @@ if ((activeOrders[doc3[d].trades.k] <= 1)&&  tickers.includes('trade:1m:' + doc3
 	//console.log(osymbols);
 		
 	}
-	for (var symbol in symbolcounts){
 		for (var s in poscounts){
-			if (symbol == s){
-				if (poscounts[s].toFixed(6) != -1 * (symbolcounts[symbol]).toFixed(6)){
-					console.log('difference!');
+			if (!osymbols.includes(s)){
+					console.log('missing!');
 					console.log(s);
 					console.log(poscounts[s]);
-					console.log(symbolcounts[symbol])
 					console.log('loose position found ' + s);
-					var amount = -1 * (symbolcounts[symbol] + poscounts[s]);
+					var amount = -1 * (poscounts[s]);
 					console.log('amount: ' + amount);
 					console.log('bestAsk: ' + bestAsk[s]);
 					console.log('bestBid: ' + bestBid[s]);
-					console.log('bestask: ')
-					console.log(bestAsk[string2]);
 					const o = new Order({
 						cid: Date.now(),
 						symbol: s,
@@ -1675,9 +1686,7 @@ if ((activeOrders[doc3[d].trades.k] <= 1)&&  tickers.includes('trade:1m:' + doc3
 			console.log('got submit confirmation for order %d [%d]', o.cid, o.id)
 					});
 				}
-			}
 		}
-	}
 							//console.log(positions);
 	for (let i = 0; i < positions.length; i += 1) {
 		var p = positions[i];
