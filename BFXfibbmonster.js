@@ -1706,7 +1706,7 @@ string = "IOTA" + string;
 		+ '<h2>usdt gains (usdt): ' + thetotalusdt + '</h2>'
 		+ '<h2>btc gains (btc only) (sats): ' + thetotalbtc + '</h2>'
 		+ '<h2>eth gains (wei): ' + thetotaleth + '</h2>'
-		+ '<h1>total gains (usdt) (since trade history, including positions not listed here, including open orders): ' + totaltotal + '</h1>'
+		+ '<h1>total gains (usdt) (since trade history, including positions not listed here, including open orders IF SOLD (the above PL value is more accurate to judge the bot\'s performance)): ' + totaltotal + '</h1>'
 		+ '<div style="display:none;" id="stoplimits">' + JSON.stringify(stoplimits) + '</div>'
 		+ '<div style="display:none;" id="orders2">' + JSON.stringify(orders2) + '</div>'
 		+ '<div style="display:none;" id="trades">' + JSON.stringify(trades) + '</div>'
