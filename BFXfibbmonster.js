@@ -1662,7 +1662,7 @@ string = "IOTA" + string;
 					var diff2 = Math.abs(new Date() - startDate);
 					var minutes = Math.floor((diff2/1000)/60);
 					var hours = ((diff2/1000)/60 / 60).toFixed(8);
-					var percentHr = ((PL - parseFloat(process.env.plstart)) / hours).toFixed(4);
+					var percentHr = ((PL / parseFloat(process.env.plstart)) / hours).toFixed(4);
 							//////////console.log(balances.BTC);
 							trades.sort(sortFunction3);
 							stoplimits.sort(sortFunction);
@@ -1701,7 +1701,7 @@ string = "IOTA" + string;
 		+ 'current time: ' + new Date()
 		+ 'minutes: ' + minutes + '<br>'
 		+ 'hours: ' + hours + '<br>'
-		+ '<h1>PL: ' + (PL - parseFloat(process.env.plstart)) + '%</h1>'
+		+ '<h1>PL: ' + (PL / parseFloat(process.env.plstart)) + '%</h1>'
 		+ '<h1>percent/hr: ' + percentHr + '%</h1>'
 		+ '<h2>usdt gains (usdt): ' + thetotalusdt + '</h2>'
 		+ '<h2>btc gains (btc only) (sats): ' + thetotalbtc + '</h2>'
