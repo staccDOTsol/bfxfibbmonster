@@ -4,15 +4,15 @@ var MongoClient = require('mongodb').MongoClient;
 let poloniex
 				var bestAsk = []
 
-				const ccxt = require ('ccxt');
+				//const ccxt = require ('ccxt');
 				
 
 				var bestBid = []
 				const bfx = require('./bfx.js')
-let bitfinexapi = new ccxt.ethfinex ({
-		apiKey: process.env.bapi2,
-		secret: process.env.bkey2,
-	})
+//let bitfinexapi = new ccxt.ethfinex ({
+//		apiKey: process.env.bapi2,
+//		secret: process.env.bkey2,
+//		})
 
 const ws = bfx.ws(2, {
 	apiKey:process.env.bapi, apiSecret: process.env.bkey,
@@ -1211,11 +1211,12 @@ async function setBal(){
 	var MN = mi[1][3]
 	
 	PL = -1 * (1-(MN / mnstart)) * 100;
+	PL = mi[1][0]
 	console.log('PL: ' + PL);
 }
 setTimeout(function(){
 setBal();
-}, 5000);
+}, 800);
 setInterval(function(){
 	setBal();
 }, 120000);
@@ -1662,7 +1663,7 @@ string = "IOTA" + string;
 					var diff2 = Math.abs(new Date() - startDate);
 					var minutes = Math.floor((diff2/1000)/60);
 					var hours = ((diff2/1000)/60 / 60).toFixed(8);
-					var percentHr = ((PL / parseFloat(process.env.plstart)) / hours).toFixed(4);
+					var percentHr = ((PL ) / hours).toFixed(4);
 							//////////console.log(balances.BTC);
 							trades.sort(sortFunction3);
 							stoplimits.sort(sortFunction);
@@ -1701,7 +1702,7 @@ string = "IOTA" + string;
 		+ 'current time: ' + new Date()
 		+ 'minutes: ' + minutes + '<br>'
 		+ 'hours: ' + hours + '<br>'
-		+ '<h1>PL: ' + (PL / parseFloat(process.env.plstart)) + '%</h1>'
+		+ '<h1>Pl' + (PL) + '%</h1>'
 		+ '<h1>percent/hr: ' + percentHr + '%</h1>'
 		+ '<h2>usdt gains (usdt): ' + thetotalusdt + '</h2>'
 		+ '<h2>btc gains (btc only) (sats): ' + thetotalbtc + '</h2>'
