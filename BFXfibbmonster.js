@@ -1642,8 +1642,6 @@ if ((activeOrders[doc3[d].trades.k] <= 1)&&  tickers.includes('trade:1m:' + doc3
 			  o.on('update', () => {
 				console.log('order updated: %j', o.serialize())
 			 });
-				}
-			  })
 
 			  o.on('close', () => {
 				console.log('order closed: %s', o.status)
