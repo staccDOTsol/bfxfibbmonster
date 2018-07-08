@@ -1193,7 +1193,7 @@ async function setBal(){
 	rest.calcAvailableBalance('tETHUSD', 1, ethusd, 'MARGIN').then(balances => {
 	var btcusdavail = (balances[0] * ethusd);
 	console.log(btcusdavail);
-	divisor = btcusdavail / 75
+	divisor = btcusdavail / 300
 	console.log('divisor: ' + divisor);
 	if (divisor <= 1	){
 		godosell = false;
@@ -1629,7 +1629,7 @@ if ((activeOrders[doc3[d].trades.k] <= 1)&&  tickers.includes('trade:1m:' + doc3
 			console.log(bestAsk[string2]);
 			const o = new Order({
 				cid: Date.now(),
-				symbol: 't' + string2,
+				symbol: string2,
 				price: (bestAsk[string2] + bestBid[string2]) / 2,
 				amount: -1 * amount,
 				type: Order.type.LIMIT
