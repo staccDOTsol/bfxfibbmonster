@@ -667,7 +667,7 @@ o3.on('error', () => {
 	price: (rate),
 	amount: (-1 * ( os / 2 )),
 	type: Order.type.LIMIT,
-	priceAuxLimit: rate2 * 1.08
+	priceAuxLimit: rate2 * 1.08	
   }, ws)
 
   let closed2 = false
@@ -1193,7 +1193,7 @@ async function setBal(){
 	rest.calcAvailableBalance('tETHUSD', 1, ethusd, 'MARGIN').then(balances => {
 	var btcusdavail = (balances[0] * ethusd);
 	console.log(btcusdavail);
-	divisor = btcusdavail / 50
+	divisor = btcusdavail / 100
 	console.log('divisor: ' + divisor);
 	if (divisor <= .8){
 		godosell = false;
@@ -1208,7 +1208,7 @@ async function setBal(){
 	});
 	console.log(mi);
 	
-	var MN = mi[1][2]
+	var MN = mi[1][3]
 	
 	PL = -1 * (1-(MN /parseFloat(process.env.mnstart))) * 100;
 	console.log('PL: ' + PL);
