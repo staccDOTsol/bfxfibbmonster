@@ -4,6 +4,12 @@ The bot is currently set up to run on Ethfinex:
 
 https://www.ethfinex.com/?refcode=hfT8i73kyT
 
+Donations also welcome:
+
+0x3CE52a2a8c60fA944d2ff7ccDA563fe81d0D16F7 (Eth)
+
+Pull requests also welcome :)
+
 Here's my first two ref signups:
 
 first guy:
