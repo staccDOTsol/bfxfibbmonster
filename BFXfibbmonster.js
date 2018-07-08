@@ -4,15 +4,15 @@ var MongoClient = require('mongodb').MongoClient;
 let poloniex
 				var bestAsk = []
 
-				//const ccxt = require ('ccxt');
+				const ccxt = require ('ccxt');
 				
 
 				var bestBid = []
 				const bfx = require('./bfx.js')
-//let bitfinexapi = new ccxt.ethfinex ({
-//		apiKey: process.env.bapi2,
-//		secret: process.env.bkey2,
-//		})
+let bitfinexapi = new ccxt.ethfinex ({
+		apiKey: process.env.bapi2,
+	secret: process.env.bkey2,
+	})
 
 const ws = bfx.ws(2, {
 	apiKey:process.env.bapi, apiSecret: process.env.bkey,
