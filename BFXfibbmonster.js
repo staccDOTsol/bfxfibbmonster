@@ -1210,7 +1210,7 @@ async function setBal(){
 	
 	var MN = mi[1][2]
 	
-	PL = -1 * (1-(MN / process.env.mnstart)) * 100;
+	PL = -1 * (1-(MN /parseFloat(process.env.mnstart))) * 100;
 	console.log('PL: ' + PL);
 }
 setTimeout(function(){
