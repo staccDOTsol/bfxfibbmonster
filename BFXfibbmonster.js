@@ -1193,9 +1193,9 @@ async function setBal(){
 	rest.calcAvailableBalance('tETHUSD', 1, ethusd, 'MARGIN').then(balances => {
 	var btcusdavail = (balances[0] * ethusd);
 	console.log(btcusdavail);
-	divisor = btcusdavail / 50
+	divisor = btcusdavail / 25
 	console.log('divisor: ' + divisor);
-	if (divisor <= 1.5){
+	if (divisor <= 40){
 		godosell = false;
 		godobuy = false;
 		console.log('NONO buy buy! NONO sell sell!');
