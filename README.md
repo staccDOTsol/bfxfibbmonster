@@ -8,6 +8,30 @@ Donations also welcome:
 
 0x3CE52a2a8c60fA944d2ff7ccDA563fe81d0D16F7 (Eth)
 
+If you wanted to fork this repo and replace these lines in BFX.js it'll work perfectly on Bitfinex, however they don't run a referral program so do consider a donation:
+
+ ws: {
+    url: "wss://api.ethfinex.com/ws/2",
+    agent
+  },
+
+  rest: {
+    url: "https://api.ethfinex.com",
+    agent
+  }
+  
+  with:
+  
+   ws: {
+    url: WS_URL,
+    agent
+  },
+
+  rest: {
+    url: REST_URL,
+    agent
+  }
+
 Pull requests also welcome :)
 
 Here's my first two ref signups:
