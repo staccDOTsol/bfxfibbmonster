@@ -6,7 +6,7 @@
   "bundleDependencies": false,
   "dependencies": {
     "@sendgrid/mail": "^6.3.1",
-    "bitfinex-api-node": "^2.0.0-beta.
+    "bitfinex-api-node": "*",
     "body-parser": "^1.18.3",
     "ccxt": "*",
     "co": "4.6.0",
