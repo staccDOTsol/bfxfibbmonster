@@ -1195,7 +1195,7 @@ async function setBal(){
 	console.log(btcusdavail);
 	divisor = btcusdavail / 25
 	console.log('divisor: ' + divisor);
-	if (divisor <= 40){
+	if (divisor <= 41){
 		godosell = false;
 		godobuy = false;
 		console.log('NONO buy buy! NONO sell sell!');
