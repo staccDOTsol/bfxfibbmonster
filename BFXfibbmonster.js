@@ -1601,6 +1601,9 @@ if ((activeOrders[doc3[d].trades.k] <= 1)&&  tickers.includes('trade:1m:' + doc3
 								if (!osymbols.includes(orders2[o].symbol)){
 																	
 									var string = 't'+ orders2[o].symbol.replace('/','');
+									if (string.slice(-4)=="USDT"){
+										string = string.substr(0, string.length-1)
+									}
 									osymbols.push(string);
 								}
 							}
@@ -1613,7 +1616,6 @@ if ((activeOrders[doc3[d].trades.k] <= 1)&&  tickers.includes('trade:1m:' + doc3
 		var price = p[3]
 		var thepl = p[6]
 		console.log(string2)
-		string2 += "T"
 		console.log(osymbols);
 	//string = 't' + string2.replace(/(?=.{3}$)/,'/');
 	//string2 = string2.substr(1, string2.length);
@@ -1627,7 +1629,7 @@ if ((activeOrders[doc3[d].trades.k] <= 1)&&  tickers.includes('trade:1m:' + doc3
 			console.log(bestAsk[string2]);
 			const o = new Order({
 				cid: Date.now(),
-				symbol: string2,
+				symbol: 't' + string2,
 				price: (bestAsk[string2] + bestBid[string2]) / 2,
 				amount: -1 * amount,
 				type: Order.type.LIMIT
