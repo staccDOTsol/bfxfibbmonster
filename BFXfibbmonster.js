@@ -1637,11 +1637,43 @@ if ((activeOrders[doc3[d].trades.k] <= 1)&&  tickers.includes('trade:1m:' + doc3
 	for (var symbol in symbolcounts){
 		for (var s in poscounts){
 			if (symbol == s){
-				if (poscounts[s] != -1 * (symbolcounts[symbol])){
+				if (poscounts[s].toFixed(6) != -1 * (symbolcounts[symbol]).toFixed(6)){
 					console.log('difference!');
 					console.log(s);
 					console.log(poscounts[s]);
 					console.log(symbolcounts[symbol])
+					console.log('loose position found ' + s);
+					var amount = -1 * (symbolcounts[symbol] + poscounts[s]);
+					console.log('amount: ' + amount);
+					console.log('bestAsk: ' + bestAsk[s]);
+					console.log('bestBid: ' + bestBid[s]);
+					console.log('bestask: ')
+					console.log(bestAsk[string2]);
+					const o = new Order({
+						cid: Date.now(),
+						symbol: s,
+						price: (bestAsk[s] + bestBid[s]) / 2,
+						amount: amount,
+						type: Order.type.LIMIT
+					  }, ws)
+
+					  let closed = false
+
+					  // Enable automatic updates
+					  o.registerListeners()
+					o.on('error', () => {
+						console.log('error');
+					});
+					  o.on('update', () => {
+						console.log('order updated: %j', o.serialize())
+					 });
+
+					  o.on('close', () => {
+						console.log('order closed: %s', o.status)
+					}) 
+					o.submit().then(() => {
+			console.log('got submit confirmation for order %d [%d]', o.cid, o.id)
+					});
 				}
 			}
 		}
