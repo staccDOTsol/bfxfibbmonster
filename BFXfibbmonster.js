@@ -529,7 +529,7 @@ var collection = dbo.collection(string);
 		}
 	string = 't' + string;
 	if (cancelOrders.includes(string)){
-		const o = bitfinexapi.cancelOrder(orders[o2].id)
+		//const o = bitfinexapi.cancelOrder(orders[o2].id)
 
 	}
 	else {
