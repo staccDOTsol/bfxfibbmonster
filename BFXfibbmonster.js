@@ -1208,10 +1208,9 @@ async function setBal(){
 	});
 	console.log(mi);
 	
-	var MN = mi[1][3]
+	var MN = mi[1][2]
 	
-	PL = -1 * (1-(MN / mnstart)) * 100;
-	PL = mi[1][0]
+	PL = -1 * (1-(MN / process.env.mnstart)) * 100;
 	console.log('PL: ' + PL);
 }
 setTimeout(function(){
