@@ -1701,7 +1701,7 @@ string = "IOTA" + string;
 		+ 'current time: ' + new Date()
 		+ 'minutes: ' + minutes + '<br>'
 		+ 'hours: ' + hours + '<br>'
-		+ '<h1>Pl' + (PL) + '%</h1>'
+		+ '<h1>PL: ' + (PL) + '%</h1>'
 		+ '<h1>percent/hr: ' + percentHr + '%</h1>'
 		+ '<h2>usdt gains (usdt): ' + thetotalusdt + '</h2>'
 		+ '<h2>btc gains (btc only) (sats): ' + thetotalbtc + '</h2>'
