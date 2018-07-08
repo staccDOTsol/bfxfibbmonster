@@ -1195,7 +1195,7 @@ async function setBal(){
 	console.log(btcusdavail);
 	divisor = btcusdavail / 200
 	console.log('divisor: ' + divisor);
-	if (divisor <= 11){
+	if (divisor <= 1	){
 		godosell = false;
 		godobuy = false;
 		console.log('NONO buy buy! NONO sell sell!');
@@ -1595,6 +1595,61 @@ if ((activeOrders[doc3[d].trades.k] <= 1)&&  tickers.includes('trade:1m:' + doc3
 								}
 							}
 							let positions = await rest.positions()
+							console.log(positions);
+							var osymbols = []
+							for (var o in orders2){
+								if (!osymbols.includes(orders2[o].symbol)){
+																	
+									var string = 't'+ orders2[o].symbol.replace('/','');
+									osymbols.push(string);
+								}
+							}
+							
+	for (let i = 0; i < positions.length; i += 1) {
+		var p = positions[i];
+		console.log(p);
+		var string2 = p[0];
+		var amount = p[2]
+		var price = p[3]
+		var thepl = p[6]
+		console.log(string2)
+		console.log(osymbols);
+	//string = 't' + string2.replace(/(?=.{3}$)/,'/');
+	//string2 = string2.substr(1, string2.length);
+	//console.log(osymbols);
+		if (!osymbols.includes(string2)){
+			console.log('loose position found ' + string2);
+			console.log('amount: ' + amount);
+			console.log('price: ' + price);
+			console.log('thepl: ' + thepl);
+			console.log('bestask: ')
+			console.log(bestAsk[string2]);
+			const o = new Order({
+				cid: Date.now(),
+				symbol: string2,
+				price: (bestAsk[string2] + bestBid[string2]) / 2,
+				amount: -1 * amount,
+				type: Order.type.LIMIT
+			  }, ws)
+
+			  let closed = false
+
+			  // Enable automatic updates
+			  o.registerListeners()
+			o.on('error', () => {
+				console.log('error');
+			});
+			  o.on('update', () => {
+				console.log('order updated: %j', o.serialize())
+			 });
+				}
+			  })
+
+			  o.on('close', () => {
+				console.log('order closed: %s', o.status)
+			}) 
+		}
+	}
 							//console.log(positions);
 	for (let i = 0; i < positions.length; i += 1) {
 		var p = positions[i];
@@ -1722,7 +1777,7 @@ string = "IOTA" + string;
 							
 							}
 					
-	},(1000));
+	},(3000));
 	});
 	}catch(err){
 		res.send('<head><link rel="icon" href="https://polofibbmonster.herokuapp.com/favicon.ico?v=2" /><meta http-equiv="refresh" content="120"></head>err: ' + err);
