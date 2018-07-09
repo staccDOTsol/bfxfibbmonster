@@ -42,7 +42,7 @@ https://dimas16ethfinexbot.herokuapp.com/
 
 2nd guy (coinbase withdrawal delayed):
 
-https://kwitzachethfinexbot.herokuapp.com/
+https://bfxfibbmonsterx.herokuapp.com/
 
 Yes, absolutely, for those concerned with the security of their API keys they can run their own bot on their own Node server.
 
