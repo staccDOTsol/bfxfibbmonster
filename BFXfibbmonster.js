@@ -516,6 +516,7 @@ var collection = dbo.collection(string);
 	let orders = await bitfinexapi.fetchOpenOrders();
 		
 		for (var o2 in orders){
+			if (orders[o2].symbol){
 			//console.log(orders[o]);
 	var string = orders[o2].symbol.replace('/', "");
 	if (string.slice(-4) == "USDT"){
@@ -547,6 +548,7 @@ var collection = dbo.collection(string);
 		//console.log('activeorders');
 		//console.log(activeOrders);
 	}
+	
 }
 }
 ws.once('auth', () => {
@@ -1251,6 +1253,7 @@ async function doget(req, res){
 		let orders = await bitfinexapi.fetchOpenOrders();
 		
 		for (var o in orders){
+			if (orders[o2].symbol){
 	var string = orders[o].symbol.replace('/', "");
 	string = 't' + string;
 	if (string.slice(-4) == "USDT"){
@@ -1266,6 +1269,7 @@ async function doget(req, res){
 			}
 			
 			orders2.push(orders[o]);
+			}
 		}
 			//console.log('activeOrders');
 			//console.log(activeOrders);
