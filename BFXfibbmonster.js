@@ -198,10 +198,10 @@ ws.onTicker({ symbol: k }, (ticker) => {
 										greater.push(f[fibb]);
 									}
 							}
-							if (dbo != undefined){
+							
 							winners[k] = {}
 							if ((greater.length >= 1 && lesser.length >= 1)){
-								
+								if (dbo != undefined){
 								var collection = dbo.collection(k);
 								if (greater[0] != undefined){
 									winners[k].sell1 = greater[0]
@@ -251,17 +251,17 @@ ws.onTicker({ symbol: k }, (ticker) => {
 									updateStoplimits(winners[k], collection);
 									tickercount[k]=0;
 								}
+								}	
+							}
 								
-							}
-							}
 					}
 	} else {
-		if (k == "tBTCUSD"){
+		if (k == "tETHBTC"){
 			console.log(ticker);
-			btcusd = ticker.ask;
-		}
-		else if (k == "tBTCETH"){
 			btceth = ticker.ask;
+		}
+		else if (k == "tETHUSD"){
+			ethusd = ticker.ask;
 		}
 	}
 });
@@ -2011,7 +2011,7 @@ var collections = []
 setTimeout(function(){
 MongoClient.connect(process.env.mongodb || mongodb, function(err, db) {
 	
-	dbo = db.db(process.env.thedatabase)
+	var dbo = db.db(process.env.thedatabase)
 	var count = 0;
 	dbo.listCollections().toArray(function(err, collInfos) {
 		// collInfos is an array of collection info objects that look like:
