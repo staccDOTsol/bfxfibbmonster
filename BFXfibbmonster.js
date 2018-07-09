@@ -198,7 +198,7 @@ ws.onTicker({ symbol: k }, (ticker) => {
 										greater.push(f[fibb]);
 									}
 							}
-							
+							if (dbo != undefined){
 							winners[k] = {}
 							if ((greater.length >= 1 && lesser.length >= 1)){
 								
@@ -253,15 +253,15 @@ ws.onTicker({ symbol: k }, (ticker) => {
 								}
 								
 							}
-								
+							}
 					}
 	} else {
-		if (k == "tETHBTC"){
+		if (k == "tBTCUSD"){
 			console.log(ticker);
-			btceth = ticker.ask;
+			btcusd = ticker.ask;
 		}
-		else if (k == "tETHUSD"){
-			ethusd = ticker.ask;
+		else if (k == "tBTCETH"){
+			btceth = ticker.ask;
 		}
 	}
 });
@@ -2011,7 +2011,7 @@ var collections = []
 setTimeout(function(){
 MongoClient.connect(process.env.mongodb || mongodb, function(err, db) {
 	
-	var dbo = db.db(process.env.thedatabase)
+	dbo = db.db(process.env.thedatabase)
 	var count = 0;
 	dbo.listCollections().toArray(function(err, collInfos) {
 		// collInfos is an array of collection info objects that look like:
