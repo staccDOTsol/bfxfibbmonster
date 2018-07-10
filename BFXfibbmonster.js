@@ -1864,10 +1864,10 @@ async function doget(req, res) {
 
                 console.log(totaltotal);
 
-              var rest2 = await  rest2.tickers(['tBTCUSD'])
+              var rest23 = await  rest2.tickers(['tBTCUSD'])
                 let zz
-                for (let i = 0; i < rest2.length; i += 1) {
-                    zz = rest2[i]
+                for (let i = 0; i < rest23.length; i += 1) {
+                    zz = rest23[i]
                     var theask = (zz.ask)
 
                 }
