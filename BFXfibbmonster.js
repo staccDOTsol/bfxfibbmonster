@@ -1660,10 +1660,11 @@ if ((activeOrders[doc3[d].trades.k] <= 1)&&  tickers.includes('trade:1m:' + doc3
 					console.log('amount: ' + amount);
 					console.log('bestAsk: ' + bestAsk[s]);
 					console.log('bestBid: ' + bestBid[s]);
+
 					const o = new Order({
 						cid: Date.now(),
 						symbol: s,
-						price: (bestAsk[s] + bestBid[s]) / 2,
+						price: ((bestAsk[s] + bestBid[s]) / 2).toFixed(8),
 						amount: amount,
 						type: Order.type.LIMIT
 					  }, ws)
