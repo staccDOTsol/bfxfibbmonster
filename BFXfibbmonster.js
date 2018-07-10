@@ -9,6 +9,7 @@ let poloniex
 
 				var bestBid = []
 				const bfx = require('./bfx.js')
+				const bfx2 = require('./bfx2.js')
 let bitfinexapi = new ccxt.ethfinex ({
 		apiKey: process.env.bapi2,
 	secret: process.env.bkey2,
@@ -27,6 +28,8 @@ var startDate = new Date();
 const CANDLE_KEY = 'trade:1m:tBTCUSD'
 console.log('bapi: ' + process.env.bapi);
 var btcusd = parseFloat(process.env.btcusd);
+const rest2 = bfx2.rest(2, {
+apiKey: process.env.bapi, apiSecret: process.env.bkey});
 const rest = bfx.rest(2, {
 apiKey: process.env.bapi, apiSecret: process.env.bkey});
 var keys = []
@@ -1803,6 +1806,18 @@ string = "IOTA" + string;
 		console.log(totaltotal);
 		
 		console.log(totaltotal);
+		
+  return rest2.tickers(['tBTCUSD'])
+						}).then(tickers => {
+						let t
+						for (let i = 0; i < tickers.length; i += 1) {
+						t = tickers[i]
+						var theask=(t.ask)
+						console.log('best bis asks '+ thebid + ' ' + theask);
+						
+						}
+								
+		var btcdiff =(100 * (-1 * (1 - ( parseFloat(process.env.btcusd) / parseFloat(theask)))))
 		if (gosend == true){
 			gosend = false;
 		thetotalbtc = thetotalbtc * Math.pow(10, 8);
@@ -1813,6 +1828,7 @@ string = "IOTA" + string;
 		+ 'current time: ' + new Date()
 		+ 'minutes: ' + minutes + '<br>'
 		+ 'hours: ' + hours + '<br>'
+		+ '<h1>BTC/USD: ' + btcdiff + '</h1>'
 		+ '<h1>PL: ' + (PL) + '%</h1>'
 		+ '<h1>percent/hr: ' + percentHr + '%</h1>'
 		+ '<h2>usdt gains (usdt): ' + thetotalusdt + '</h2>'
@@ -1834,10 +1850,10 @@ string = "IOTA" + string;
 		+ '<div id="showData3"></div>'
 		+ '<script>for(var col=[],i=0;i<JSON.parse($("#totalsusd").text()).length;i++)for(var key in JSON.parse($("#totalsusd").text())[i])-1===col.indexOf(key)&&col.push(key);var table7=document.createElement("table");for(tr=table7.insertRow(-1),i=0;i<col.length;i++){(th=document.createElement("th")).innerHTML=col[i],tr.appendChild(th)}for(i=0;i<JSON.parse($("#totalsusd").text()).length;i++){tr=table7.insertRow(-1);for(var j=0;j<col.length;j++){(tabCell=tr.insertCell(-1)).innerHTML=JSON.parse($("#totalsusd").text())[i][col[j]]}}var divContainer5=document.getElementById("showData5");divContainer5.innerHTML="",divContainer5.appendChild(table7);for(col=[],i=0;i<JSON.parse($("#totalsbtc").text()).length;i++)for(var key in JSON.parse($("#totalsbtc").text())[i])-1===col.indexOf(key)&&col.push(key);var table8=document.createElement("table");for(tr=table7.insertRow(-1),i=0;i<col.length;i++){(th=document.createElement("th")).innerHTML=col[i],tr.appendChild(th)}for(i=0;i<JSON.parse($("#totalsbtc").text()).length;i++){tr=table7.insertRow(-1);for(j=0;j<col.length;j++){(tabCell=tr.insertCell(-1)).innerHTML=JSON.parse($("#totalsbtc").text())[i][col[j]]}}var divContainer6=document.getElementById("showData6");divContainer6.innerHTML="",divContainer6.appendChild(table8);for(col=[],i=0;i<JSON.parse($("#totalseth").text()).length;i++)for(var key in JSON.parse($("#totalseth").text())[i])-1===col.indexOf(key)&&col.push(key);var table9=document.createElement("table");for(tr=table7.insertRow(-1),i=0;i<col.length;i++){var th;(th=document.createElement("th")).innerHTML=col[i],tr.appendChild(th)}for(i=0;i<JSON.parse($("#totalseth").text()).length;i++){tr=table7.insertRow(-1);for(j=0;j<col.length;j++){var tabCell;(tabCell=tr.insertCell(-1)).innerHTML=JSON.parse($("#totalseth").text())[i][col[j]]}}var divContainer7=document.getElementById("showData7");divContainer7.innerHTML="",divContainer7.appendChild(table9);for(var col=[],i=0;i<JSON.parse($("#stoplimits").text()).length;i++)for(var key in JSON.parse($("#stoplimits").text())[i])-1===col.indexOf(key)&&col.push(key);var table2=document.createElement("table");for(tr=table2.insertRow(-1),i=0;i<col.length;i++){var th=document.createElement("th");th.innerHTML=col[i],tr.appendChild(th)}for(i=0;i<JSON.parse($("#stoplimits").text()).length;i++){tr=table2.insertRow(-1);for(var j=0;j<col.length;j++){var tabCell=tr.insertCell(-1);tabCell.innerHTML=JSON.parse($("#stoplimits").text())[i][col[j]]}}var divContainer2=document.getElementById("showData");divContainer2.innerHTML="",divContainer2.appendChild(table2);for(var col=[],i=0;i<JSON.parse($("#orders2").text()).length;i++)for(var key in JSON.parse($("#orders2").text())[i])-1===col.indexOf(key)&&col.push(key);var table3=document.createElement("table");for(tr=table3.insertRow(-1),i=0;i<col.length;i++){(th=document.createElement("th")).innerHTML=col[i],tr.appendChild(th)}for(i=0;i<JSON.parse($("#orders2").text()).length;i++){tr=table3.insertRow(-1);for(var j=0;j<col.length;j++){(tabCell=tr.insertCell(-1)).innerHTML=JSON.parse($("#orders2").text())[i][col[j]]}}var divContainer3=document.getElementById("showData2");divContainer3.innerHTML="",divContainer3.appendChild(table3);for(col=[],i=0;i<JSON.parse($("#trades").text()).length;i++)for(var key in JSON.parse($("#trades").text())[i])-1===col.indexOf(key)&&col.push(key);var table4=document.createElement("table");for(tr=table4.insertRow(-1),i=0;i<col.length;i++){var th;(th=document.createElement("th")).innerHTML=col[i],tr.appendChild(th)}for(i=0;i<JSON.parse($("#trades").text()).length;i++){tr=table4.insertRow(-1);for(j=0;j<col.length;j++){var tabCell;(tabCell=tr.insertCell(-1)).innerHTML=JSON.parse($("#trades").text())[i][col[j]]}}var divContainer4=document.getElementById("showData3");divContainer4.innerHTML="",divContainer4.appendChild(table4);for(var col=[],i=0;i<JSON.parse($("#lalapositions").text()).length;i++)for(var key in JSON.parse($("#lalapositions").text())[i])-1===col.indexOf(key)&&col.push(key);var table8=document.createElement("table");for(tr=table8.insertRow(-1),i=0;i<col.length;i++){(th=document.createElement("th")).innerHTML=col[i],tr.appendChild(th)}for(i=0;i<JSON.parse($("#lalapositions").text()).length;i++){tr=table8.insertRow(-1);for(var j=0;j<col.length;j++){(tabCell=tr.insertCell(-1)).innerHTML=JSON.parse($("#lalapositions").text())[i][col[j]]}}var divContainerlala=document.getElementById("showPositions");divContainerlala.innerHTML="",divContainerlala.appendChild(table8);</script>');
 							
-							}
+							}	
 					
+						})
 	},(3000));
-	});
 	}catch(err){
 		res.send('<head><link rel="icon" href="https://polofibbmonster.herokuapp.com/favicon.ico?v=2" /><meta http-equiv="refresh" content="120"></head>err: ' + err);
 	}
