@@ -1870,7 +1870,7 @@ async function doget(req, res) {
 				console.log(rest23[0])
                 var btcask = rest23[0][1] 
 
-                var btcdiff = (100 * (-1 * (1 - (parseFloat(process.env.btcusd) / parseFloat(btcask)))))
+                var btcdiff = (100 * (-1 * (1 -  (parseFloat(btcask) /parseFloat(process.env.btcusd)))))
                 if (gosend == true) {
                     gosend = false;
                     thetotalbtc = thetotalbtc * Math.pow(10, 8);
