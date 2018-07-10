@@ -1666,7 +1666,7 @@ if ((activeOrders[doc3[d].trades.k] <= 1)&&  tickers.includes('trade:1m:' + doc3
 					var thebid = 0;
 					var theask = 0;
 					
-					let tickers = await rest.tickers(['tEDOUSD'])
+					let tickers = await rest.tickers([s])
 	
 					  let t
 					  for (let i = 0; i < tickers.length; i += 1) {
