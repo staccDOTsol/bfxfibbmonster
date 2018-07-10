@@ -551,6 +551,7 @@ var collection = dbo.collection(string);
 	
 }
 }
+}
 ws.once('auth', () => {
 	
 ws.onOrderSnapshot({}, (orders) => {
@@ -1253,7 +1254,7 @@ async function doget(req, res){
 		let orders = await bitfinexapi.fetchOpenOrders();
 		
 		for (var o in orders){
-			if (orders[o].symbol){
+			if (orders[o].symbol){	
 	var string = orders[o].symbol.replace('/', "");
 	string = 't' + string;
 	if (string.slice(-4) == "USDT"){
