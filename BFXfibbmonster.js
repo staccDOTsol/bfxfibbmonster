@@ -1866,13 +1866,11 @@ async function doget(req, res) {
 
               var rest23 = await  rest2.tickers(['tBTCUSD'])
                 let zz
-                for (let i = 0; i < rest23.length; i += 1) {
-                    zz = rest23[i]
-                    var theask = (zz.ask)
+				console.log('rest230');
+				console.log(rest23[0])
+                var btcask = rest23[0].ask 
 
-                }
-
-                var btcdiff = (100 * (-1 * (1 - (parseFloat(process.env.btcusd) / parseFloat(theask)))))
+                var btcdiff = (100 * (-1 * (1 - (parseFloat(process.env.btcusd) / parseFloat(btcask)))))
                 if (gosend == true) {
                     gosend = false;
                     thetotalbtc = thetotalbtc * Math.pow(10, 8);
