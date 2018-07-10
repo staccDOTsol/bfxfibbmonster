@@ -1253,7 +1253,7 @@ async function doget(req, res){
 		let orders = await bitfinexapi.fetchOpenOrders();
 		
 		for (var o in orders){
-			if (orders[o2].symbol){
+			if (orders[o].symbol){
 	var string = orders[o].symbol.replace('/', "");
 	string = 't' + string;
 	if (string.slice(-4) == "USDT"){
