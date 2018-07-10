@@ -1881,7 +1881,7 @@ async function doget(req, res) {
                         'current time: ' + new Date() +
                         'minutes: ' + minutes + '<br>' +
                         'hours: ' + hours + '<br>' +
-                        '<h1>BTC/USD: ' + btcdiff + '</h1>' +
+                        '<h1>BTC/USD: ' + btcdiff + '%</h1>' +
                         '<h1>PL: ' + (PL) + '%</h1>' +
                         '<h1>percent/hr: ' + percentHr + '%</h1>' +
                         '<h2>usdt gains (usdt): ' + thetotalusdt + '</h2>' +
