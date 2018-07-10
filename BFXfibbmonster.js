@@ -1666,16 +1666,21 @@ if ((activeOrders[doc3[d].trades.k] <= 1)&&  tickers.includes('trade:1m:' + doc3
 					var thebid = 0;
 					var theask = 0;
 					
-					let tickers = await rest.tickers([s])
-	
-					  let t
-					  for (let i = 0; i < tickers.length; i += 1) {
+					rest.symbols().then(symbols => {
+
+  return rest.tickers([symbols.map(s => `t${s.toUpperCase()}`)])
+						}).then(tickers => {
+						let t
+						for (let i = 0; i < tickers.length; i += 1) {
 						t = tickers[i]
-						thebid = (t.bid);
-						theask = (t.ask);
-						console.log('thebid: ' + thebid);
-						console.log('theask: ' + theask);
-					  }
+						if (t.symbol == s){
+						thebid=(t.bid)
+						theask=(t.ask)
+						console.log('best bis asks '+ thebid + ' ' + theask);
+						}
+						}
+									
+						})
 					const o = new Order({
 						cid: Date.now(),
 						symbol: s,
