@@ -1663,17 +1663,26 @@ if ((activeOrders[doc3[d].trades.k] <= 1)&&  tickers.includes('trade:1m:' + doc3
 					console.log('loose position found ' + s);
 					var amount = -1 * (poscounts[s]);
 					console.log('amount: ' + amount);
-					console.log('bestAsk: ' + bestAsk[s]);
-					console.log('bestBid: ' + bestBid[s]);
-
+					var thebid = 0;
+					var theask = 0;
+					
+					let tickers = await rest.tickers(['tEDOUSD'])
+	
+					  let t
+					  for (let i = 0; i < tickers.length; i += 1) {
+						t = tickers[i]
+						thebid = (t.bid);
+						theask = (t.ask);
+						console.log('thebid: ' + thebid);
+						console.log('theask: ' + theask);
+					  }
 					const o = new Order({
 						cid: Date.now(),
 						symbol: s,
-						price: ((bestAsk[s] + bestBid[s]) / 2).toFixed(8),
+						price: ((theask + thebid) / 2).toFixed(8),
 						amount: amount,
 						type: Order.type.LIMIT
 					  }, ws)
-
 					  let closed = false
 
 					  // Enable automatic updates
