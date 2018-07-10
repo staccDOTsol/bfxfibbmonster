@@ -1864,13 +1864,11 @@ async function doget(req, res) {
 
                 console.log(totaltotal);
 
-                rest2.tickers(['tBTCUSD'])
-            }).then(tickers => {
+              var rest2 = await  rest2.tickers(['tBTCUSD'])
                 let t
-                for (let i = 0; i < tickers.length; i += 1) {
-                    t = tickers[i]
+                for (let i = 0; i < rest2.length; i += 1) {
+                    t = rest2[i]
                     var theask = (t.ask)
-                    console.log('best bis asks ' + thebid + ' ' + theask);
 
                 }
 
@@ -1909,8 +1907,8 @@ async function doget(req, res) {
 
                 }
 
-            })
         }, (3000));
+		})
     } catch (err) {
         res.send('<head><link rel="icon" href="https://polofibbmonster.herokuapp.com/favicon.ico?v=2" /><meta http-equiv="refresh" content="120"></head>err: ' + err);
     }
