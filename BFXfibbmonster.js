@@ -1219,7 +1219,7 @@ async function setBal() {
     rest.calcAvailableBalance('tETHUSD', 1, ethusd, 'MARGIN').then(balances => {
         var btcusdavail = (balances[0] * ethusd);
         console.log(btcusdavail);
-        divisor = (btcusdavail / 40) * (2000 / btcusdavail) // 1800 / 40 = 45 // 430 / 40 = 10.75
+        divisor = (btcusdavail / 40) * (parseFloat(process.env.mnstart) / btcusdavail) // 1800 / 40 = 45 // 430 / 40 = 10.75
         console.log('divisor: ' + divisor);
         if (divisor <= 1) {
             godosell = false;
@@ -1875,8 +1875,6 @@ async function doget(req, res) {
                     gosend = false;
                     thetotalbtc = thetotalbtc * Math.pow(10, 8);
                     thetotaleth = thetotaleth * Math.pow(10, 18);
-                    console.log('PL ' + PL);
-                    console.log('PL start' + parseFloat(process.env.plstart));
                     res.send('<head><link rel="icon" href="https://polofibbmonster.herokuapp.com/favicon.ico?v=2" /><meta http-equiv="refresh" content="120"><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script></head><h1>Don\'t Panic! If the data seems off, wait a minute or so.</h1>' +
                         'current time: ' + new Date() +
                         'minutes: ' + minutes + '<br>' +
