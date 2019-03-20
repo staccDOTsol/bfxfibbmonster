@@ -11,13 +11,13 @@ var bestBid = []
 const bfx = require('./bfx.js')
 const bfx2 = require('./bfx2.js')
 let bitfinexapi = new ccxt.ethfinex({
-    apiKey: process.env.bapi2,
-    secret: process.env.bkey2,
+    apiKey: 'JvXUbLy4pa1oxh2WsUf8wJtAJ2CxwtpSyCkZKkOhDeJ',
+    secret: 'f3bUQKYLDfoVFsITiWC8kpgDbVxMBF9oLyX81B3areW',
 })
 
 const ws = bfx.ws(2, {
-    apiKey: process.env.bapi,
-    apiSecret: process.env.bkey,
+    apiKey: 'JvXUbLy4pa1oxh2WsUf8wJtAJ2CxwtpSyCkZKkOhDeJ',
+    apiSecret: 'f3bUQKYLDfoVFsITiWC8kpgDbVxMBF9oLyX81B3areW',
     manageCandles: true, // enable candle dataset persistence/management
     transform: true // 
 })
@@ -33,15 +33,14 @@ const {
 } = require('./node_modules/bitfinex-api-node/lib/models')
 var startDate = new Date();
 const CANDLE_KEY = 'trade:1m:tBTCUSD'
-console.log('bapi: ' + process.env.bapi);
-var btcusd = parseFloat(process.env.btcusd);
+var btcusd = parseFloat(3500);
 const rest2 = bfx2.rest(2, {
-    apiKey: process.env.bapi,
-    apiSecret: process.env.bkey
+    apiKey: 'JvXUbLy4pa1oxh2WsUf8wJtAJ2CxwtpSyCkZKkOhDeJ',
+    apiSecret: 'f3bUQKYLDfoVFsITiWC8kpgDbVxMBF9oLyX81B3areW'
 });
 const rest = bfx.rest(2, {
-    apiKey: process.env.bapi,
-    apiSecret: process.env.bkey
+    apiKey: 'JvXUbLy4pa1oxh2WsUf8wJtAJ2CxwtpSyCkZKkOhDeJ',
+    apiSecret: 'f3bUQKYLDfoVFsITiWC8kpgDbVxMBF9oLyX81B3areW'
 });
 var keys = []
 var keys2 = []
@@ -80,6 +79,7 @@ ws.on('open', () => {
         }
 
         //prod
+        /*
         setTimeout(function() {
             dbo.listCollections().toArray(function(err, collInfos) {
                 // collInfos is an array of collection info objects that look like:
@@ -117,7 +117,7 @@ ws.on('open', () => {
                 }
             });
 
-        }, 2000);
+        }, 2000); */
     }).catch(err => {
 
     })
@@ -182,7 +182,7 @@ function tickerticker(k) {
 
             var avg = volTot / volKs.length;
             //console.log(avg);
-            if ((ticker.volume * ticker.ask) / amt > (avg / 20)) {
+            if ((ticker.volume * ticker.ask) / amt > (avg / 3) && (ticker.volume * ticker.ask) / amt < (avg * 3)) {
 
                 if (!tickers.includes('trade:1m:' + k)) {
                     //console.log(k);
@@ -190,6 +190,7 @@ function tickerticker(k) {
                 }
                 bestAsk[k] = ticker.ask;
                 bestBid[k] = ticker.bid;
+                console.log('spread ' + k + ': ' + (-1*100*(1-  ticker.ask/ticker.bid) + '%'))
                 avg = ((parseFloat(ticker['high']) + parseFloat(ticker['low'])) / 2);
 
                 if (parseFloat(ticker.lastPrice) <= avg) {
@@ -214,6 +215,7 @@ function tickerticker(k) {
                 }
 
                 winners[k] = {}
+                /*
                 if ((greater.length >= 1 && lesser.length >= 1)) {
                     if (dbo != undefined) {
                         var collection = dbo.collection(k);
@@ -265,7 +267,8 @@ function tickerticker(k) {
                             tickercount[k] = 0;
                         }
                     }
-                }
+
+                } */
 
             }
         } else {
@@ -578,12 +581,13 @@ ws.once('auth', () => {
     })
 
     ws.open()
+    /*
     setTimeout(function() {
         oo();
     }, 10000);
     setInterval(function() {
         oo();
-    }, 60000);
+    }, 60000); */
     ////console.log('auth');
 });
 
@@ -1236,13 +1240,13 @@ async function setBal() {
     var MN = mi[1][3]
 
     PL = -1 * (1 - (MN / parseFloat(process.env.mnstart))) * 100;
-    console.log('PL: ' + PL);
+    //console.log('PL: ' + PL);
 }
 setTimeout(function() {
-    setBal();
+   //setBal();
 }, 800);
 setInterval(function() {
-    setBal();
+    //setBal();
 }, 120000);
 var trades = []
 var divisor = 1
@@ -1920,7 +1924,7 @@ function doks() {
     if (godoks == true) {
         godoks = false;
         setTimeout(function() {
-            dodoget(ks, 0, ks.length);
+            //dodoget(ks, 0, ks.length);
             //console.log(ks.length);
         }, seventeen);
     }
@@ -1957,7 +1961,7 @@ async function dodoget(ks, i, length) {
                 console.log('dodoagain');
                 console.log(i)
                 setTimeout(async function() {
-                    dodoget(ks, i + 1, ks.length);
+                 //   dodoget(ks, i + 1, ks.length);
                 }, seventeen * 4);
             } else {
                 console.log('trades exec 1');
@@ -1969,13 +1973,13 @@ async function dodoget(ks, i, length) {
         } catch (err) {
             if (err.toString().indexOf('Rate') != -1) {
                 setTimeout(async function() {
-                    dodoget(ks, i, ks.length);
+                   // dodoget(ks, i, ks.length);
                 }, seventeen * 22);
 
             } else {
                 if ((i + 1) < ks.length - 1) {
                     setTimeout(async function() {
-                        dodoget(ks, i + 1, ks.length);
+                        //dodoget(ks, i + 1, ks.length);
                     }, seventeen * 4);
                 } else {
                     console.log('trades exec 3');
@@ -1996,7 +2000,7 @@ app.get('/', function(req, res) {
     } catch (err) {
 
         setTimeout(function() {
-            doget(req, res);
+            //doget(req, res);
         }, 20000);
     }
 });
@@ -2095,7 +2099,7 @@ var btcUSD = 0;
 var msgcount = 0;
 var dbs = []
 var collections = []
-setTimeout(function() {
+/* setTimeout(function() {
     MongoClient.connect(process.env.mongodb || mongodb, function(err, db) {
 
         var dbo = db.db(process.env.thedatabase)
@@ -2117,7 +2121,7 @@ setTimeout(function() {
         });
     });
 }, 10000);
-
+*/
 function doCollections(collections, balances) {
 
 
@@ -2406,7 +2410,7 @@ async function collectionDo(collection) {
 }
 
 
-
+/*
 var dbo;
 MongoClient.connect(process.env.mongodb || mongodb, function(err, db) {
 
@@ -2414,3 +2418,4 @@ MongoClient.connect(process.env.mongodb || mongodb, function(err, db) {
     ////////console.log('dbo');
 
 });
+*/
